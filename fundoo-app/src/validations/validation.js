@@ -14,8 +14,17 @@ let obj = {
 
 const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/
 
+// defining module
+
 module.exports = {
 
+    /**
+     *  defining email function which will be validate
+     *  here passed as a parameted by the caller method 
+     *  if any error find returning an object with defined error
+     *   and boolen value.
+    */
+    
     email(email) {
 
         console.log("email",email);
@@ -38,6 +47,12 @@ module.exports = {
         return obj
     },
 
+     /**
+     *  defining password function which will be validate
+     *  here passed as a parameted by the caller method 
+     *  if any error find returning an object with defined error
+     *   and boolen value.
+    */
     password(password) {
 
 
@@ -57,6 +72,12 @@ module.exports = {
         return obj
     },
 
+     /**
+     *  defining fName function which will be validate
+     * textfield that it is empty or not.
+     *  if  error find returning an object with defined error
+     *   and boolen value.
+    */
     fName(name){
 
         if(name === ""){
@@ -69,6 +90,14 @@ module.exports = {
         }
         return obj
     },
+
+
+    /**
+     *  defining lName function which will be validate
+     * textfield that it is empty or not.
+     *  if  error find returning an object with defined error
+     *   and boolen value.
+    */
 
     lName(name){
 

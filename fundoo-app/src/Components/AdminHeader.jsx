@@ -1,10 +1,15 @@
+
 import React, { Component } from 'react'
 import '../cssFiles/AdminHeader.css'
 
+// defining custom class component..
+
 class AdminHeader extends Component {
 
+// render method..
     render() {
         return (
+            
             <div className="adminHeaderContainer">
 
                 <div id="Admin">

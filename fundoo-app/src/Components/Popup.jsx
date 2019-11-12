@@ -4,6 +4,7 @@ import '../cssFiles/PopUpContainer.css'
 class Popup extends Component {
 
 
+    // sign out function defined which will be pushed onto signIn page.
     signOut=()=>{
 
         console.log("signout",event.target);

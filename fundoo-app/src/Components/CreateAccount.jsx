@@ -4,6 +4,9 @@ import TextField from '@material-ui/core/TextField';
 import validate from '../validations/validation'
 const userService = require('../Services/Userservice')
 
+
+// defining custom class component..
+
 class CreateAccount extends Component {
 
     constructor(props) {
@@ -24,6 +27,11 @@ class CreateAccount extends Component {
 
     }
 
+    /**
+     *  defining an Input funtion which is same for all textfield
+     *   defining function with async and inside state as await for set state
+     *  */
+
     async Input(event) {
 
         await this.setState({
@@ -33,6 +41,10 @@ class CreateAccount extends Component {
 
     }
 
+    /** 
+     * this function will call internnaly method fname and set state..
+     * 
+    */
     FirstName() {
 
         const obj = validate.fName(this.state.FirstName)
@@ -45,7 +57,10 @@ class CreateAccount extends Component {
 
         return boolval
     }
-
+    /** 
+ * this function will call internnaly  Lname method and set state..
+ * 
+*/
     lName() {
 
 
@@ -59,7 +74,10 @@ class CreateAccount extends Component {
 
         return boolval
     }
-
+    /** 
+    * this function will call internnaly email method and set state..
+    * 
+   */
     userName() {
 
         const obj = validate.email(this.state.userName)
@@ -72,6 +90,10 @@ class CreateAccount extends Component {
 
         return boolval
     }
+     /** 
+    * this function will call internnaly password method and set state..
+    * 
+   */
 
     password() {
 
@@ -86,6 +108,11 @@ class CreateAccount extends Component {
         return boolval
     }
 
+    /** 
+    * this function will compare with the state.password 
+    * if not same error will bs display
+    * 
+   */
     cnfPass() {
         if (this.state.password !== this.state.confrmPassword) {
             this.setState({
@@ -101,7 +128,10 @@ class CreateAccount extends Component {
 
     }
 
-
+    /**
+     *  defined RegisterBtn Function in that defined a flag which decide 
+     *  final true or false if flag is flag then api will hit..
+     */
     RegisterBtn(event) {
 
         let flag = false
@@ -124,22 +154,26 @@ class CreateAccount extends Component {
             flag = false
         }
 
+        
         const obj = {
 
             "firstName": this.state.FirstName,
             "lastName": this.state.LastName,
             "service": "basic",
             "email": this.state.userName,
-            "password":this.state.password
+            "password": this.state.password
 
         }
-        userService.register(obj,(error,result)=>{
+        // if flag not true then api will hit.
+        if(!flag){
 
-            if(result){
-                
+        userService.register(obj, (error, result) => {
+
+            if (result) {
+
             }
         })
-
+    }
     }
 
     render() {
@@ -204,9 +238,6 @@ class CreateAccount extends Component {
 
                             </div>
 
-                            {/* <div id="domainPart">
-                                @gmail.com
-                            </div> */}
 
                         </div>
 
@@ -242,7 +273,7 @@ class CreateAccount extends Component {
                             </div>
                             <div id="showPasswordIcon">
                                 {/* ShowIcon */}
-                        </div>
+                            </div>
 
                         </div>
 
