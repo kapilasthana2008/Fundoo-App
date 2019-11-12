@@ -1,0 +1,334 @@
+.MainContainer {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+
+    height         : 40px;
+    width          : 100%;
+    border-bottom  : 1px solid rgb(224, 223, 223);
+    padding        : 10px 10px;
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-between
+}
+
+.menuWithLogo {
+    height        : 50px;
+    width         : 150px;
+    display       : flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items    : center;
+    align-content  : center
+}
+
+.searchbar {
+    height          : 40px;
+    width           : 600px;
+    margin-left     : 30px;
+    background-color: transparent;
+    display         : flex;
+    flex-direction  : row;
+    justify-content : space-between;
+    justify-content : center;
+    border-width    : 1px;
+    border          : 1px solid rgb(201, 196, 196);
+    border-radius   : 15px 15px 15px 15px;
+    align-items     : center
+}
+
+.accountDetailsPart {
+    height: 50px;
+    width : 300px;
+
+    display         : flex;
+
+    flex-direction  : row;
+    justify-content : space-between;
+    align-content   : center;
+    align-items     : center
+}
+
+
+
+
+#setting {
+    height          : 40px;
+    width           : 40px;
+    border-radius   : 50%;
+    background-color: pink
+}
+
+#appIcon {
+
+
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-around;
+    align-content  : center;
+    align-items    : center
+}
+
+#appIcon:hover {
+    background-color: rgb(233, 225, 225);
+}
+
+
+#profilelogo {
+    height       : 40px;
+    width        : 40px;
+    border-radius: 50%;
+
+    display       : flex;
+    flex-direction: row;
+
+    justify-content: space-around;
+    align-content  : center;
+    align-items    : center
+}
+
+#profile {
+    height       : 30px;
+    width        : 30px;
+    border-radius: 50%;
+
+
+}
+
+
+
+#profilelogo:hover {
+    background-color: rgb(233, 225, 225);
+}
+
+#menuIcon {
+    height: 50px;
+    width : 50px;
+
+    border-radius: 50%;
+}
+
+#menuIcon:hover {
+    background-color: rgb(233, 225, 225);
+}
+
+#logo {
+    height: 50px;
+    width : 100px;
+
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-between
+}
+
+#logoImg {
+
+    height: 50px;
+    width : 45px;
+
+}
+
+#keep {
+    color    : rgb(110, 108, 108);
+    font-size: 23px;
+
+    height    : 20px;
+    width     : 45px;
+    margin-top: 10px;
+
+}
+
+#menuImg {
+    height: 50px;
+    width : 50px;
+
+}
+
+#svgImg {
+    height: 40px;
+    width : 40px;
+}
+
+
+#label {
+    margin-top: 10px;
+    font-size : 10px;
+}
+
+#searchicon {
+    height      : 51px;
+    width       : 74px;
+    margin-right: 3px;
+
+}
+
+#searchField {
+    height: 40px;
+    width : auto;
+
+}
+
+#searchtext {
+    border: none;
+    width : 500px;
+    height: 25px;
+
+}
+
+#searchCroxBtn {
+    height     : 51px;
+    width      : 74px;
+    margin-left: 3px;
+
+}
+
+#searchimg {
+    margin-top : 10px;
+    margin-left: 16px;
+    height     : 30px;
+    width      : 30px;
+    background : none
+}
+
+#crossimg {
+    margin-top: 15px;
+    height    : 15px;
+    width     : 15px;
+}
+.note-container{
+    width: auto;
+    height: auto;
+    /* background-color: red; */
+    margin: 20px auto
+}
+
+.take-a-note {
+    /* margin-left  : 35%; */
+    margin-top   : 2%;
+    padding      : 5px;
+    min-height   : 35px;
+    min-width    : 598px;
+    border       : 1px solid rgb(182, 178, 178);
+    box-shadow   : 0 2px 2px rgba(0, 0, 0, 0.10), 0 5px 5px rgba(0, 0, 0, 0.10);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    justify-content: center
+}
+
+.notes {
+    margin-left     : 25%;
+    margin-top      : 5%;
+    min-height      : 100px;
+    max-width       : 800px;
+    display         : flex;
+    flex-direction  : row;
+    flex-wrap       : wrap;
+    justify-content : space-evenly;
+    background-color: chocolate;
+}
+
+.popupContainer {
+
+    height          : auto;
+    width           : 90%;
+    display         : flex;
+    flex-direction  : column;
+    justify-content : flex-start;
+    background-color: transparent;
+    position        : relative;
+    margin-top      : 60px;
+    margin-left     : 235%;
+    /* margin-left  : 220%; */
+
+}
+
+#refreshIcon {
+    height          : 40px;
+    width           : 40px;
+    margin-top      : 4px;
+    border-radius   : 50%;
+
+    display         : flex;
+    flex-direction  : row;
+    justify-content : center;
+}
+
+#gridIcon {
+
+    height          : 40px;
+    margin-top      : 4px;
+    width           : 40px;
+    display         : flex;
+    flex-direction  : row;
+    justify-content : center;
+    border-radius   : 50%;
+    margin-right    : 10px;
+
+}
+
+#refresh {
+    height          : 30px;
+    margin-top      : 4.5px;
+    width           : 30px;
+  
+    border-radius   : 50%;
+}
+#refreshImg{
+    height          : 30px;
+    width           : 30px;
+}
+
+.setting-grid {
+
+    width  : 60%;
+    height : 50px;
+    display: flex;
+
+    flex-direction  : row;
+    justify-content : space-around;
+  
+
+}
+
+#popup {
+
+    height          : 410px;
+    width           : 356px;
+    padding         : 10px;
+    background-color: white;
+    border          : 1px solid gray;
+    border-radius   : 10px;
+    box-shadow      : 0 14px 28px rgba(0, 0, 0, 0.30), 0 10px 10px rgba(0, 0, 0, 0.10);
+
+
+}
+
+#refreshIcon:hover{
+
+    background-color: rgb(233, 225, 225);
+
+}
+#gridIcon:hover{
+    background-color: rgb(233, 225, 225);
+}
+
+
+#listItem {
+    /* background-color: red; */
+}
+
+#item1 {
+    /* width        : auto;    
+    background-color: yellow */
+}
+
+@media (max-width: 900px) {
+    .popupContainer {
+        margin-left: 130%;
+    }
+}

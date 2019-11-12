@@ -1,0 +1,196 @@
+.registerBody {
+    height: 80vh;
+
+
+    display       : flex;
+    flex-direction: column;
+    text-align    : center
+}
+
+.restrationContainer {
+
+    min-height    : 480px;
+    width         : 748px;
+    border        : 1px solid rgb(190, 186, 186);
+    border-radius : 10px;
+    margin        : auto auto;
+    display       : flex;
+    flex-direction: row;
+    margin-top    : 20px;
+    padding       : 48px 40px 36px;
+}
+
+#title {
+    font-size      : 20px;
+    margin-top     : 20px;
+    display        : flex;
+    flex-direction : row;
+    flex-wrap      : wrap;
+    justify-content: flex-start;
+}
+
+.part1 {
+
+    width: 60%;
+
+}
+
+.part2 {
+    height        : 442px;
+    width         : 252px;
+    position      : relative;
+    display       : flex;
+    flex-direction: column;
+    margin        : 50px auto;
+}
+
+#iconImg {
+
+    height: 244px;
+    width : 244px;
+}
+
+#message {
+
+    margin-top: 40px;
+
+}
+
+.inputFields {
+
+    height         : 70px;
+    width          : 368px;
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-between;
+    margin-top     : 20px
+}
+
+#F-name {
+
+    height: auto;
+    width : auto;
+
+}
+
+#L-name {
+
+    height: auto;
+    width : 158px;
+
+}
+
+#nameField {
+    width : 175px;
+    height: 8px;
+}
+
+#lastField {
+    width : 175px;
+    height: 8px;
+}
+
+#userNameField {
+
+    height         : 70px;
+    width          : 400px;
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-between;
+    align-content  : center;
+    align-items    : center;
+
+}
+
+#userName {
+
+    height: auto;
+    width : auto;
+
+}
+
+#domainPart {
+    height    : auto;
+    width     : auto;
+    margin-top: 60px;
+
+}
+
+#userName {
+    width : 380px;
+    height: 8px;
+}
+
+#currentTitle {
+    margin-top    : 40px;
+    display       : flex;
+    flex-direction: row;
+    justify-items : flex-start
+}
+
+.passwordDiv {
+    height        : 70px;
+    width         : 380px;
+    display       : flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    margin-top     : 20px
+}
+
+#password {
+
+    height: auto;
+    width : auto;
+
+}
+
+#CnfPassword {
+
+    height: auto;
+    width : auto;
+
+}
+
+#showPasswordIcon {
+    height: 20px;
+    width : 50px;
+
+    margin-top: 30px;
+}
+
+#paswdField,
+#cnfrnpassword {
+    width: 130px;
+}
+
+.registerBtn {
+
+    display        : flex;
+    flex-direction : row;
+    justify-content: flex-end;
+    margin-right   : 50px;
+    margin-top     : 50px;
+
+
+}
+
+#Btn {
+    color           : white;
+    font-size       : 15px;
+    font-weight     : bold;
+    margin-right    : -4px;
+    height          : 34px;
+    width           : 90px;
+    border-color    : rgb(39, 100, 180);
+    border-width    : 1px;
+    border-style    : solid;
+    border-radius   : 5px;
+    background-color: rgb(58, 137, 240);
+}
+
+#Btn:hover {
+
+    background-color   : rgb(39, 100, 180);
+    transition-duration: 0.5s
+}

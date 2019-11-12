@@ -1,0 +1,108 @@
+.EmailField {
+
+    width          : auto;
+    margin-top     : 10px;
+    display        : flex;
+    flex-direction : row;
+    flex-wrap      : wrap;
+    justify-content: center;
+
+}
+
+.PasswordField {
+    width          : auto;
+    margin-top     : 5px;
+    display        : flex;
+    flex-direction : row;
+    flex-wrap      : wrap;
+    justify-content: center;
+}
+
+.EmailField #email,
+#passworda {
+        width: 350px;
+
+}
+
+#forgotPassword {
+
+    color       : rgb(39, 100, 180);
+    font-weight : bold;
+    font-size   : 12px;
+    margin-right: 35px;
+    text-align  : end
+}
+
+
+
+#forgotPassword:hover {
+
+    /* background-color: rgb(224, 222, 222); */
+    text-decoration    : underline;
+    position           : relative;
+    cursor             : pointer;
+}
+
+.learnMore {
+
+    margin-top : 10px;
+    margin-left: 38px;
+    font-size  : 15px;
+    line-height: 26px;
+    color: rgb(160, 158, 158)
+}
+
+.learnMore a {
+    color      : rgb(39, 100, 180);
+    font-weight: bold
+}
+
+.createAcnt {
+
+    display        : flex;
+    flex-direction : row;
+    flex-wrap      : wrap;
+    justify-content: space-between
+}
+
+
+.submitBtn {
+
+    width : auto;
+    height: auto;
+    background-color: transparent   
+
+}
+
+#create {
+    width      : auto;
+    height     : auto;
+    color      : rgb(39, 100, 180);
+    margin-top : 5px;
+    font-weight: bold;
+}
+
+#create:hover {
+    text-decoration: underline;
+    cursor         : pointer;
+}
+
+#submit {
+    color           : white;
+    font-size       : 15px;
+    font-weight     : bold;
+    margin-right    : 40px;
+    height          : 34px;
+    width           : 90px;
+    border-color    : rgb(39, 100, 180);
+    border-width    : 1px;
+    border-style    : solid;
+    border-radius   : 5px;
+    background-color: rgb(58, 137, 240);
+}
+
+#submit:hover {
+
+    background-color   : rgb(39, 100, 180);
+    transition-duration: 0.5s
+}

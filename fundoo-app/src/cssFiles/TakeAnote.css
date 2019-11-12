@@ -1,0 +1,24 @@
+
+
+.note-title{
+    height: 3px;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center
+
+}
+
+
+#titleHead{
+    color: gray;
+    background-color: brown;
+    font-size: 20px
+}
+#pin-up{
+
+    color: gray;
+    background-color: red;
+    font-size: 20px
+}

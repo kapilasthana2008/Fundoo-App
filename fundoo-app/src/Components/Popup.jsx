@@ -1,0 +1,49 @@
+import React, { Component } from 'react'
+import '../cssFiles/PopUpContainer.css'
+
+class Popup extends Component {
+
+
+    signOut=()=>{
+
+        console.log("signout",event.target);
+        localStorage.clear()
+
+        console.log(this.props);
+        // this.props.props.history.push("/")
+        this.props.history.push("/")
+    }
+
+    render() {
+        return (
+
+            <div>
+               
+                <div className="popUpContainer">
+
+                    <div id="profileImage">
+                        {/* image */}
+                    </div>
+
+                    <div id="Username">
+                    {localStorage.getItem('firstName')}
+                     </div>
+
+                    <div id="EmailId">
+                       {localStorage.getItem('email')}
+                    </div>
+                </div>
+            <div className = "signOutBtn">
+
+                <div id = "signOutButton">
+                <button id = "signOut" onClick = {this.signOut}>
+                    Sign out
+                </button>
+                </div>
+            </div>
+            </div>
+        )
+    }
+}
+
+export default Popup
