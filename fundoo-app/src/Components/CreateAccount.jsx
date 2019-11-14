@@ -22,7 +22,11 @@ class CreateAccount extends Component {
             "password": "",
             "passwordError": "",
             "confrmPassword": "",
-            "confrmPasswordError": ""
+            "confrmPasswordError": "",
+            "service": "",
+            "defaultMsg": "",
+            "basicUserToggle": false,
+            "advnceUserToggle": false
         }
 
     }
@@ -90,10 +94,10 @@ class CreateAccount extends Component {
 
         return boolval
     }
-     /** 
-    * this function will call internnaly password method and set state..
-    * 
-   */
+    /** 
+   * this function will call internnaly password method and set state..
+   * 
+  */
 
     password() {
 
@@ -128,6 +132,41 @@ class CreateAccount extends Component {
 
     }
 
+    /** 
+     *  this basicuser() function will work for basic user type selection
+     *  and the change the state 
+    */
+    basicUser = async (event) => {
+
+        // "basicUserToggle": false,
+        // "advnceUserToggle": false
+        await this.setState({
+            basicUserToggle: true,
+            advnceUserToggle: false,
+            service: "basic",
+            defaultMsg:""
+        })
+
+    }
+
+    /** 
+     *  this advanceUser() function will work for basic user type selection
+     *  and the change the state 
+    */
+    advanceUser = async (event) => {
+        // "basicUserToggle": false,
+        // "advnceUserToggle": false
+        await this.setState({
+            basicUserToggle: false,
+            advnceUserToggle: true,
+            service: "advance",
+            defaultMsg:""
+        })
+
+    }
+
+
+
     /**
      *  defined RegisterBtn Function in that defined a flag which decide 
      *  final true or false if flag is flag then api will hit..
@@ -154,26 +193,37 @@ class CreateAccount extends Component {
             flag = false
         }
 
-        
+
         const obj = {
 
             "firstName": this.state.FirstName,
             "lastName": this.state.LastName,
-            "service": "basic",
+            "service": this.state.service,
             "email": this.state.userName,
             "password": this.state.password
 
         }
         // if flag not true then api will hit.
-        if(!flag){
+        if (!flag) {
+            if ((this.state.basicUserToggle || this.state.advnceUserToggle)) {
+                userService.register(obj, (error, result) => {
 
-        userService.register(obj, (error, result) => {
+                    if (result) {
 
-            if (result) {
+                        console.log("props only",this.props);
+                        this.props.history.Push("/")
+                        console.log("props.props only",this.props.props);
+                    }
+                })
 
+            } else {
+
+                this.setState({
+                    defaultMsg: "*please select any user type."
+                })
             }
-        })
-    }
+
+        }
     }
 
     render() {
@@ -225,7 +275,7 @@ class CreateAccount extends Component {
 
                             <div id="userName">
 
-                                <TextField id="userName"
+                                <TextField id="userNametext"
                                     label="user Name"
                                     type="text"
                                     name="userName"
@@ -272,11 +322,22 @@ class CreateAccount extends Component {
                                     variant="outlined" />
                             </div>
                             <div id="showPasswordIcon">
-                                {/* ShowIcon */}
+                                ShowIcon
                             </div>
 
                         </div>
+                        <div id={!(this.state.advnceUserToggle || this.state.basicUserToggle) ?
+                            "user-types-error" : ""} >
+                            {this.state.defaultMsg}
 
+                        </div>
+                        <div id="basic-advnc">
+                            <div id={(this.state.basicUserToggle) ? "basic-toggle" : "basic"}
+                                onClick={event => this.basicUser(event)}>Basic</div>
+                            <div id={(this.state.advnceUserToggle) ? "basic-toggle" : "basic"}
+                                onClick={event => this.advanceUser(event)}>Advance</div>
+
+                        </div>
 
                         <div className="registerBtn">
                             <button id="Btn" onClick={event => this.RegisterBtn(event)}>

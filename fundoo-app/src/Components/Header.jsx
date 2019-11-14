@@ -4,12 +4,14 @@ import DrawerList from './DrawerList';
 import InputBase from '@material-ui/core/InputBase';
 import PopUp from '../Components/Popup'
 import Popper from '@material-ui/core/Popper';
+import IconButton from '@material-ui/core/IconButton';
+
 
 // import SearchIcon from '@material-ui/icons/Search';
 
 
 
-class Header extends Component {
+class HeaderAppBar extends Component {
 
     constructor(props) {
         super(props)
@@ -17,27 +19,34 @@ class Header extends Component {
         this.state = {
             toggleBool: false,
             popupBool: false,
-            gridchange:false
+            gridchange: false
         }
- 
+
     }
 
     menuClick = async () => {
 
-        if (this.state.toggleBool) {
+      await  this.setState({ toggleBool: !this.state.toggleBool })
+        // if (this.state.toggleBool) {
 
-            await this.setState({
-                toggleBool: false
-            })
-        } else {
-            await this.setState({
-                toggleBool: true
-            })
-        }
+        //     await this.setState({
+        //         toggleBool: false
+        //     })
+        // } else {
+        //     await this.setState({
+        //         toggleBool: true
+        //     })
+        // }
 
         console.log("togglebool", this.state.toggleBool);
 
+         console.log("this.props in header", this.props);
+        this.props.getvalue(this.state.toggleBool)
+
+
     }
+
+
 
     popUpClick = async () => {
 
@@ -57,7 +66,7 @@ class Header extends Component {
         console.log("popupBool", this.state.popupBool);
     }
 
-    changegrid = async ()=>{
+    changegrid = async () => {
 
         console.log("popup");
 
@@ -80,11 +89,11 @@ class Header extends Component {
 
                 <div className="menuWithLogo">
 
-                    <div id="menuIcon" onClick={this.menuClick}>
-
+                    {/* <div  > */}
+                    <IconButton id="menuIcon" onClick={this.menuClick}>
                         <img src={require('../assets/menuicon.jpg')} id="menuImg" />
-
-                    </div>
+                    </IconButton>
+                    {/* </div> */}
 
                     <div id="logo">
 
@@ -129,8 +138,8 @@ class Header extends Component {
                         <div id="refreshIcon">
 
                             <div id="refresh">
-                            <img src= {require("../assets/refresh.svg")} id="refreshImg" />
-                        
+                                <img src={require("../assets/refresh.svg")} id="refreshImg" />
+
                             </div>
 
                         </div>
@@ -138,11 +147,11 @@ class Header extends Component {
                         <div id="gridIcon">
 
                             <div id="refresh" onClick={this.changegrid}>
-                            <img src= { (this.state.gridchange) ?  require('../assets/grid.svg') : 
-                            require('../assets/grid1.svg')} 
-                            id="refreshImg" />
+                                <img src={(this.state.gridchange) ? require('../assets/grid.svg') :
+                                    require('../assets/grid1.svg')}
+                                    id="refreshImg" />
 
-                            {/* <img src={require('../assets/grid1.svg')} id="refreshImg" /> */}
+                                {/* <img src={require('../assets/grid1.svg')} id="refreshImg" /> */}
                             </div>
                         </div>
 
@@ -156,7 +165,7 @@ class Header extends Component {
                         </div>
                     </div>
 
-                    
+
 
                 </div>
 
@@ -178,4 +187,4 @@ class Header extends Component {
 
 }
 
-export default Header
+export default HeaderAppBar

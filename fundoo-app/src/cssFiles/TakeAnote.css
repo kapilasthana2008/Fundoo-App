@@ -1,24 +1,39 @@
+.note-title-box{
+    width: 600px;
+
+    padding: 12px 16px;
+    font-size: 17px;
+    font-weight: bold
+}
 
 
-.note-title{
-    height: 3px;
-    padding: 10px 15px;
+
+#title-container{
+
     display: flex;
+    height: 20px;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center
+    justify-content: space-between
 
 }
 
-
-#titleHead{
-    color: gray;
-    background-color: brown;
-    font-size: 20px
+#title{
+    font-weight: normal;
+    color: rgb(179, 174, 174);
+    position: relative;
+    bottom: 20px;
+   
 }
-#pin-up{
 
-    color: gray;
-    background-color: red;
-    font-size: 20px
+.inputNote{
+    margin-top: 15px;
 }
+
+
+#searchtextBox {
+    border: none;
+    width : 500px;
+   
+
+}
+

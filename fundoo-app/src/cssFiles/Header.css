@@ -1,17 +1,24 @@
+
 .MainContainer {
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
+    height         : 90vh;
+    width          : 100%;
+    display        : flex;
+    flex-direction : column;
+    justify-content: flex-start;
+
+    margin    : 10px auto;
+    margin-top: 15px
 }
 
 .header {
 
-    height         : 40px;
-    width          : 100%;
-    border-bottom  : 1px solid rgb(224, 223, 223);
-    padding        : 10px 10px;
-    display        : flex;
-    flex-direction : row;
+    height        : 40px;
+    width         : 1331px;
+    border-bottom : 1px solid rgb(224, 223, 223);
+    padding       : 10px 10px;
+    display       : flex;
+    flex-direction: row;
+
     justify-content: space-between
 }
 
@@ -45,22 +52,22 @@
     height: 50px;
     width : 300px;
 
-    display         : flex;
+    display: flex;
 
-    flex-direction  : row;
-    justify-content : space-between;
-    align-content   : center;
-    align-items     : center
+    flex-direction : row;
+    justify-content: space-between;
+    align-content  : center;
+    align-items    : center
 }
 
 
 
 
 #setting {
-    height          : 40px;
-    width           : 40px;
-    border-radius   : 50%;
-    background-color: pink
+    height       : 40px;
+    width        : 40px;
+    border-radius: 50%;
+
 }
 
 #appIcon {
@@ -199,37 +206,56 @@
     height    : 15px;
     width     : 15px;
 }
-.note-container{
-    width: auto;
-    height: auto;
-    /* background-color: red; */
-    margin: 20px auto
+
+.noteparent {
+    /* width              : 70%;
+    background-color      : greenyellow;
+    margin-left           : 260px; */
+    /* transition         : 0.5s; */
+    /* margin-left        : 260px; */
+    margin-left           : 260px;
+    transition            : 0.3s;
 }
 
-.take-a-note {
-    /* margin-left  : 35%; */
-    margin-top   : 2%;
-    padding      : 5px;
-    min-height   : 35px;
-    min-width    : 598px;
-    border       : 1px solid rgb(182, 178, 178);
-    box-shadow   : 0 2px 2px rgba(0, 0, 0, 0.10), 0 5px 5px rgba(0, 0, 0, 0.10);
-    border-radius: 10px;
+.note-container {
+    width  : 600px;
     display: flex;
-    justify-content: space-between;
-    justify-content: center
+
+    flex-direction: column;
+
+    margin: 0px auto
 }
 
-.notes {
-    margin-left     : 25%;
-    margin-top      : 5%;
-    min-height      : 100px;
-    max-width       : 800px;
-    display         : flex;
-    flex-direction  : row;
-    flex-wrap       : wrap;
-    justify-content : space-evenly;
-    background-color: chocolate;
+.note-list {
+
+    max-width     : 1000px;
+    /* background : yellow; */
+    display       : flex;
+    margin-left   : 50px;
+    flex-direction: row;
+    flex-wrap     : wrap;
+    margin        : 25px auto
+}
+
+.note-listForColumn {
+
+    max-width     : 660px;
+    background : yellow;
+    display       : flex;
+    margin-right   : 60px;
+    flex-direction: column;
+    flex-wrap     : wrap;
+    margin        : 25px auto
+}
+
+.mainInputCard {
+    width         : 600px;
+    padding       : 12px 16px;
+    font-size     : 12px;
+    display       : flex;
+    flex-direction: column;
+    border-radius : 20px;
+    font-weight   : bold
 }
 
 .popupContainer {
@@ -248,39 +274,40 @@
 }
 
 #refreshIcon {
-    height          : 40px;
-    width           : 40px;
-    margin-top      : 4px;
-    border-radius   : 50%;
+    height       : 40px;
+    width        : 40px;
+    margin-top   : 4px;
+    border-radius: 50%;
 
-    display         : flex;
-    flex-direction  : row;
-    justify-content : center;
+    display        : flex;
+    flex-direction : row;
+    justify-content: center;
 }
 
 #gridIcon {
 
-    height          : 40px;
-    margin-top      : 4px;
-    width           : 40px;
-    display         : flex;
-    flex-direction  : row;
-    justify-content : center;
-    border-radius   : 50%;
-    margin-right    : 10px;
+    height         : 40px;
+    margin-top     : 4px;
+    width          : 40px;
+    display        : flex;
+    flex-direction : row;
+    justify-content: center;
+    border-radius  : 50%;
+    margin-right   : 10px;
 
 }
 
 #refresh {
-    height          : 30px;
-    margin-top      : 4.5px;
-    width           : 30px;
-  
-    border-radius   : 50%;
+    height    : 30px;
+    margin-top: 4.5px;
+    width     : 30px;
+
+    border-radius: 50%;
 }
-#refreshImg{
-    height          : 30px;
-    width           : 30px;
+
+#refreshImg {
+    height: 30px;
+    width : 30px;
 }
 
 .setting-grid {
@@ -289,9 +316,9 @@
     height : 50px;
     display: flex;
 
-    flex-direction  : row;
-    justify-content : space-around;
-  
+    flex-direction : row;
+    justify-content: space-around;
+
 
 }
 
@@ -308,12 +335,13 @@
 
 }
 
-#refreshIcon:hover{
+#refreshIcon:hover {
 
     background-color: rgb(233, 225, 225);
 
 }
-#gridIcon:hover{
+
+#gridIcon:hover {
     background-color: rgb(233, 225, 225);
 }
 
@@ -326,6 +354,41 @@
     /* width        : auto;    
     background-color: yellow */
 }
+
+.icons-in-row {
+    width: 70%;
+
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-between
+}
+
+.utilityIcons {
+    margin-top     : 13px;
+    margin-bottom  : 10px;
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-between;
+
+}
+
+#Closebtn {
+
+
+    border          : none;
+    font-size       : 15px;
+    font-weight     : bold;
+    color           : rgb(61, 60, 60);
+    width           : 100px;
+    height          : 30px;
+    background-color: transparent
+}
+
+#Closebtn:hover {
+    background-color: rgb(233, 229, 229);
+    cursor          : pointer;
+}
+
 
 @media (max-width: 900px) {
     .popupContainer {

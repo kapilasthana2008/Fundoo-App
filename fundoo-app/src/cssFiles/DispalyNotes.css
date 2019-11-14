@@ -1,0 +1,83 @@
+.mainDipalyCard{
+    width: 200px;
+    margin-top: 10px;
+    padding: 12px 16px 0px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2px;
+}
+
+#titleRow{
+    font-size: 15px;
+ 
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between */
+}
+
+#title-show{
+    width:  90%;
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
+  
+}
+
+#msgDisp-part{
+    width:  90%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
+
+}
+
+#utililityIcons{
+    width:  90%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  
+}
+/* 
+#remindMe{
+    width: 100px;
+    background-color: red
+}
+
+#collaboration{
+    width: 100px;
+    background-color: yellow
+}
+
+#changeColor{
+    width: 100px;
+    background-color: greenyellow
+}
+
+#addImage{
+    width: 100px;
+    background-color: yellow
+}
+
+#archive{
+    width: 100px;
+    margin-right: 5px;
+    background-color: red
+}
+
+#more{
+    width: 100px;
+    margin-left: 60px;
+    background-color: yellow
+}
+*/
+#pinupImg{
+    width: auto;
+}
+#moreimg{
+    height: 20px;
+    width :20px;
+} 

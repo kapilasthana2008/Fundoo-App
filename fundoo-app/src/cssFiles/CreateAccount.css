@@ -1,5 +1,5 @@
 .registerBody {
-    height: 80vh;
+    height: 0vh;
 
 
     display       : flex;
@@ -9,7 +9,7 @@
 
 .restrationContainer {
 
-    min-height    : 480px;
+    min-height    : 450px;
     width         : 748px;
     border        : 1px solid rgb(190, 186, 186);
     border-radius : 10px;
@@ -59,11 +59,11 @@
 .inputFields {
 
     height         : 70px;
-    width          : 368px;
+    width          : auto;
     display        : flex;
     flex-direction : row;
     justify-content: space-between;
-    margin-top     : 20px
+    margin-top     : -5px
 }
 
 #F-name {
@@ -75,9 +75,8 @@
 
 #L-name {
 
-    height: auto;
-    width : 158px;
-
+    width       : auto;
+    margin-right: 36px
 }
 
 #nameField {
@@ -116,13 +115,13 @@
 
 }
 
-#userName {
-    width : 380px;
-    height: 8px;
+#userNametext {
+    width: 385px;
+
 }
 
 #currentTitle {
-    margin-top    : 40px;
+    margin-top    : 10px;
     display       : flex;
     flex-direction: row;
     justify-items : flex-start
@@ -170,7 +169,7 @@
     flex-direction : row;
     justify-content: flex-end;
     margin-right   : 50px;
-    margin-top     : 50px;
+    margin-top     : 20px;
 
 
 }
@@ -189,8 +188,76 @@
     background-color: rgb(58, 137, 240);
 }
 
+#basic-advnc {
+    display: flex;
+    width  : 75%;
+
+    margin-top     : 20px;
+    flex-direction : row;
+    justify-content: space-evenly
+}
+
+
+#basic {
+    color           : rgb(7, 7, 7);
+    font-size       : 15px;
+    font-weight     : bold;
+    height          : 34px;
+    width           : 90px;
+    border-color    : rgb(202, 204, 206);
+    border-width    : 1px;
+    display         : flex;
+    flex-direction  : column;
+    justify-content : center;
+    border-style    : solid;
+    border-radius   : 5px;
+    background-color: rgb(234, 237, 240);
+}
+
+#basic-toggle {
+    color           : white;
+    font-size       : 15px;
+    font-weight     : bold;
+    height          : 34px;
+    width           : 90px;
+    border-color    : rgb(202, 204, 206);
+    border-width    : 1px;
+    display         : flex;
+    flex-direction  : column;
+    justify-content : center;
+    border-style    : solid;
+    border-radius   : 5px;
+    background-color: rgb(58, 137, 240);
+}
+
+#user-types {
+
+
+    margin-top      : 10px;
+    display         : flex;
+    flex-direction  : row;
+    
+    justify-content : flex-start
+}
+
+#user-types-error {
+    color: red;
+    font-size: 13px;
+    margin-top      : 10px;
+    display         : flex;
+    flex-direction  : row;
+    
+    justify-content : flex-start
+}
+
+#basic:hover {
+    background-color   : rgb(179, 181, 184);
+    color              : rgb(255, 255, 255);
+    transition-duration: 0.5s
+}
+
 #Btn:hover {
 
     background-color   : rgb(39, 100, 180);
-    transition-duration: 0.5s
+    transition-duration: 0.3s
 }
