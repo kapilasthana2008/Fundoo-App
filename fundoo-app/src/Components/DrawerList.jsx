@@ -25,7 +25,9 @@ class DrawerList extends Component {
 
         this.state = {
             toggleBool: this.props.togglebool,
-            bool: true
+            bool: true,
+            archiveBool:false,
+            trashBool:false
         }
     }
 
@@ -39,7 +41,7 @@ class DrawerList extends Component {
                         paperAnchorLeft: {
                             top: "60px",
                             width: width
-                            
+
                         }
                     }
                 }
@@ -47,10 +49,31 @@ class DrawerList extends Component {
 
         return useStyles
     }
+
+    archClicked = async () => {
+
+        console.log("archive fun");
+
+        await this.setState({archiveBool: true})
+
+       this.props.arch(this.state.archiveBool)
+
+    }
+
+    trashClicked = async ()=>{
+        
+        console.log("trash clicked");
+        await this.setState ({trashBool:true})
+
+        this.props.trashbox(this.state.trashBool)
+
+    }
+
+
+
     render() {
 
         console.log("state", this.props.togglebool);
-
 
 
         return (
@@ -70,60 +93,56 @@ class DrawerList extends Component {
                         <Divider />
                         <List >
 
-                                <ListItem button  >
-                                    <ListItemIcon>
-                        <img src = {require('../assets/notes.svg') }alt="Logo" />
-                                        {/* <InboxIcon /> */}
-                                    </ListItemIcon>
-                                    <ListItemText primary="Notes" />
-                                </ListItem>
-                                <ListItem button>
-                                    <ListItemIcon>
-                                        <img src={require('../assets/remind.svg')} alt="Logo"/>
-                                        {/* <DraftsIcon /> */}
-                                    </ListItemIcon>
-                                    <ListItemText primary="Remainder" />
-                                </ListItem>
+                            <ListItem button  >
+                                <ListItemIcon>
+                                    <img src={require('../assets/notes.svg')} alt="Logo" />
+                                    {/* <InboxIcon /> */}
+                                </ListItemIcon>
+                                <ListItemText primary="Notes" />
+                            </ListItem>
 
-                                
-                            {/* {['Notes', 'Reminder'].map((text, index) => (
-                                <ListItem button key={text}>
-                                    <ListItemIcon>{index % 3 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItem>
-                            ))} */}
+                            <ListItem>
+                                <ListItemIcon>
+                                    <img src={require('../assets/remind.svg')} alt="Logo" />
+                                    {/* <DraftsIcon /> */}
+                                </ListItemIcon>
+                                <ListItemText primary="Reminders" />
+                            </ListItem>
+
                         </List>
 
                         <Divider />
                         <List>
 
-                        <ListItem button>
-                                    <ListItemIcon>
-                                        <img src={require('../assets/edit.svg')} alt="Logo"/>
-                                        {/* <DraftsIcon /> */}
-                                    </ListItemIcon>
-                                    <ListItemText primary="Edit Labels" />
-                                </ListItem>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <img src={require('../assets/edit.svg')} alt="Logo" />
+                                    {/* <DraftsIcon /> */}
+                                </ListItemIcon>
+                                <ListItemText primary="Edit Labels" />
+                            </ListItem>
                         </List>
 
                         <Divider />
-                        <ListItem button>
-                                    <ListItemIcon>
-                                    <img src={require('../assets/archive.svg')} alt="Logo"/>
-                                        {/* <img src={require('../Assets/remind.svg')} alt="Logo" id="imageFlex1" /> */}
-                                        {/* <DraftsIcon /> */}
-                                    </ListItemIcon>
-                                    <ListItemText primary="Archive" />
-                          </ListItem>
                         
-                          <ListItem button>
-                                    <ListItemIcon>
-                                    <img src={require('../assets/trash.svg')} alt="Logo"/>
-                                        {/* <img src={require('../Assets/remind.svg')} alt="Logo" id="imageFlex1" /> */}
-                                        {/* <DraftsIcon /> */}
-                                    </ListItemIcon>
-                                    <ListItemText primary="Trash" />
-                          </ListItem>
+                        <ListItem button onClick = {this.archClicked}>
+                        
+                            <ListItemIcon >
+                                <img src={require('../assets/archive.svg')} alt="Logo" />
+                                {/* <img src={require('../Assets/remind.svg')} alt="Logo" id="imageFlex1" /> */}
+                                {/* <DraftsIcon /> */}
+                            </ListItemIcon>
+                            <ListItemText primary="Archive" />
+                        </ListItem>
+
+                        <ListItem button onClick = {this.trashClicked}>
+                            <ListItemIcon>
+                                <img src={require('../assets/trash.svg')} alt="Logo" />
+                                {/* <img src={require('../Assets/remind.svg')} alt="Logo" id="imageFlex1" /> */}
+                                {/* <DraftsIcon /> */}
+                            </ListItemIcon>
+                            <ListItemText primary="Trash" />
+                        </ListItem>
 
                     </Drawer>
                 </MuiThemeProvider>

@@ -87,15 +87,16 @@ class LoginField extends Component {
         }
 
         if(!flag){
-            userService.login(obj, (error, result) => {
+            userService.login(obj,async (error, result) => {
 
                 if (result) {
     
                     console.log(result.data.id);
-    
-                    localStorage.setItem('firstName', result.data.firstName)
-                    localStorage.setItem('email', result.data.email)
-                    localStorage.setItem('token', result.data.id)
+                    
+                    
+                    await localStorage.setItem('firstName', result.data.firstName)
+                    await localStorage.setItem('email', result.data.email)
+                    await localStorage.setItem('token', result.data.id)
     
     
                     this.props.props.history.push('/Dashboard')
@@ -119,6 +120,8 @@ class LoginField extends Component {
     // rendering component
     render() {
 
+        console.log("token generated",localStorage.getItem('token'));
+        
 
         return (
             <div>

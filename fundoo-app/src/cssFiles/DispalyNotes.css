@@ -1,83 +1,135 @@
-.mainDipalyCard{
-    width: 200px;
-    margin-top: 10px;
-    padding: 12px 16px 0px;
-    font-size: 12px;
-    display: flex;
+.mainDipalyCard {
+    width         : 250px;
+    margin-top    : 20px;
+    padding       : 12px 16px 0px;
+    font-size     : 12px;
+    display       : flex;
     flex-direction: column;
-    margin-left: 2px;
+    margin-left   : 10px;
+    border        : 1px solid rgb(223, 218, 218);
 }
 
-#titleRow{
-    font-size: 15px;
- 
-    display: flex;
-    flex-direction: row;
+.EditmainDipalyCard {
+    position        : absolute;
+    z-index         : 10;
+    width           : 500px;
+    transition            : 0.3s;
+    background-color: red;
+    margin-top      : 20px;
+    padding         : 12px 16px 0px;
+    font-size       : 12px;
+    display         : flex;
+    flex-direction  : column;
+    margin-left     : 10px;
+    border          : 1px solid rgb(223, 218, 218);
+
+}
+
+#titleRow {
+    font-size         : 15px;
+    display           : flex;
+    flex-direction    : row;
     /* justify-content: space-between */
 }
 
-#title-show{
-    width:  90%;
-    display: flex;
+#title-show {
+    width         : 90%;
+    display       : flex;
     flex-direction: column;
-    overflow-wrap: break-word;
-  
-}
-
-#msgDisp-part{
-    width:  90%;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    overflow-wrap: break-word;
+    overflow-wrap : break-word;
 
 }
 
-#utililityIcons{
-    width:  90%;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: row;
+#EditTitle-show {
+    width         : 100%;
+    display       : flex;
+    flex-direction: column;
+    overflow-wrap : break-word;
+
+}
+
+#msgDisp-part {
+    width         : 90%;
+    margin-top    : 10px;
+    display       : flex;
+    flex-direction: column;
+    overflow-wrap : break-word;
+
+}
+
+#utililityIcons {
+    width          : 90%;
+    margin-top     : 40px;
+    display        : flex;
+    flex-direction : row;
     justify-content: space-evenly;
-  
-}
-/* 
-#remindMe{
-    width: 100px;
-    background-color: red
+
 }
 
-#collaboration{
-    width: 100px;
-    background-color: yellow
+#EditutililityIcons {
+    width          : 70%;
+
+    margin-top     : 40px;
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-evenly;
+
 }
 
-#changeColor{
-    width: 100px;
-    background-color: greenyellow
-}
 
-#addImage{
-    width: 100px;
-    background-color: yellow
-}
-
-#archive{
-    width: 100px;
-    margin-right: 5px;
-    background-color: red
-}
-
-#more{
-    width: 100px;
-    margin-left: 60px;
-    background-color: yellow
-}
-*/
-#pinupImg{
+#pinupImg {
     width: auto;
 }
-#moreimg{
+
+#moreimg {
     height: 20px;
-    width :20px;
-} 
+    width : 20px;
+}
+
+#popper {
+    background-color: white;
+    margin-top      : -10px;
+    width           : 163px;
+    border          : 1px solid rgb(201, 198, 198);
+    border-radius   : 5px;
+    box-shadow      : 0 3px 3px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+#typographyEdit {
+    margin-top  : 10px;
+    font-size   : 15px;
+    height      : 30px;
+    text-align  : justify;
+    text-justify: inter-word;
+    color       : rgb(78, 76, 76)
+}
+
+#delete-note {
+    margin-left: 20px
+}
+
+#typographyEdit:hover {
+    background-color: rgb(199, 194, 194)
+}
+
+
+#closeBtn{
+    position: absolute;
+    margin-left: 280px;
+}
+
+#EditBtn{
+    border: none;
+    font-size: 15px;
+    color: gray;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    height: 40px;
+    width: 100px;
+    cursor: pointer;
+}
+#EditBtn:hover{
+    background-color: rgb(241, 237, 237);
+    transition: 0.2s
+}

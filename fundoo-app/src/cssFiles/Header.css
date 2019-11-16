@@ -142,7 +142,6 @@
 #keep {
     color    : rgb(110, 108, 108);
     font-size: 23px;
-
     height    : 20px;
     width     : 45px;
     margin-top: 10px;
@@ -208,8 +207,9 @@
 }
 
 .noteparent {
+
     /* width              : 70%;
-    background-color      : greenyellow;
+  
     margin-left           : 260px; */
     /* transition         : 0.5s; */
     /* margin-left        : 260px; */

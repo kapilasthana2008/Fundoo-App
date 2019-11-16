@@ -5,8 +5,13 @@ import DisplayNotes from '../Components/DisplayNotes'
 import InputNote from '../Components/InputNote'
 import InputBase from '@material-ui/core/InputBase';
 import Card from '@material-ui/core/Card';
+import Masonry from 'react-masonry-component';
+import AppBar from '@material-ui/core/AppBar';
 import '../cssFiles/Header.css'
 import { NotesServices } from '../Services/DashboardServices';
+import IconButton from '@material-ui/core/IconButton';
+import Archive_page from '../Components/Archive_page'
+
 const service = require('../Services/DashboardServices')
 var obj = new service.NotesServices()
 
@@ -21,7 +26,10 @@ class Dashboard extends Component {
             Description: "",
             toggleNote: true,
             drawerToggle: true,
-            allNotes: []
+            allNotes: [],
+            archiveBoolState: false,
+            trashState: false,
+            drawerClickedArray: [],
         }
 
         //  this.getValue = this.getvalue.bind(this)
@@ -31,15 +39,30 @@ class Dashboard extends Component {
 
 
         this.getNotes()
+
+        
     }
 
 
-    getNotes() {
+
+    getTrashItem = (id) => {
+
+        // console.log("get trashed item..", id);
+
+    }
+
+    trashedNote = (id) => {
+
+        // console.log("trashed call", id);
+
+    }
+
+    getNotes = () => {
 
 
         obj.getAllNotes(async (error, result) => {
 
-            await this.setState({allNotes:[]})
+            await this.setState({ allNotes: [] })
 
             console.log("result", result);
 
@@ -47,7 +70,12 @@ class Dashboard extends Component {
                 let arr = []
                 arr = this.state.allNotes
                 result.map((item) => {
-                    arr.push(item)
+
+                    if (item.isArchived === false) {
+                        arr.push(item)
+                    }
+
+
                 })
 
                 await this.setState({ allNotes: arr })
@@ -55,7 +83,7 @@ class Dashboard extends Component {
             }
         })
 
-        
+
     }
 
     async Input(event) {
@@ -84,12 +112,16 @@ class Dashboard extends Component {
 
         console.log("obj created", noteObj);
 
-        obj.addNote(noteObj, (error, result) => {
+        obj.addNote(noteObj, async (error, result) => {
 
 
             if (result) {
-                
-                console.log("responce", result);
+
+                await this.setState({
+                    Title: "",
+                    Description: ""
+
+                })
 
                 this.getNotes()
 
@@ -100,8 +132,6 @@ class Dashboard extends Component {
 
         })
 
-
-
     }
 
     getvalue = async (data) => {
@@ -111,86 +141,173 @@ class Dashboard extends Component {
         })
     }
 
-    render() {
-        return (
 
-            <div >
-                <div>
-                    <HeaderAppBar getvalue={this.getvalue} />
+    archiveClickedHere = async (data) => {
+
+        await this.setState({ archiveBoolState: data })
+
+
+        obj.getAllarchive( async (error, result) => {
+
+            await this.setState({ drawerClickedArray: [] })
+           
+                if (result) {
+                    let arr = []
+                    arr = this.state.drawerClickedArray
+
+                    result.data.map((item) => {
+    
+                        // console.log("archive item..",item);
+                        
+                        arr.push(item)
+    
+                    })
+    
+                    await this.setState({ drawerClickedArray: arr })
+           
+                }
+            })
+
+            console.log("drawer state aarray",this.state.drawerClickedArray.length);
+            
+        // console.log("state set for archive", this.state.archiveBoolState);
+
+    }
+
+    trashClicked = async (data) => {
+     
+        await this.setState({ trashState: data,
+             archiveBoolState:false})
+
+
+        obj.trashNotesList( async (error, result) => {
+
+
+            await this.setState({ drawerClickedArray: [] })
+           
+                if (result) {
+                    let arr = []
+                    arr = this.state.drawerClickedArray
+
+                    result.data.map((item) => {
+    
+                        // console.log("archive item..",item);
+                        
+                        arr.push(item)
+    
+                    })
+    
+                    await this.setState({ drawerClickedArray: arr })
+           
+                }
+            })
+    }
+
+    render() {
+
+   
+        
+        //=========================================Main page==================================================
+        const mainPage = (
+
+            <div className={(this.state.drawerToggle) ? "noteparent" : ""}>
+
+                <div className="note-container" >
+
+                    {this.state.toggleNote ?
+
+                        <Card className="note-title-box"
+                            onClick={event => this.toggleNoteClick(event)}>
+                            Take a note...
+                        </Card> :
+
+                        <Card className="mainInputCard">
+
+                            <div id="title-container">
+
+                                <div id="title">
+                                    <InputBase id="searchtextBox" type="text"
+                                        placeholder="Title"
+                                        value={this.state.Title}
+                                        onChange={event => this.Input(event)}
+                                        name="Title" />
+                                </div>
+
+                                <div id="pinupImg">
+
+                                    <IconButton><img src={require('../assets/unpin.svg')} /></IconButton>
+
+                                </div>
+                            </div>
+
+                            <div className="inputNote">
+
+                                <InputBase id="searchtextBox" type="text"
+                                    placeholder="Take a note..."
+                                    value={this.state.Description}
+                                    onChange={event => this.Input(event)}
+                                    name="Description" />
+                            </div>
+
+                            <div className="utilityIcons">
+                                <div className="icons-in-row">
+                                    <div>
+                                        <img src={require('../assets/remind.svg')} />
+                                    </div>
+                                    <div>  <img src={require('../assets/collabs.svg')} /></div>
+                                    <div>  <img src={require('../assets/color.svg')} /></div>
+                                    <div>  <img src={require('../assets/AddImg.svg')} /></div>
+                                    <div>  <img src={require('../assets/archive.svg')} /></div>
+                                    <div>  <img id="moreimg" src={require('../assets/more.svg')} /></div>
+                                    <div></div>
+                                </div>
+
+                                <div>
+                                    <button id="Closebtn" onClick={event => this.tugglenote(event)}>Close</button>
+                                </div>
+
+                            </div>
+                        </Card>}
                 </div>
 
-                <div className="MainContainer">
+                <Masonry className="note-list">
+                    {/* <div className="note-listForColumn"> */}
+                    {this.state.allNotes.map((item) =>
 
-                    <div className={(this.state.drawerToggle) ? "noteparent" : ""}>
+                        <DisplayNotes item={item} archiveMethod={this.getNotes} trash={this.trashedNote} />
 
-                        <div className="note-container" >
+                    )}
+                </Masonry>
 
-                            {this.state.toggleNote ?
+            </div>
 
-                                <Card className="note-title-box"
-                                    onClick={event => this.toggleNoteClick(event)}>
-                                    Take a note...
-                                 </Card> :
+        )
 
-                                <Card className="mainInputCard">
+        //================================================Archive Page===================================================
 
-                                    <div id="title-container">
 
-                                        <div id="title">
-                                            <InputBase id="searchtextBox" type="text"
-                                                placeholder="Title"
-                                                value={this.state.Title}
-                                                onChange={event => this.Input(event)}
-                                                name="Title" />
-                                        </div>
+        return (
+            <div >
+                <div>
 
-                                        <div id="pinupImg">
-                                            <img src={require('../assets/unpin.svg')} />
-                                        </div>
-                                    </div>
+                    <HeaderAppBar getvalue={this.getvalue} archiveClickedHere={this.archiveClickedHere}
+                        trashClicked={this.trashClicked} />
 
-                                    <div className="inputNote">
+            
+                    <div className="MainContainer">
 
-                                        <InputBase id="searchtextBox" type="text"
-                                            placeholder="Take a note..."
-                                            value={this.state.Description}
-                                            onChange={event => this.Input(event)}
-                                            name="Description" />
-                                    </div>
+                
+                        {(this.state.archiveBoolState) ||(this.state.trashState) ?
 
-                                    <div className="utilityIcons">
-                                        <div className="icons-in-row">
-                                            <div>
-                                                <img src={require('../assets/remind.svg')} />
-                                            </div>
-                                            <div>  <img src={require('../assets/collabs.svg')} /></div>
-                                            <div>  <img src={require('../assets/color.svg')} /></div>
-                                            <div>  <img src={require('../assets/AddImg.svg')} /></div>
-                                            <div>  <img src={require('../assets/archive.svg')} /></div>
-                                            <div>  <img id="moreimg" src={require('../assets/more.svg')} /></div>
-                                            <div></div>
-                                        </div>
-
-                                        <div>
-                                            <button id="Closebtn" onClick={event => this.tugglenote(event)}>Close</button>
-                                        </div>
-
-                                    </div>
-                                </Card>}
-                        </div>
-
-                        <div className="note-list">
-                        {/* <div className="note-listForColumn"> */}
-                        {this.state.allNotes.map((item) =>
-                                <DisplayNotes item={item} />
-
-                            )}
-                        </div>
-
+                            <Archive_page  item = {this.state.drawerClickedArray}/> : mainPage
+                       }
                     </div>
 
                 </div>
+
+
             </div>
+
 
         )
     }
@@ -198,3 +315,5 @@ class Dashboard extends Component {
 }
 
 export default Dashboard
+
+

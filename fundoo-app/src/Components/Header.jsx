@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../cssFiles/Header.css'
 import DrawerList from './DrawerList';
 import InputBase from '@material-ui/core/InputBase';
+import AppBar from '@material-ui/core/AppBar';
 import PopUp from '../Components/Popup'
 import Popper from '@material-ui/core/Popper';
 import IconButton from '@material-ui/core/IconButton';
@@ -27,16 +28,7 @@ class HeaderAppBar extends Component {
     menuClick = async () => {
 
       await  this.setState({ toggleBool: !this.state.toggleBool })
-        // if (this.state.toggleBool) {
-
-        //     await this.setState({
-        //         toggleBool: false
-        //     })
-        // } else {
-        //     await this.setState({
-        //         toggleBool: true
-        //     })
-        // }
+        
 
         console.log("togglebool", this.state.toggleBool);
 
@@ -45,8 +37,6 @@ class HeaderAppBar extends Component {
 
 
     }
-
-
 
     popUpClick = async () => {
 
@@ -83,11 +73,26 @@ class HeaderAppBar extends Component {
 
     }
 
+    arch =(data)=>{
+        
+        
+        this.props.archiveClickedHere(data)
+    }
+
+    trash =(data) =>{
+
+        console.log("trash box is comming");
+        this.props.trashClicked(data)
+    }
+
     render() {
+
+        console.log("in header render",this.props);
+        
         return (
             <div className="header">
-
-                <div className="menuWithLogo">
+        
+                             <div className="menuWithLogo">
 
                     {/* <div  > */}
                     <IconButton id="menuIcon" onClick={this.menuClick}>
@@ -178,8 +183,7 @@ class HeaderAppBar extends Component {
                 </Popper>
 
 
-
-                <DrawerList togglebool={this.state.toggleBool} />
+                <DrawerList togglebool={this.state.toggleBool} arch = {this.arch} trashbox = {this.trash}/>
 
             </div>
         )

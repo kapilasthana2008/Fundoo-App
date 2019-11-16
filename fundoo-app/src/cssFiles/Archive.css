@@ -1,0 +1,21 @@
+.archiveContainer {
+
+    height          : 90vh;
+    width           : 51%;
+    display         : flex;
+    flex-direction  : column;
+    justify-content : flex-start;
+   
+    margin          : 0px auto;
+}
+
+.archiveChild {
+  
+    margin-right     : 1000px;
+    width           : 1000px;
+    flex-direction: row;
+    flex-wrap     : wrap;
+   
+    margin          : 0px auto
+}
+

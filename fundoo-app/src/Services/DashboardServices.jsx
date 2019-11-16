@@ -11,7 +11,6 @@ let headers = {
 export class NotesServices {
 
 
-
     addNote(values, callback) {
 
 
@@ -34,6 +33,9 @@ export class NotesServices {
 
     getAllNotes(callback) {
 
+        let headers = {
+            Authorization: localStorage.getItem('token')
+        }
         console.log("header-->", headers.Authorization);
 
         axios.get(BaseUrl + "/getNotesList", { headers: headers }).then((response) => {
@@ -44,10 +46,72 @@ export class NotesServices {
 
         }).catch((error) => {
 
-            return callback(null, error)
+            return callback( error)
         })
 
     }
 
+    deleteNote(values,callback){
 
+        axios.post(BaseUrl+"/trashNotes",values,{ headers: headers }).then((response)=>{
+
+            return callback(null,response)
+        
+        }).catch((error)=>{
+
+            return callback(error)
+            
+        })
+    }
+
+    archiveNote(values,callback){
+
+        axios.post(BaseUrl+"/archiveNotes",values,{ headers: headers }).then((response)=>{
+         
+        return callback(null,response)
+            
+
+        }).catch((error)=>{
+
+            return callback(error)
+            console.log("archive error",error);
+        })
+    }
+
+    getAllarchive(callback){
+
+        axios.get(BaseUrl+"/getArchiveNotesList",{ headers: headers }).then((response)=>{
+
+            // console.log("archive notes..",response.data.data);
+            
+
+            return callback(null,response.data.data)
+            
+        }).catch((error)=>{
+
+            console.log("error part",error);
+            return callback(error)
+
+            
+            
+        })
+    }
+
+
+    trashNotesList(callback){
+
+        axios.get(BaseUrl+"/getTrashNotesList",{ headers: headers }).then((response)=>{
+
+           
+            return callback(null,response.data.data)
+            
+
+        }).catch((error)=>{
+
+            console.log("error in trash API",error);
+            return callback(error)
+            
+
+        })
+    }
 }

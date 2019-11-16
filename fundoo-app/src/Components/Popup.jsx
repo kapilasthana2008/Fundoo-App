@@ -9,7 +9,8 @@ class Popup extends Component {
 
         console.log("signout",event.target);
         localStorage.clear()
-
+        console.log("local storage clear",localStorage);
+        
         console.log(this.props);
         // this.props.props.history.push("/")
         this.props.history.push("/")
