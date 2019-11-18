@@ -73,6 +73,13 @@ class HeaderAppBar extends Component {
 
     }
 
+    notes = (data)=>{
+
+       
+        
+        this.props.noteClicked(data)
+    }
+
     arch =(data)=>{
         
         
@@ -183,7 +190,7 @@ class HeaderAppBar extends Component {
                 </Popper>
 
 
-                <DrawerList togglebool={this.state.toggleBool} arch = {this.arch} trashbox = {this.trash}/>
+                <DrawerList noteClick = {this.notes} togglebool={this.state.toggleBool} arch = {this.arch} trashbox = {this.trash}/>
 
             </div>
         )

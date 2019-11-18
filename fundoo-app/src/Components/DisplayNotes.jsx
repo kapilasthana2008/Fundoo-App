@@ -9,6 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import { Snackbar, TextField } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
+import PopperComponent from '../Components/PopperComponent'
+import ColorPopper from '../Components/ColorPopper'
+import Chip from '@material-ui/core/Chip';
 
 const service = require('../Services/DashboardServices')
 var SerObj = new service.NotesServices()
@@ -28,7 +31,11 @@ class DisplayNotes extends Component {
             "snackbarBool": false,
             editCard: false,
             Title: "",
-            Description: ""
+            Description: "",
+            deleteNotesnackBar: false,
+            itemClicked: false,
+            colorIconClick: false,
+            setColor: this.props.item.color,
         }
 
     }
@@ -45,15 +52,29 @@ class DisplayNotes extends Component {
 
     }
 
-    closeBtnClick = async () =>{
+    closeBtnClick = async () => {
 
-        await  this.setState({
+        await this.setState({
             editCard: false
-           
+
         })
-        
-        console.log("this.sedit card",this.state.editCard);
-        
+
+        console.log("note id ", this.props.item.description);
+
+        let obj = {
+            noteId: this.props.item.id,
+            title: this.state.Title,
+            description: this.state.Description
+        }
+
+        SerObj.updateNote(obj, (error, result) => {
+
+            if (result) {
+                this.props.updateNote()
+
+            }
+        })
+
     }
 
     async Input(event) {
@@ -68,10 +89,13 @@ class DisplayNotes extends Component {
     }
 
     moreBtnClicked = async (event) => {
-        console.log("more button clicked");
+
 
         await this.setState({
+
             Popper: !this.state.Popper,
+            itemClicked: false,
+            colorIconClick: false,
             anchorEl: event.currentTarget
         })
         console.log("more button clicked", this.state);
@@ -80,17 +104,24 @@ class DisplayNotes extends Component {
 
     deletenote = (event) => {
 
+        console.log("note deleted...");
+
         let obj = {
 
             noteIdList: [this.props.item.id],
             isDeleted: true
         }
 
+
         SerObj.deleteNote(obj, async (error, result) => {
 
             if (result) {
 
-                await this.setState({ Popper: !this.state.Popper })
+                await this.setState({
+                    Popper: !this.state.Popper,
+                    snackbarBool: true,
+                    snackbarMsg: "trashed note"
+                })
 
                 this.props.trash(this.props.item.id)
             }
@@ -123,12 +154,46 @@ class DisplayNotes extends Component {
                     snackbarMsg: "archeived note.",
                     snackbarBool: true
                 })
-                
+
                 console.log("archive method checking ", this.props.archiveMethod());
 
                 this.props.archiveMethod()
 
             }
+        })
+
+    }
+
+    colorsBtn = async (event) => {
+
+        await this.setState({
+            itemClicked: false,
+            Popper: false,
+            colorIconClick: !this.state.colorIconClick,
+            anchorEl: event.currentTarget,
+
+        })
+        this.props.colosIcon(event)
+    }
+
+    setColor = async (colorCode) => {
+
+        console.log("getting colorcode", colorCode);
+
+        await this.setState({
+            setColor: colorCode
+        })
+    }
+
+
+    remindIconClicked = async (event) => {
+
+
+        await this.setState({
+            colorIconClick: false,
+            itemClicked: !this.state.itemClicked,
+            anchorEl: event.currentTarget,
+            Popper: false
         })
 
     }
@@ -145,8 +210,8 @@ class DisplayNotes extends Component {
 
                 <div>
 
-                    <Card className={(this.state.editCard) ? "EditmainDipalyCard" : "mainDipalyCard"}
-                        >
+                    <Card style={{ backgroundColor: this.state.setColor }} className={(this.state.editCard) ? "EditmainDipalyCard" : "mainDipalyCard"}
+                    >
 
                         {/* title part */}
                         <div id="titleRow" onClick={() => this.cardClicked()}>
@@ -174,6 +239,8 @@ class DisplayNotes extends Component {
 
                         {/* message display Part in card*/}
 
+
+
                         <div id="msgDisp-part" onClick={() => this.cardClicked()}>
 
                             {
@@ -192,10 +259,21 @@ class DisplayNotes extends Component {
                             }
                         </div>
 
+
+                        <div className = "">
+                            <Chip
+                                icon={require('../assets/watch.svg')}
+                                label="Nov 25 8:00 PM"
+                                onClick="{handleClick}"
+                                onDelete="{handleDelete}"
+                            />
+                        </div>
+
+
                         {/* utility part  */}
 
-                        <div id= {(this.state.editCard) ? "EditutililityIcons":"utililityIcons"}>
-                            <IconButton id="remindMe">
+                        <div id={(this.state.editCard) ? "EditutililityIcons" : "utililityIcons"}>
+                            <IconButton id="remindMe" onClick={event => this.remindIconClicked(event)}>
                                 <img src={require('../assets/remind.svg')} />
                             </IconButton>
 
@@ -203,7 +281,7 @@ class DisplayNotes extends Component {
                                 <img src={require('../assets/collabs.svg')} />
                             </IconButton>
 
-                            <IconButton>
+                            <IconButton onClick={(event) => this.colorsBtn(event)}>
                                 <img src={require('../assets/color.svg')} />
                             </IconButton>
 
@@ -217,36 +295,48 @@ class DisplayNotes extends Component {
 
                             <IconButton onClick={(event) => this.moreBtnClicked(event)}>
 
-                                {(this.state.editCard) ? "": <img id="moreimg" src={require('../assets/more.svg')} />}
-                                
+                                {(this.state.editCard) ? "" : <img id="moreimg" src={require('../assets/more.svg')} />}
+
                             </IconButton>
-                           {
-                               (this.state.editCard) ? 
-                               <div id = "closeBtn">
-                               <button id = "EditBtn" onClick = { this.closeBtnClick}>
-                               Close
-                               </button> 
-                               </div>
-                               :""
-                           }
-                            
+                            {
+                                (this.state.editCard) ?
+                                    <div id="closeBtn">
+                                        <button id="EditBtn" onClick={this.closeBtnClick}>
+                                            Close
+                               </button>
+                                    </div>
+                                    : ""
+                            }
+
 
                         </div>
 
 
 
                     </Card>
-                    <Popper id="popper" open={this.state.Popper}
-                        anchorEl={this.state.anchorEl} transition placement="bottom-start">
 
-                        <Paper>
-                            <Typography id="typographyEdit" onClick={event => this.deletenote(event)} ><div id="delete-note">Delete Note</div></Typography>
-                            <Typography id="typographyEdit"><div id="delete-note">Add label</div></Typography>
-                            <Typography id="typographyEdit"><div id="delete-note">Add drawing</div></Typography>
-                            <Typography id="typographyEdit"><div id="delete-note">Make a copy</div></Typography>
-                            <Typography id="typographyEdit"><div id="delete-note">Show checkbox</div></Typography>
-                        </Paper>
-                    </Popper>
+
+                    {(this.state.itemClicked) ? <PopperComponent popperBool={this.state.itemClicked}
+                        anchor={this.state.anchorEl} />
+
+                        : <Popper id="popper" open={this.state.Popper}
+                            anchorEl={this.state.anchorEl} transition placement="bottom-start">
+
+                            <Paper>
+                                <Typography id="typographyEdit" onClick={event => this.deletenote(event)} ><div id="delete-note">Delete Note</div></Typography>
+                                <Typography id="typographyEdit"><div id="delete-note">Add label</div></Typography>
+                                <Typography id="typographyEdit"><div id="delete-note">Add drawing</div></Typography>
+                                <Typography id="typographyEdit"><div id="delete-note">Make a copy</div></Typography>
+                                <Typography id="typographyEdit"><div id="delete-note">Show checkbox</div></Typography>
+                            </Paper>
+                        </Popper>}
+
+                    {(this.state.colorIconClick) ?
+                        <ColorPopper id="colorPopper" popperBool={this.state.colorIconClick}
+                            anchor={this.state.anchorEl} cardProps={this.props} changeColor={this.setColor} />
+                        : ""}
+
+
 
 
                     <Snackbar
@@ -257,7 +347,7 @@ class DisplayNotes extends Component {
                         }}
                         open={this.state.snackbarBool}
                         message={this.state.snackbarMsg}
-                        autoHideDuration={3000}
+                        autoHideDuration={6000}
                         onClose={this.handleClose}
                         action={[
                             <Button key="undo" color="primary" size="small" onClick={this.handleClose}>

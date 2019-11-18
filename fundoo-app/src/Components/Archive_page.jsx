@@ -20,30 +20,6 @@ class Archive_page extends Component {
 
     componentDidMount() {
 
-        // if (this.state.trashbool){
-            
-        // }else{
-        //     obj.getAllarchive(async (error, result) => {
-
-           
-        //         console.log("archive result",result);
-        
-        //             if (result) {
-        //                 let arr = []
-        //                 arr = this.state.allarchive
-        //                 result.data.map((item) => {
-        
-        //                     console.log("archive item..",item);
-                            
-        //                     arr.push(item)
-        
-        //                 })
-        
-        //                 await this.setState({ allarchive: arr })
-        
-        //             }
-        //         })
-        // }
        
     }
 

@@ -5,6 +5,7 @@ import SignInContainer from './Components/SignInContainer'
 import Dashboard from './Components/Dashboard'
 import CreateAccount from './Components/CreateAccount'
 import Resetpassword from '../src/Components/Resetpassword'
+import Trash from './Components/Trash'
 
 const Router = ()=>(
 
@@ -16,7 +17,7 @@ const Router = ()=>(
         <Route path ="/ForgotPassword" component = {ForgotPassword} exact = {true}/>
         <Route path = "/CreateAccount" component = {CreateAccount} exact = {true}/>
         <Route path = "/ResetPass" component = {Resetpassword} exact = {true}/>
-        
+        <Route path = "/Dashboard/Trash" component ={Trash} exact = {true}/>
         </switch>
     
     </div>

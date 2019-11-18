@@ -11,10 +11,10 @@ import '../cssFiles/Header.css'
 import { NotesServices } from '../Services/DashboardServices';
 import IconButton from '@material-ui/core/IconButton';
 import Archive_page from '../Components/Archive_page'
-
 const service = require('../Services/DashboardServices')
-var obj = new service.NotesServices()
 
+
+var obj = new service.NotesServices()
 
 class Dashboard extends Component {
 
@@ -30,32 +30,36 @@ class Dashboard extends Component {
             archiveBoolState: false,
             trashState: false,
             drawerClickedArray: [],
+            updatenote:false,
+            noteClicked:false
         }
 
         //  this.getValue = this.getvalue.bind(this)
     }
 
     componentDidMount() {
-
-
-        this.getNotes()
-
-        
+        this.getNotes() 
     }
 
+    DrawerNoteClick = async (data) =>{
 
-
-    getTrashItem = (id) => {
-
-        // console.log("get trashed item..", id);
-
+        console.log("drawer note.",data);
+        
+        await this.setState({
+            archiveBoolState: false,
+            trashState: false,
+            noteClicked:data})
+        
+        this.getNotes()
     }
 
     trashedNote = (id) => {
 
-        // console.log("trashed call", id);
-
+        console.log("trashed item in dashboard",id);
+        
+        this.getNotes()
     }
+
 
     getNotes = () => {
 
@@ -64,15 +68,20 @@ class Dashboard extends Component {
 
             await this.setState({ allNotes: [] })
 
-            console.log("result", result);
-
+            console.log("result getting----------->",result);
+                console.log("result getting----------->",result.color);
+                
             if (result) {
+
                 let arr = []
                 arr = this.state.allNotes
-                result.map((item) => {
-
+               
+                result.map((item) => { 
                     if (item.isArchived === false) {
+                       if(item.isDeleted === false){
                         arr.push(item)
+                       }
+                        
                     }
 
 
@@ -141,6 +150,11 @@ class Dashboard extends Component {
         })
     }
 
+    colorClick = (event)=>{
+
+        // console.log("colors Btn Clicked",event);
+        
+    }
 
     archiveClickedHere = async (data) => {
 
@@ -201,6 +215,14 @@ class Dashboard extends Component {
            
                 }
             })
+    }
+
+    updateBtnClicked = async()=>{
+
+       
+        await this.setState({updatenote:true})
+       this.getNotes()
+        
     }
 
     render() {
@@ -274,7 +296,9 @@ class Dashboard extends Component {
                     {/* <div className="note-listForColumn"> */}
                     {this.state.allNotes.map((item) =>
 
-                        <DisplayNotes item={item} archiveMethod={this.getNotes} trash={this.trashedNote} />
+                        <DisplayNotes item={item} colosIcon ={this.colorClick} archiveMethod={this.getNotes} trash={this.trashedNote}
+                        updateNote = {this.updateBtnClicked}
+                         />
 
                     )}
                 </Masonry>
@@ -290,8 +314,9 @@ class Dashboard extends Component {
             <div >
                 <div>
 
-                    <HeaderAppBar getvalue={this.getvalue} archiveClickedHere={this.archiveClickedHere}
-                        trashClicked={this.trashClicked} />
+                    <HeaderAppBar noteClicked = {this.DrawerNoteClick}
+                     getvalue={this.getvalue} archiveClickedHere={this.archiveClickedHere}
+                        trashClicked={this.trashClicked}  />
 
             
                     <div className="MainContainer">

@@ -51,6 +51,21 @@ export class NotesServices {
 
     }
 
+    updateNote(values,callback){
+
+      console.log("values getting",values);
+      
+        axios.post(BaseUrl + "/updateNotes", values, { headers: headers }).then((response)=>{
+
+            return callback(null,response)
+            
+        }).catch((error)=>{
+
+            return callback(error)
+            
+        })
+    }
+
     deleteNote(values,callback){
 
         axios.post(BaseUrl+"/trashNotes",values,{ headers: headers }).then((response)=>{
@@ -96,8 +111,6 @@ export class NotesServices {
             
         })
     }
-
-
     trashNotesList(callback){
 
         axios.get(BaseUrl+"/getTrashNotesList",{ headers: headers }).then((response)=>{
@@ -111,6 +124,23 @@ export class NotesServices {
             console.log("error in trash API",error);
             return callback(error)
             
+
+        })
+    }
+
+    colorChange(values,callback){
+      
+        console.log("getting values",values);
+        
+        axios.post(BaseUrl+"/changesColorNotes",values,{ headers: headers }).then((response)=>{
+
+
+            
+            return callback(null,response)
+
+        }).catch((error)=>{
+
+            return callback(error)
 
         })
     }

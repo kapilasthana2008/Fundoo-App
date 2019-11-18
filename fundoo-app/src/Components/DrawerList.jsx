@@ -27,7 +27,8 @@ class DrawerList extends Component {
             toggleBool: this.props.togglebool,
             bool: true,
             archiveBool:false,
-            trashBool:false
+            trashBool:false,
+            noteBool:false
         }
     }
 
@@ -50,6 +51,13 @@ class DrawerList extends Component {
         return useStyles
     }
 
+    noteClicked = async()=>{
+    
+     await this.setState({noteBool:true})
+        
+        this.props.noteClick(this.state.noteBool)
+    }
+
     archClicked = async () => {
 
         console.log("archive fun");
@@ -61,15 +69,16 @@ class DrawerList extends Component {
     }
 
     trashClicked = async ()=>{
-        
-        console.log("trash clicked");
+
+    
         await this.setState ({trashBool:true})
 
+        // this.props.history.push('/Dashboard/Trash')
         this.props.trashbox(this.state.trashBool)
 
     }
 
-
+    
 
     render() {
 
@@ -93,7 +102,7 @@ class DrawerList extends Component {
                         <Divider />
                         <List >
 
-                            <ListItem button  >
+                            <ListItem button onClick = {this.noteClicked} >
                                 <ListItemIcon>
                                     <img src={require('../assets/notes.svg')} alt="Logo" />
                                     {/* <InboxIcon /> */}

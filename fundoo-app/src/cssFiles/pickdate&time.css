@@ -1,0 +1,178 @@
+#ReminderPopper {
+    background-color: white;
+    margin-top      : -10px;
+    margin-left     : 20px;
+    width           : 302px;
+    height          : 305px;
+    border          : 1px solid rgb(201, 198, 198);
+    border-radius   : 8px;
+    box-shadow      : 0 3px 3px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+.reminder-title {
+
+
+    display       : flex;
+    flex-direction: row;
+
+}
+
+.later-today {
+
+    padding: 10px 15px;
+
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-between
+}
+
+#laterToday {
+
+    font-size: 13px;
+    color    : "#3C4043";
+}
+
+#time {
+    font-size: 13px;
+    color    : "#3C4043";
+}
+
+.pickDate {
+    padding       : 10px;
+    display       : flex;
+    flex-direction: row;
+
+
+
+}
+
+#watch {
+    font-size      : 13px;
+    padding        : 10px;
+    color          : "#3C4043";
+    font-weight    : bold;
+    margin-top     : 10px;
+    display        : flex;
+    flex-direction : row;
+    justify-content: center;
+}
+
+#watchImg {
+    margin-top: 2px;
+    height    : 16px;
+}
+
+#pickdate {
+    font-size: 13px;
+    color    : "#3C4043";
+
+    margin-top : 10px;
+    margin-left: 10px;
+}
+
+#backbtn {
+
+    display        : flex;
+    flex-direction : row;
+    justify-content: center;
+
+    width : 40px;
+    height: 30px;
+
+}
+
+#colormargin {
+
+    padding: 2px;
+}
+
+#colorPopper {
+
+    background-color: white;
+    display         : flex;
+    padding         : 1px;
+    flex-direction  : row;
+    justify-content : center;
+    flex-wrap       : wrap;
+    margin-top      : -10px;
+    margin-left     : 20px;
+    width           : 100px;
+    border          : 1px solid rgb(201, 198, 198);
+    border-radius   : 5px;
+    z-index         : 10;
+    box-shadow      : 0 3px 3px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.25);
+
+}
+
+#reminder-tital {
+    width    : 100%;
+    padding  : 15px;
+    font-size: 14px;
+}
+
+.pickDate:hover {
+    background-color: rgb(247, 243, 243);
+}
+
+.later-today:hover {
+    background-color: rgb(247, 243, 243);
+}
+
+.pick-place {
+    margin-top: -10;
+    padding       : 10px;
+    display       : flex;
+    flex-direction: row;
+}
+
+#place {
+    font-size      : 13px;
+    padding        : 10px;
+    color          : "#3C4043";
+    font-weight    : bold;
+    margin-top     : 10px;
+    display        : flex;
+    flex-direction : row;
+    justify-content: center;
+}
+
+#placeimg {
+    margin-top: 2px;
+    height    : 16px;
+}
+
+#pickplace {
+margin-top: 10px;
+    padding       : 10px;
+    display       : flex;
+    flex-direction: row;
+}
+
+.pick-place:hover{
+    background-color: rgb(247, 243, 243);
+}
+
+/* 
+#pickDateTitle {
+
+
+    margin-top : 5px;
+    font-size  : 14px;
+    margin-left: 5px;
+    color      : rgb(56, 55, 55);
+    text-align : center;
+
+}
+
+#line {
+
+    height          : 1px;
+    width           : 100%;
+    background-color: rgb(212, 208, 208);
+}
+
+#date {}
+
+
+
+#time-priority {} */
