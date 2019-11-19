@@ -1,4 +1,3 @@
-
 .MainContainer {
     height         : 90vh;
     width          : 100%;
@@ -7,7 +6,7 @@
     justify-content: flex-start;
 
     margin    : 10px auto;
-    margin-top: 15px
+    margin-top: 130px
 }
 
 .header {
@@ -35,7 +34,7 @@
 
 .searchbar {
     height          : 40px;
-    width           : 600px;
+    max-width       : 600px;
     margin-left     : 30px;
     background-color: transparent;
     display         : flex;
@@ -44,7 +43,7 @@
     justify-content : center;
     border-width    : 1px;
     border          : 1px solid rgb(201, 196, 196);
-    border-radius   : 15px 15px 15px 15px;
+    border-radius   : 10px 10px 10px 10px;
     align-items     : center
 }
 
@@ -139,19 +138,11 @@
 
 }
 
-#keep {
-    color    : rgb(110, 108, 108);
-    font-size: 23px;
-    height    : 20px;
-    width     : 45px;
-    margin-top: 10px;
-
-}
 
 #menuImg {
-    height: 50px;
-    width : 50px;
-
+    height    : 47px;
+    width     : 47px;
+    margin-top: -12px;
 }
 
 #svgImg {
@@ -226,6 +217,50 @@
     margin: 0px auto
 }
 
+.toolbar {
+
+    background-color: white;
+    display         : flex;
+    flex-direction  : row;
+
+}
+
+#fundooImg {
+    margin-left: 20px;
+
+}
+
+#appName {
+    display       : flex;
+    flex-direction: row;
+    flex-wrap     : wrap;
+    margin-left   : 20px;
+    color         : rgb(141, 138, 138)
+}
+
+#menubtn {
+
+    height         : 40px;
+    width          : 40px;
+    display        : flex;
+    flex-direction : row;
+    justify-content: center;
+
+}
+
+#fundooImgsrc {
+
+    height: 40px;
+    width : 40px;
+}
+
+#searchBar {
+
+    min-width  : 600px;
+    margin-left: 50px;
+
+}
+
 .note-list {
 
     max-width     : 1000px;
@@ -240,9 +275,9 @@
 .note-listForColumn {
 
     max-width     : 660px;
-    background : yellow;
+    background    : yellow;
     display       : flex;
-    margin-right   : 60px;
+    margin-right  : 60px;
     flex-direction: column;
     flex-wrap     : wrap;
     margin        : 25px auto
@@ -267,22 +302,21 @@
     justify-content : flex-start;
     background-color: transparent;
     position        : relative;
-    margin-top      : 60px;
+    margin-top      : 67px;
     margin-left     : 235%;
     /* margin-left  : 220%; */
 
 }
 
-#refreshIcon {
-    height       : 40px;
-    width        : 40px;
-    margin-top   : 4px;
-    border-radius: 50%;
-
+/* #refreshIcon {
+    height         : 40px;
+    width          : 40px;
+    margin-top     : 4px;
+    border-radius  : 50%;
     display        : flex;
     flex-direction : row;
     justify-content: center;
-}
+} */
 
 #gridIcon {
 
@@ -297,17 +331,24 @@
 
 }
 
-#refresh {
-    height    : 30px;
-    margin-top: 4.5px;
-    width     : 30px;
+#refreshImg{
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60px;
+    width: 60px;
     border-radius: 50%;
 }
 
+#refImg {
+    height: 25px;
+    width : 25px;
+}
+
 #refreshImg {
-    height: 30px;
-    width : 30px;
+    height: 23px;
+    width : 23px;
 }
 
 .setting-grid {
@@ -394,4 +435,59 @@
     .popupContainer {
         margin-left: 130%;
     }
+}
+
+
+.userDetailsPart {
+    width           : 350px;
+    display         : flex;
+    flex-direction  : row;
+    justify-content : space-evenly;
+    height          : 40px;
+  
+    margin-left     : 30px;
+}
+
+.refreshAndGrid {
+   
+    height          : 30px;
+    display         : flex;
+    flex-direction  : row;
+    width           : 50%;
+    margin-top      : 5px;
+    margin-left     : 10px;
+}
+
+#profileIcon {
+
+    height          : 30px;
+    width           : 30%;
+    display         : flex;
+    flex-direction  : row;
+    margin-top      : 5px;
+
+}
+
+#refreshImg {
+
+    height: 25px;
+    width : 25px;
+}
+
+#grid{
+
+    margin-left: 30px
+}
+
+#profile-icon{
+
+    height: 40px;
+    width: 40px;
+    margin-top: -5px;
+}
+#avtar{
+    margin-top: -6px;
+    height: 30px;
+    width: 30px;
+    
 }

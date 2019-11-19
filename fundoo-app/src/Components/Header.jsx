@@ -6,9 +6,30 @@ import AppBar from '@material-ui/core/AppBar';
 import PopUp from '../Components/Popup'
 import Popper from '@material-ui/core/Popper';
 import IconButton from '@material-ui/core/IconButton';
-
+import { Toolbar } from '@material-ui/core';
+import { makeStyles, useTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
 
 // import SearchIcon from '@material-ui/icons/Search';
+
+
+
+const useStyles = createMuiTheme((
+    {
+
+        overrides: {
+
+            MuiAppBar: {
+
+                root: {
+                    background: 'red'
+                }
+
+            }
+        }
+    }));
 
 
 
@@ -20,40 +41,64 @@ class HeaderAppBar extends Component {
         this.state = {
             toggleBool: false,
             popupBool: false,
-            gridchange: false
+            gridchange: false,
+            anchorEl : null
         }
 
     }
+    style() {
+
+
+
+        return useStyles
+    }
+    // style() {
+
+    //     overrides: {
+    //         MuiAppBar: {
+
+    //             top: "60px",
+    //                 width: ''
+    //         },
+    //         MuiButtonBase: {
+    //             top: "60px",
+    //                 width: ''
+
+    //         }
+
+    //     }
+    // }
 
     menuClick = async () => {
 
-      await  this.setState({ toggleBool: !this.state.toggleBool })
-        
+        await this.setState({ toggleBool: !this.state.toggleBool })
+
 
         console.log("togglebool", this.state.toggleBool);
 
-         console.log("this.props in header", this.props);
+        console.log("this.props in header", this.props);
         this.props.getvalue(this.state.toggleBool)
 
 
     }
 
-    popUpClick = async () => {
+    popUpClick = async (event) => {
 
-        console.log("popup");
+
 
         if (this.state.popupBool) {
 
             await this.setState({
-                popupBool: false
-            })
+                popupBool: false,
+                anchorEl: event.currentTarget
+               })
         } else {
             await this.setState({
                 popupBool: true
             })
         }
 
-        console.log("popupBool", this.state.popupBool);
+       
     }
 
     changegrid = async () => {
@@ -73,20 +118,20 @@ class HeaderAppBar extends Component {
 
     }
 
-    notes = (data)=>{
+    notes = (data) => {
 
-       
-        
+
+
         this.props.noteClicked(data)
     }
 
-    arch =(data)=>{
-        
-        
+    arch = (data) => {
+
+
         this.props.archiveClickedHere(data)
     }
 
-    trash =(data) =>{
+    trash = (data) => {
 
         console.log("trash box is comming");
         this.props.trashClicked(data)
@@ -94,94 +139,86 @@ class HeaderAppBar extends Component {
 
     render() {
 
-        console.log("in header render",this.props);
-        
+        console.log("in header render", this.props);
+
         return (
-            <div className="header">
-        
-                             <div className="menuWithLogo">
 
-                    {/* <div  > */}
-                    <IconButton id="menuIcon" onClick={this.menuClick}>
-                        <img src={require('../assets/menuicon.jpg')} id="menuImg" />
-                    </IconButton>
-                    {/* </div> */}
+            <div>
 
-                    <div id="logo">
+                <div>
+                    <AppBar>
 
-                        <div id="logoImg">
+                        <Toolbar className="toolbar">
 
-                            <img src={require('../assets/funImg.png')} id="svgImg" />
+                            <div>
 
-                        </div>
-                        <div id="keep">
-                            FundooApp
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="searchbar">
-
-
-                    <div id="searchicon">
-                        <img id="searchimg" src={require('../assets/searchIcn.png')} />
-
-                    </div>
-
-                    <div id="searchField">
-
-                        <InputBase id="searchtext" type="text"
-                            placeholder="Search"
-                            name="" />
-                    </div>
-
-                    <div id="searchCroxBtn">
-                        {/* <img id = "crossimg" src = {require('../assets/cross-out.png')}/> */}
-                    </div>
-
-                </div>
-
-                <div className="accountDetailsPart">
-
-                    <div className="setting-grid">
-
-                        <div id="refreshIcon">
-
-                            <div id="refresh">
-                                <img src={require("../assets/refresh.svg")} id="refreshImg" />
+                                <IconButton id="menubtn" onClick={this.menuClick}>
+                                    <img src={require('../assets/menuicon.jpg')} id="menuImg" />
+                                </IconButton>
 
                             </div>
 
-                        </div>
-
-                        <div id="gridIcon">
-
-                            <div id="refresh" onClick={this.changegrid}>
-                                <img src={(this.state.gridchange) ? require('../assets/grid.svg') :
-                                    require('../assets/grid1.svg')}
-                                    id="refreshImg" />
-
-                                {/* <img src={require('../assets/grid1.svg')} id="refreshImg" /> */}
+                            <div id="fundooImg">
+                                <img src={require('../assets/fundoo.png')} id="fundooImgsrc" />
                             </div>
-                        </div>
 
-                    </div>
+                            <Typography id="appName" variant="h6" Wrap>
+                                Fundoo App
+                  </Typography>
 
-                    <div id="profilelogo">
+                            <div id="searchBar">
 
-                        <div id="profile" onClick={this.popUpClick}>
-                            <img src={require('../assets/funImg.png')} id="profile" />
+                                <div className="searchbar">
 
-                        </div>
-                    </div>
+                                    <div id="searchicon">
+                                        <img id="searchimg" src={require('../assets/searchIcn.png')} />
+                                    </div>
 
+                                    <div id="searchField">
 
+                                        <InputBase id="searchtext" type="text"
+                                            placeholder="Search"
+                                            name="" />
+                                    </div>
 
+                                    <div id="searchCroxBtn">
+                                        {/* <img id = "crossimg" src = {require('../assets/cross-out.png')}/> */}
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div className="userDetailsPart">
+
+                                <div className="refreshAndGrid">
+                                    <div id="refreshImg">
+                                        <img src={require("../assets/refresh.svg")} id="refImg" />
+                                    </div>
+
+                                    <div id="grid" onClick={this.changegrid}>
+
+                                        <img src={(this.state.gridchange) ? require('../assets/grid.svg') :
+                                            require('../assets/grid1.svg')}
+                                            id="refreshImg" />
+
+                                        {/* <img src={require('../assets/grid1.svg')} id="refreshImg" /> */}
+
+                                    </div>
+
+                                </div>
+                                <div id="profileIcon">
+                                    <IconButton id="profile-icon" onClick={event => this.popUpClick(event)}>
+                                        <Avatar alt="Remy Sharp" src={require('../assets/fundoo.png')} id="avtar" />
+                                    </IconButton>
+                                </div>
+                            </div>
+
+                        </Toolbar>
+
+                    </AppBar>
                 </div>
 
-                <Popper open={this.state.popupBool}>
+                <Popper open={this.state.popupBool} >
                     <div className="popupContainer">
                         <div id="popup">
                             <PopUp props={this.props} />
@@ -189,8 +226,8 @@ class HeaderAppBar extends Component {
                     </div>
                 </Popper>
 
-
-                <DrawerList noteClick = {this.notes} togglebool={this.state.toggleBool} arch = {this.arch} trashbox = {this.trash}/>
+                <DrawerList noteClick = {this.notes} togglebool={this.state.toggleBool} arch = {this.arch}
+                 trashbox = {this.trash}/>
 
             </div>
         )

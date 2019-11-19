@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import PopperComponent from '../Components/PopperComponent'
 import ColorPopper from '../Components/ColorPopper'
 import Chip from '@material-ui/core/Chip';
-
+import UtilityIcons from '../Components/UtilityIcons'
 const service = require('../Services/DashboardServices')
 var SerObj = new service.NotesServices()
 
@@ -210,7 +210,8 @@ class DisplayNotes extends Component {
 
                 <div>
 
-                    <Card style={{ backgroundColor: this.state.setColor }} className={(this.state.editCard) ? "EditmainDipalyCard" : "mainDipalyCard"}
+                    <Card style={{ backgroundColor: this.state.setColor }}
+                     className={(this.state.editCard) ? "EditmainDipalyCard" : "mainDipalyCard"}
                     >
 
                         {/* title part */}
@@ -260,19 +261,23 @@ class DisplayNotes extends Component {
                         </div>
 
 
-                        <div className = "">
+                        {/* <div className = "">
                             <Chip
                                 icon={require('../assets/watch.svg')}
                                 label="Nov 25 8:00 PM"
                                 onClick="{handleClick}"
                                 onDelete="{handleDelete}"
                             />
-                        </div>
+                        </div> */}
 
 
                         {/* utility part  */}
 
-                        <div id={(this.state.editCard) ? "EditutililityIcons" : "utililityIcons"}>
+                        <div className = "utility-part">
+                           <UtilityIcons/>
+                        </div>
+
+                        {/* <div id={(this.state.editCard) ? "EditutililityIcons" : "utililityIcons"}>
                             <IconButton id="remindMe" onClick={event => this.remindIconClicked(event)}>
                                 <img src={require('../assets/remind.svg')} />
                             </IconButton>
@@ -309,7 +314,7 @@ class DisplayNotes extends Component {
                             }
 
 
-                        </div>
+                        </div> */}
 
 
 

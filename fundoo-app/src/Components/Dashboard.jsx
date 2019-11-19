@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
 import HeaderAppBar from '../Components/Header'
-import TakeAnote from '../Components/TakeAnote'
 import DisplayNotes from '../Components/DisplayNotes'
 import InputNote from '../Components/InputNote'
 import InputBase from '@material-ui/core/InputBase';
 import Card from '@material-ui/core/Card';
 import Masonry from 'react-masonry-component';
 import AppBar from '@material-ui/core/AppBar';
-import '../cssFiles/Header.css'
-import { NotesServices } from '../Services/DashboardServices';
 import IconButton from '@material-ui/core/IconButton';
-import Archive_page from '../Components/Archive_page'
+import Archive_page from '../Components/Archive_page';
+import '../cssFiles/Header.css'
+
 const service = require('../Services/DashboardServices')
-
-
 var obj = new service.NotesServices()
+
+
 
 class Dashboard extends Component {
 
@@ -33,13 +32,13 @@ class Dashboard extends Component {
             updatenote:false,
             noteClicked:false
         }
-
-        //  this.getValue = this.getvalue.bind(this)
     }
 
     componentDidMount() {
         this.getNotes() 
     }
+
+
 
     DrawerNoteClick = async (data) =>{
 
@@ -296,7 +295,8 @@ class Dashboard extends Component {
                     {/* <div className="note-listForColumn"> */}
                     {this.state.allNotes.map((item) =>
 
-                        <DisplayNotes item={item} colosIcon ={this.colorClick} archiveMethod={this.getNotes} trash={this.trashedNote}
+                        <DisplayNotes item={item} colosIcon ={this.colorClick} 
+                        archiveMethod={this.getNotes} trash={this.trashedNote}
                         updateNote = {this.updateBtnClicked}
                          />
 
