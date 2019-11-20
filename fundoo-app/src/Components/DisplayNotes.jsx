@@ -43,12 +43,15 @@ class DisplayNotes extends Component {
 
     cardClicked = async () => {
 
-
+            // console.log("click on card",this.props);
+            
         this.setState({
+
             editCard: true,
             Title: this.props.item.title,
             Description: this.props.item.description
         })
+
 
     }
 
@@ -88,46 +91,46 @@ class DisplayNotes extends Component {
 
     }
 
-    moreBtnClicked = async (event) => {
+    // moreBtnClicked = async (event) => {
 
 
-        await this.setState({
+    //     await this.setState({
 
-            Popper: !this.state.Popper,
-            itemClicked: false,
-            colorIconClick: false,
-            anchorEl: event.currentTarget
-        })
-        console.log("more button clicked", this.state);
-    }
-
-
-    deletenote = (event) => {
-
-        console.log("note deleted...");
-
-        let obj = {
-
-            noteIdList: [this.props.item.id],
-            isDeleted: true
-        }
+    //         Popper: !this.state.Popper,
+    //         itemClicked: false,
+    //         colorIconClick: false,
+    //         anchorEl: event.currentTarget
+    //     })
+    //     console.log("more button clicked", this.state);
+    // }
 
 
-        SerObj.deleteNote(obj, async (error, result) => {
+    // deletenote = (event) => {
 
-            if (result) {
+    //     console.log("note deleted...");
 
-                await this.setState({
-                    Popper: !this.state.Popper,
-                    snackbarBool: true,
-                    snackbarMsg: "trashed note"
-                })
+    //     let obj = {
 
-                this.props.trash(this.props.item.id)
-            }
-        })
+    //         noteIdList: [this.props.item.id],
+    //         isDeleted: true
+    //     }
 
-    }
+
+    //     SerObj.deleteNote(obj, async (error, result) => {
+
+    //         if (result) {
+
+    //             await this.setState({
+    //                 Popper: !this.state.Popper,
+    //                 snackbarBool: true,
+    //                 snackbarMsg: "trashed note"
+    //             })
+
+    //             this.props.trash(this.props.item.id)
+    //         }
+    //     })
+
+    // }
 
     handleClose = async () => {
         await this.setState({ snackbarBool: !this.state.snackbarBool })
@@ -155,7 +158,6 @@ class DisplayNotes extends Component {
                     snackbarBool: true
                 })
 
-                console.log("archive method checking ", this.props.archiveMethod());
 
                 this.props.archiveMethod()
 
@@ -164,45 +166,42 @@ class DisplayNotes extends Component {
 
     }
 
-    colorsBtn = async (event) => {
+    // colorsBtn = async (event) => {
 
-        await this.setState({
-            itemClicked: false,
-            Popper: false,
-            colorIconClick: !this.state.colorIconClick,
-            anchorEl: event.currentTarget,
+    //     await this.setState({
+    //         itemClicked: false,
+    //         Popper: false,
+    //         colorIconClick: !this.state.colorIconClick,
+    //         anchorEl: event.currentTarget,
 
-        })
-        this.props.colosIcon(event)
-    }
+    //     })
+    //     this.props.colosIcon(event)
+    // }
+
 
     setColor = async (colorCode) => {
 
-        console.log("getting colorcode", colorCode);
 
-        await this.setState({
-            setColor: colorCode
-        })
+       await this.setState({setColor:colorCode})
     }
 
-
-    remindIconClicked = async (event) => {
-
-
-        await this.setState({
-            colorIconClick: false,
-            itemClicked: !this.state.itemClicked,
-            anchorEl: event.currentTarget,
-            Popper: false
-        })
-
+    getAllNotes = () => {
+        this.props.trash()
     }
+
+    // remindIconClicked = async (event) => {
+
+
+    //     await this.setState({
+    //         colorIconClick: false,
+    //         itemClicked: !this.state.itemClicked,
+    //         anchorEl: event.currentTarget,
+    //         Popper: false
+    //     })
+
+    // }
 
     render() {
-
-        console.log("this. is state", this.props.item);
-
-
 
         return (
 
@@ -211,7 +210,7 @@ class DisplayNotes extends Component {
                 <div>
 
                     <Card style={{ backgroundColor: this.state.setColor }}
-                     className={(this.state.editCard) ? "EditmainDipalyCard" : "mainDipalyCard"}
+                        className={(this.state.editCard) ? "EditmainDipalyCard" : "mainDipalyCard"}
                     >
 
                         {/* title part */}
@@ -273,10 +272,27 @@ class DisplayNotes extends Component {
 
                         {/* utility part  */}
 
-                        <div className = "utility-part">
-                           <UtilityIcons/>
-                        </div>
+                        <div className="utility-part">
+                            
+                            <div id = "utilIcons">
 
+                            <UtilityIcons noteItems={this.props.item} getNotes={this.getAllNotes}
+                            colosIcon={this.setColor}
+                            editCard = {this.state.editCard}
+                           
+                             />    
+                            </div>
+                      
+                            {(this.state.editCard)? 
+                            <div id= "close-btn">
+                            <button id="EditBtn" onClick={this.closeBtnClick}>
+                                            Close
+                               </button>
+                            </div> : ""}
+                        
+                                                 
+                        </div>
+                       
                         {/* <div id={(this.state.editCard) ? "EditutililityIcons" : "utililityIcons"}>
                             <IconButton id="remindMe" onClick={event => this.remindIconClicked(event)}>
                                 <img src={require('../assets/remind.svg')} />
@@ -315,8 +331,6 @@ class DisplayNotes extends Component {
 
 
                         </div> */}
-
-
 
                     </Card>
 

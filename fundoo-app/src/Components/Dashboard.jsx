@@ -9,6 +9,7 @@ import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
 import Archive_page from '../Components/Archive_page';
 import '../cssFiles/Header.css'
+import UtilityIcons from './UtilityIcons';
 
 const service = require('../Services/DashboardServices')
 var obj = new service.NotesServices()
@@ -20,6 +21,7 @@ class Dashboard extends Component {
     constructor(props) {
         super(props)
 
+
         this.state = {
             Title: "",
             Description: "",
@@ -29,33 +31,36 @@ class Dashboard extends Component {
             archiveBoolState: false,
             trashState: false,
             drawerClickedArray: [],
-            updatenote:false,
-            noteClicked:false
+            updatenote: false,
+            noteClicked: false,
+            colorCode: ""
         }
+
     }
 
     componentDidMount() {
-        this.getNotes() 
+        this.getNotes()
     }
 
 
 
-    DrawerNoteClick = async (data) =>{
+    DrawerNoteClick = async (data) => {
 
-        console.log("drawer note.",data);
-        
+        console.log("drawer note.", data);
+
         await this.setState({
             archiveBoolState: false,
             trashState: false,
-            noteClicked:data})
-        
+            noteClicked: data
+        })
+
         this.getNotes()
     }
 
     trashedNote = (id) => {
 
-        console.log("trashed item in dashboard",id);
-        
+        console.log("inside comming from utility component");
+
         this.getNotes()
     }
 
@@ -67,20 +72,20 @@ class Dashboard extends Component {
 
             await this.setState({ allNotes: [] })
 
-            console.log("result getting----------->",result);
-                console.log("result getting----------->",result.color);
-                
+            console.log("result getting----------->", result);
+            console.log("result getting----------->", result.color);
+
             if (result) {
 
                 let arr = []
                 arr = this.state.allNotes
-               
-                result.map((item) => { 
+
+                result.map((item) => {
                     if (item.isArchived === false) {
-                       if(item.isDeleted === false){
-                        arr.push(item)
-                       }
-                        
+                        if (item.isDeleted === false) {
+                            arr.push(item)
+                        }
+
                     }
 
 
@@ -106,19 +111,19 @@ class Dashboard extends Component {
     toggleNoteClick = async (event) => {
 
         await this.setState({ toggleNote: !this.state.toggleNote })
+
+        console.log("toggleNote",this.state.toggleNote);
+        
     }
 
     tugglenote = async (event) => {
 
 
-        await this.setState({ toggleNote: !this.state.toggleNote })
-
         var noteObj = {
             title: this.state.Title,
-            description: this.state.Description
+            description: this.state.Description,
+            color: this.state.colorCode
         }
-
-        console.log("obj created", noteObj);
 
         obj.addNote(noteObj, async (error, result) => {
 
@@ -139,8 +144,21 @@ class Dashboard extends Component {
             }
 
         })
+        await this.setState({ toggleNote: !this.state.toggleNote ,
+
+                colorCode:""
+        })
 
     }
+
+    getColorDash = async(colorCode)=>{
+
+        
+        await this.setState({colorCode:colorCode})
+
+    }
+
+
 
     getvalue = async (data) => {
 
@@ -149,10 +167,10 @@ class Dashboard extends Component {
         })
     }
 
-    colorClick = (event)=>{
+    colorClick = (event) => {
 
         // console.log("colors Btn Clicked",event);
-        
+
     }
 
     archiveClickedHere = async (data) => {
@@ -160,74 +178,76 @@ class Dashboard extends Component {
         await this.setState({ archiveBoolState: data })
 
 
-        obj.getAllarchive( async (error, result) => {
+        obj.getAllarchive(async (error, result) => {
 
             await this.setState({ drawerClickedArray: [] })
-           
-                if (result) {
-                    let arr = []
-                    arr = this.state.drawerClickedArray
 
-                    result.data.map((item) => {
-    
-                        // console.log("archive item..",item);
-                        
-                        arr.push(item)
-    
-                    })
-    
-                    await this.setState({ drawerClickedArray: arr })
-           
-                }
-            })
+            if (result) {
+                let arr = []
+                arr = this.state.drawerClickedArray
 
-            console.log("drawer state aarray",this.state.drawerClickedArray.length);
-            
+                result.data.map((item) => {
+
+                    // console.log("archive item..",item);
+
+                    arr.push(item)
+
+                })
+
+                await this.setState({ drawerClickedArray: arr })
+
+            }
+        })
+
+        console.log("drawer state aarray", this.state.drawerClickedArray.length);
+
         // console.log("state set for archive", this.state.archiveBoolState);
 
     }
 
     trashClicked = async (data) => {
-     
-        await this.setState({ trashState: data,
-             archiveBoolState:false})
+
+        await this.setState({
+            trashState: data,
+            archiveBoolState: false
+        })
 
 
-        obj.trashNotesList( async (error, result) => {
+        obj.trashNotesList(async (error, result) => {
 
 
             await this.setState({ drawerClickedArray: [] })
-           
-                if (result) {
-                    let arr = []
-                    arr = this.state.drawerClickedArray
 
-                    result.data.map((item) => {
-    
-                        // console.log("archive item..",item);
-                        
-                        arr.push(item)
-    
-                    })
-    
-                    await this.setState({ drawerClickedArray: arr })
-           
-                }
-            })
+            if (result) {
+                let arr = []
+                arr = this.state.drawerClickedArray
+
+                result.data.map((item) => {
+
+                    // console.log("archive item..",item);
+
+                    arr.push(item)
+
+                })
+
+                await this.setState({ drawerClickedArray: arr })
+
+            }
+        })
     }
 
-    updateBtnClicked = async()=>{
+    updateBtnClicked = async () => {
 
-       
-        await this.setState({updatenote:true})
-       this.getNotes()
-        
+
+        await this.setState({ updatenote: true })
+        this.getNotes()
+
     }
 
     render() {
 
-   
-        
+
+
         //=========================================Main page==================================================
         const mainPage = (
 
@@ -242,7 +262,7 @@ class Dashboard extends Component {
                             Take a note...
                         </Card> :
 
-                        <Card className="mainInputCard">
+                        <Card style = {{backgroundColor:this.state.colorCode}} className="mainInputCard">
 
                             <div id="title-container">
 
@@ -272,15 +292,12 @@ class Dashboard extends Component {
 
                             <div className="utilityIcons">
                                 <div className="icons-in-row">
-                                    <div>
-                                        <img src={require('../assets/remind.svg')} />
-                                    </div>
-                                    <div>  <img src={require('../assets/collabs.svg')} /></div>
-                                    <div>  <img src={require('../assets/color.svg')} /></div>
-                                    <div>  <img src={require('../assets/AddImg.svg')} /></div>
-                                    <div>  <img src={require('../assets/archive.svg')} /></div>
-                                    <div>  <img id="moreimg" src={require('../assets/more.svg')} /></div>
-                                    <div></div>
+
+                                    <UtilityIcons toggleBool={this.state.toggleNote}
+
+                                        getcolorForDash={this.getColorDash}
+                                    />
+
                                 </div>
 
                                 <div>
@@ -295,10 +312,11 @@ class Dashboard extends Component {
                     {/* <div className="note-listForColumn"> */}
                     {this.state.allNotes.map((item) =>
 
-                        <DisplayNotes item={item} colosIcon ={this.colorClick} 
-                        archiveMethod={this.getNotes} trash={this.trashedNote}
-                        updateNote = {this.updateBtnClicked}
-                         />
+                        <DisplayNotes item={item} colosIcon={this.colorClick}
+                            archiveMethod={this.getNotes} trash={this.trashedNote}
+                            updateNote={this.updateBtnClicked}
+                            toggleChange={this.toggleNoteClick}
+                        />
 
                     )}
                 </Masonry>
@@ -314,18 +332,18 @@ class Dashboard extends Component {
             <div >
                 <div>
 
-                    <HeaderAppBar noteClicked = {this.DrawerNoteClick}
-                     getvalue={this.getvalue} archiveClickedHere={this.archiveClickedHere}
-                        trashClicked={this.trashClicked}  />
+                    <HeaderAppBar noteClicked={this.DrawerNoteClick}
+                        getvalue={this.getvalue} archiveClickedHere={this.archiveClickedHere}
+                        trashClicked={this.trashClicked} />
 
-            
+
                     <div className="MainContainer">
 
-                
-                        {(this.state.archiveBoolState) ||(this.state.trashState) ?
 
-                            <Archive_page  item = {this.state.drawerClickedArray}/> : mainPage
-                       }
+                        {(this.state.archiveBoolState) || (this.state.trashState) ?
+
+                            <Archive_page item={this.state.drawerClickedArray} /> : mainPage
+                        }
                     </div>
 
                 </div>

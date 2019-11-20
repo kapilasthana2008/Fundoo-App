@@ -58,8 +58,17 @@
 }
 
 .utility-part {
-    margin-top      : 20px;
+   
+    margin-top   : 20px;
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+
+}
+
+#utilIcons{
+    
 }
 
 
@@ -94,7 +103,17 @@
     background-color: rgb(199, 194, 194)
 }
 
+#EditBtn{
+    height: 30px;
+    margin-top: -10px;
+}
+
 #EditBtn:hover {
-    background-color: rgb(241, 237, 237);
+    background-color: rgb(252, 247, 247);
     transition      : 0.2s
+}
+
+#close-btn{
+    height: 30px;
+
 }

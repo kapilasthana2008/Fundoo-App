@@ -18,11 +18,11 @@ const colors = [
         colorcode: "#ffc0cb"
     },
     {
-        Colorname: "red",
+        Colorname: "light pink",
         colorcode: "#ffcdcb"
     },
     {
-        Colorname: "orange",
+        Colorname: "red",
         colorcode: "#ff4040"
     },
     {
@@ -39,15 +39,23 @@ const colors = [
     },
     {
         Colorname: "Dark blue",
-        colorcode: "#00008b"
+        colorcode: "#3498DB"
     },
     {
         Colorname: "purple",
-        colorcode: "#6a0dad"
+        colorcode: "#C39BD3"
     },
     {
-        Colorname: "brown",
+        Colorname: "dark brown",
         colorcode: "#964B00"
+    },
+    {
+        Colorname: "Orange",
+        colorcode: "#E67E22"
+    },
+    {
+        Colorname: "light brown",
+        colorcode: "#F5CBA7"
     }
 
 ]
@@ -58,21 +66,28 @@ class ColorPopper extends Component {
 
         this.state = {
             popperBool: this.props.popperBool,
-            anchorEl: this.props.anchor
+            anchorEl: this.props.anchor,
+            dashboardBool:this.props.dashboardBool
         }
     }
 
     colorClicked = (index) => {
-
-        // console.log("color states", this.props.cardProps.item.id);
      
+        // console.log("color clicked ",this.props.dashboardBool);
         
+        if(this.state.dashboardBool=== false){
+
+            this.props.dashboardNote(colors[index].colorcode)
+        }
+        else{
+
+        
+
         var obj = {
-            noteIdList:[this.props.cardProps.item.id],
+            noteIdList:[this.props.cardProps.noteItems.id],
             color:colors[index].colorcode
         }
 
-        console.log("color obj",obj);
         
         SerObj.colorChange(obj, (error, result) => {
 
@@ -85,6 +100,7 @@ class ColorPopper extends Component {
             //  this.setState({popperBool:false})
         })
     }
+    }
 
     render() {
 
@@ -95,8 +111,8 @@ class ColorPopper extends Component {
                 <div key={index} id="colormargin" >
                     <Tooltip title={item.Colorname}>
 
-                        <IconButton style={{ backgroundColor: item.colorcode }} onClick={event => this.colorClicked(index)}>
-
+                        <IconButton style={{ backgroundColor: item.colorcode }}
+                         onClick={event => this.colorClicked(index)}>
                         </IconButton>
 
                     </Tooltip>
