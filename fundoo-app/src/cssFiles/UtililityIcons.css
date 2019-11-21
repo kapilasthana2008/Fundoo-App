@@ -122,3 +122,7 @@
     opacity: 0.7;
     cursor: pointer;
 }
+
+#addLabelPopper{
+    background-color: white;
+}

@@ -27,8 +27,7 @@ module.exports = {
     
     email(email) {
 
-        console.log("email",email);
-        
+      
         if (email === "") {
 
             obj.error = "Enter an valid email",

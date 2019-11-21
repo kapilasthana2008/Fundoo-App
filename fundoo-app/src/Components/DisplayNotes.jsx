@@ -19,6 +19,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 const service = require('../Services/DashboardServices')
 var SerObj = new service.NotesServices()
 
+
 class DisplayNotes extends Component {
 
     constructor(props) {
@@ -70,7 +71,7 @@ class DisplayNotes extends Component {
 
         })
 
-        console.log("note id ", this.props.item.description);
+       
 
         let obj = {
             noteId: this.props.item.id,
@@ -90,7 +91,7 @@ class DisplayNotes extends Component {
 
     async Input(event) {
 
-        console.log("get target", event);
+     
 
         await this.setState({
 
@@ -108,7 +109,8 @@ class DisplayNotes extends Component {
 
     archiveNote = (event) => {
 
-        console.log("item id", this.props.item.id);
+    
+        
 
         let obj = {
 
@@ -120,7 +122,7 @@ class DisplayNotes extends Component {
 
             if (result) {
 
-                console.log("response archeive", result);
+             
 
                 await this.setState({
                     snackbarMsg: "archeived note.",
@@ -128,15 +130,12 @@ class DisplayNotes extends Component {
                 })
 
 
-                this.props.archiveMethod()
+                this.props.getNotes()
 
             }
         })
 
     }
-
- 
-
 
     setColor = async (colorCode) => {
 
@@ -145,7 +144,8 @@ class DisplayNotes extends Component {
     }
 
     getAllNotes = () => {
-        this.props.trash()
+
+        this.props.getNotes() 
     }
 
     handleClickAway = async()=>{
@@ -161,14 +161,16 @@ class DisplayNotes extends Component {
 
     render() {
 
+    
+      
+
         return (
 
             <div>
 
                 <div>
 
-                    <ClickAwayListener onClickAway={this.handleClickAway}>
-                    
+            
                     <Card style={{ backgroundColor: this.state.setColor }}
                     
                         className={(this.state.editCard) ? "EditmainDipalyCard" : "mainDipalyCard"}
@@ -295,8 +297,6 @@ class DisplayNotes extends Component {
 
                     </Card>
                     
-
-                    </ClickAwayListener>
                     {(this.state.itemClicked) ? <PopperComponent popperBool={this.state.itemClicked}
                         anchor={this.state.anchorEl} />
 

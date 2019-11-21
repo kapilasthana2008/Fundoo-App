@@ -21,8 +21,7 @@ class ForgotPassword extends Component {
             [event.target.name] : event.target.value
         })
 
-        console.log(this.state);
-        
+       
     }
 
 
@@ -31,8 +30,7 @@ class ForgotPassword extends Component {
    
         
         const obj = validate.email(this.state.Email)
-        console.log("returned obj",obj);
-        
+      
         const error = obj.error
         const boolval = obj.boolval
 

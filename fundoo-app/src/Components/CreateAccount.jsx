@@ -210,9 +210,9 @@ class CreateAccount extends Component {
 
                     if (result) {
 
-                        console.log("props only",this.props);
+                        
                         this.props.history.Push("/")
-                        console.log("props.props only",this.props.props);
+                      
                     }
                 })
 

@@ -25,7 +25,9 @@ class UtilityIcons extends Component {
             MorePopper: false,
             snackbarMsg: '',
             setColor: '',
-            DashboardBool: this.props.toggleBool
+            DashboardBool: this.props.toggleBool,
+            addlabelBool:false,
+
         }
 
 
@@ -34,6 +36,8 @@ class UtilityIcons extends Component {
 
     colorForDashboard = (colorCode)=>{
 
+       
+        
         this.props.getcolorForDash(colorCode)
         // console.log("getting color in utility",);
         
@@ -53,13 +57,17 @@ class UtilityIcons extends Component {
 
     archiveNote = (event) => {
 
+      if(this.state.DashboardBool === false){
+
+        this.props.isArchive(true)   
+        
+      }else{
+        
         let obj = {
 
             noteIdList: [this.props.noteItems.id],
             isArchived: true
         }
-
-        
 
         SerObj.archiveNote(obj, async (error, result) => {
 
@@ -72,6 +80,7 @@ class UtilityIcons extends Component {
                 this.props.getNotes()
             }
         })
+    }
     }
 
 
@@ -97,7 +106,8 @@ class UtilityIcons extends Component {
         await this.setState({
 
             MorePopper: !this.state.MorePopper,
-            anchorEl: event.currentTarget
+            anchorEl: event.currentTarget,
+            addlabelBool:false
         })
 
 
@@ -105,12 +115,12 @@ class UtilityIcons extends Component {
 
     deletenote = (event) => {
 
+       
         let obj = {
 
             noteIdList: [this.props.noteItems.id],
             isDeleted: true
         }
-
 
 
         SerObj.deleteNote(obj, async (error, result) => {
@@ -129,9 +139,22 @@ class UtilityIcons extends Component {
 
     }
 
+   
+    addLabel = (event) =>{
+
+        this.setState({MorePopper:false,
+            addlabelBool:true,
+           
+        })
+
+
+
+    }
+
     render() {
 
-        // console.log("bool value from dashboard",this.props.toggleBool);
+       console.log("this.from take note",this.props);
+       
         
         return (
 
@@ -196,12 +219,37 @@ class UtilityIcons extends Component {
                         <div id="delete-note">Make a copy</div>
                         </Typography>   
                     }
-                        <Typography id="typographyEdit"><div id="delete-note">Add label</div></Typography> 
+                        <Typography id="typographyEdit" onClick={event => this.addLabel(event)}>
+                        <div id="delete-note">Add label</div>
+                        </Typography> 
+
                         <Typography id="typographyEdit"><div id="delete-note">Add drawing</div></Typography>
                         <Typography id="typographyEdit"><div id="delete-note">Show checkbox</div></Typography>
         
                     </Paper>
+
+              
                 </Popper>
+
+                    
+                    
+                    <Popper id = "addLabelPopper" open ={this.state.addlabelBool}
+                    anchorEl={this.state.anchorEl} transition placement="bottom-start">
+                       
+                      
+                      
+                       <Paper>
+
+
+                    {/* gdfgdfg */}
+                    
+                       </Paper>
+
+
+                    </Popper>
+
+
+
 
                 {(this.state.colorIconClick) ?
                     <ColorPopper id="colorPopper" popperBool={this.state.colorIconClick}

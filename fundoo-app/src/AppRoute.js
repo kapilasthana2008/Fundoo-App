@@ -6,6 +6,8 @@ import Dashboard from './Components/Dashboard'
 import CreateAccount from './Components/CreateAccount'
 import Resetpassword from '../src/Components/Resetpassword'
 import Trash from '../src/Components/Trash'
+import ChildNotes from '../src/Components/ChildNotes'
+import Archive_page from './Components/Archive_page';
 
 const Router = ()=>(
 
@@ -17,7 +19,10 @@ const Router = ()=>(
         <Route path ="/ForgotPassword" component = {ForgotPassword} exact = {true}/>
         <Route path = "/CreateAccount" component = {CreateAccount} exact = {true}/>
         <Route path = "/ResetPass" component = {Resetpassword} exact = {true}/>
+        <Route path = "/Dashboard/Notes" component = {ChildNotes} exact = {true}/>
         <Route path = "/Dashboard/Trash" component ={Trash} />
+        <Route path = "/Dashboard/Archive" component ={Archive_page} />
+        
         </switch>
     
     </div>

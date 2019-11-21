@@ -42,10 +42,17 @@ class HeaderAppBar extends Component {
             toggleBool: false,
             popupBool: false,
             gridchange: false,
-            anchorEl : null
+            anchorEl: null,
+            value: 'Fundoo Apps'
         }
 
     }
+
+    componentDidMount(){
+
+   
+    }
+
     style() {
 
 
@@ -74,9 +81,6 @@ class HeaderAppBar extends Component {
         await this.setState({ toggleBool: !this.state.toggleBool })
 
 
-        console.log("togglebool", this.state.toggleBool);
-
-        console.log("this.props in header", this.props);
         this.props.getvalue(this.state.toggleBool)
 
 
@@ -91,19 +95,19 @@ class HeaderAppBar extends Component {
             await this.setState({
                 popupBool: false,
                 anchorEl: event.currentTarget
-               })
+            })
         } else {
             await this.setState({
                 popupBool: true
             })
         }
 
-       
+
     }
 
     changegrid = async () => {
 
-        console.log("popup");
+
 
         if (this.state.gridchange) {
 
@@ -133,13 +137,18 @@ class HeaderAppBar extends Component {
 
     trash = (data) => {
 
-        console.log("trash box is comming");
+
         this.props.trashClicked(data)
+    }
+    changeHeader = (value) =>{
+
+     this.setState({ value: value })
+
     }
 
     render() {
 
-        console.log("in header render", this.props);
+
 
         return (
 
@@ -163,8 +172,8 @@ class HeaderAppBar extends Component {
                             </div>
 
                             <Typography id="appName" variant="h6" Wrap>
-                                Fundoo App
-                  </Typography>
+                                {this.state.value}
+                            </Typography>
 
                             <div id="searchBar">
 
@@ -172,23 +181,23 @@ class HeaderAppBar extends Component {
 
                                     <div id="searchField"></div>
 
-                                        <InputBase startAdornment = {(
-                                          
-                                            <InputAdornment position ='start'>
-                                                <SearchIcon />
-                                            </InputAdornment>
-                                        )}
-                                         id="searchtext" type="text"
-                                            placeholder="Search"
-                                            name="" />
-                                    </div>
+                                    <InputBase startAdornment={(
 
-                                   
-                                        {/* <img id = "crossimg" src = {require('../assets/cross-out.png')}/> */}
-                                    
-
+                                        <InputAdornment position='start'>
+                                            <SearchIcon />
+                                        </InputAdornment>
+                                    )}
+                                        id="searchtext" type="text"
+                                        placeholder="Search"
+                                        name="" />
                                 </div>
-                            
+
+
+                                {/* <img id = "crossimg" src = {require('../assets/cross-out.png')}/> */}
+
+
+                            </div>
+
                             <div className="userDetailsPart">
 
                                 <div className="refreshAndGrid">
@@ -227,8 +236,8 @@ class HeaderAppBar extends Component {
                     </div>
                 </Popper>
 
-                <DrawerList noteClick = {this.notes} togglebool={this.state.toggleBool} arch = {this.arch}
-                 trashbox = {this.trash}/>
+                <DrawerList props={this.props} change={this.changeHeader} noteClick={this.notes} togglebool={this.state.toggleBool} arch={this.arch}
+                    trashbox={this.trash} />
 
             </div>
         )

@@ -1,56 +1,56 @@
 import React, { Component } from 'react'
-import '../cssFiles/Archive.css'
-import DisplayNotes from '../Components/DisplayNotes'
-const service = require('../Services/DashboardServices')
-
-var obj = new service.NotesServices()
+import InputBase from '@material-ui/core/InputBase';
+import Card from '@material-ui/core/Card';
 import Masonry from 'react-masonry-component';
+import UtilityIcons from './UtilityIcons';
+import DisplayNotes from '../Components/DisplayNotes'
+import IconButton from '@material-ui/core/IconButton';
+import TakeNote from '../Components/TakeNote'
+import '../cssFiles/ChildNote.css'
+const service = require('../Services/DashboardServices')
+var obj = new service.NotesServices()
 
-class Archive_page extends Component {
+
+class ChildNotes extends Component {
 
 
     constructor(props) {
         super(props)
 
         this.state = {
-
-            allarchive: [],
-            trashbool: this.props.trashbool
+            allNotes: []
         }
     }
-
-
 
     componentDidMount() {
 
         this.getNotes()
     }
 
-
-
     getNotes = () => {
 
 
         obj.getAllNotes(async (error, result) => {
 
+            await this.setState({ allNotes: [] })
 
-          
-            
             if (result) {
 
                 let arr = []
-                arr = this.state.allarchive
+                arr = this.state.allNotes
 
                 result.map((item) => {
-                  
+                    if (item.isArchived === false) {
+                        if (item.isDeleted === false) {
+                            arr.push(item)
+                        }
 
-                    if (item.isArchived) {
-                       arr.push(item)
                     }
+
 
                 })
 
-                await this.setState({ allarchive: arr })
+                await this.setState({ allNotes: arr })
 
             }
         })
@@ -58,24 +58,21 @@ class Archive_page extends Component {
 
     }
 
-
-
     render() {
-
-
 
         return (
 
-            <div className = "archive-pages">
-
+            <div className="NoteMainContainer">
 
                 <div className="childContainer">
+
+                    <TakeNote getNotes={this.getNotes} />
 
                     <div classname="all-note-container">
 
                         <Masonry className="note-list">
 
-                            {this.state.allarchive.map((item) =>
+                            {this.state.allNotes.map((item) =>
 
                                 <DisplayNotes item={item} getNotes={this.getNotes}
                                 />
@@ -83,11 +80,13 @@ class Archive_page extends Component {
                             )}
                         </Masonry>
                     </div>
-                </div>
-            </div>
 
+                </div>
+
+            </div>
         )
+
     }
 }
 
-export default Archive_page
+export default ChildNotes

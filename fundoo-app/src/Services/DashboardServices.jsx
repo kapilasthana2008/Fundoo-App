@@ -14,7 +14,7 @@ export class NotesServices {
     addNote(values, callback) {
 
 
-        console.log("token", headers.Authorization);
+    
 
 
         axios.post(BaseUrl + "/addNotes", values, { headers: headers }).then((response) => {
@@ -53,8 +53,7 @@ export class NotesServices {
 
     updateNote(values,callback){
 
-      console.log("values getting",values);
-      
+   
         axios.post(BaseUrl + "/updateNotes", values, { headers: headers }).then((response)=>{
 
             return callback(null,response)
@@ -130,8 +129,7 @@ export class NotesServices {
 
     colorChange(values,callback){
       
-        console.log("getting values",values);
-        
+      
         axios.post(BaseUrl+"/changesColorNotes",values,{ headers: headers }).then((response)=>{
 
 

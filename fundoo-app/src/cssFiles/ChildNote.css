@@ -1,0 +1,27 @@
+.NoteMainContainer {
+
+    margin-top: 100px
+}
+
+.childContainer {
+    /* background-color: aquamarine; */
+    width : 70%;
+    margin: auto 250px
+}
+
+.OnTogglechildContainer {
+    /* background-color: aquamarine; */
+    width : 70%;
+    margin: auto 250px
+}
+
+
+
+
+.note-list {
+
+    display       : flex;
+    flex-direction: row;
+    flex-wrap     : wrap;
+    margin        : 5px auto
+}

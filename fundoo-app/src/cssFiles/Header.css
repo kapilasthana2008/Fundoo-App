@@ -281,16 +281,6 @@
 
 }
 
-.note-list {
-
-    max-width     : 1000px;
-    display       : flex;
-
-    flex-direction: row;
-    flex-wrap     : wrap;
-    margin        : 25px auto
-}
-
 
 .note-listForColumn {
 
@@ -511,3 +501,9 @@
     width: 30px;
     
 }
+
+#note{
+    background-color: rgb(247, 242, 185);
+    border-radius: 0px 20px 20px 0px;
+}
+

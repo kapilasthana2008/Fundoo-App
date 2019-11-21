@@ -46,8 +46,7 @@ class Dashboard extends Component {
 
     DrawerNoteClick = async (data) => {
 
-        console.log("drawer note.", data);
-
+       
         await this.setState({
             archiveBoolState: false,
             trashState: false,
@@ -59,8 +58,7 @@ class Dashboard extends Component {
 
     trashedNote = (id) => {
 
-        console.log("inside comming from utility component");
-
+      
         this.getNotes()
     }
 
@@ -72,8 +70,6 @@ class Dashboard extends Component {
 
             await this.setState({ allNotes: [] })
 
-            console.log("result getting----------->", result);
-            console.log("result getting----------->", result.color);
 
             if (result) {
 
@@ -99,21 +95,20 @@ class Dashboard extends Component {
 
     }
 
-    async Input(event) {
+    // async Input(event) {
 
-        await this.setState({
+    //     await this.setState({
 
-            [event.target.name]: event.target.value
-        })
+    //         [event.target.name]: event.target.value
+    //     })
 
-    }
+    // }
 
     toggleNoteClick = async (event) => {
 
         await this.setState({ toggleNote: !this.state.toggleNote })
 
-        console.log("toggleNote", this.state.toggleNote);
-
+       
     }
 
     tugglenote = async (event) => {
@@ -135,7 +130,7 @@ class Dashboard extends Component {
                     Description: ""
 
                 })
-
+                
                 this.getNotes()
 
             } else {
@@ -152,12 +147,7 @@ class Dashboard extends Component {
 
     }
 
-    getColorDash = async (colorCode) => {
-
-
-        await this.setState({ colorCode: colorCode })
-
-    }
+  
 
 
 
@@ -166,6 +156,7 @@ class Dashboard extends Component {
         await this.setState({
             drawerToggle: data
         })
+    
     }
 
     colorClick = (event) => {
@@ -216,7 +207,6 @@ class Dashboard extends Component {
 
         obj.trashNotesList(async (error, result) => {
 
-
             await this.setState({ drawerClickedArray: [] })
 
             if (result) {
@@ -250,82 +240,82 @@ class Dashboard extends Component {
 
 
         //=========================================Main page==================================================
-        const mainPage = (
+        // const mainPage = (
 
-            <div className={(this.state.drawerToggle) ? "noteparent" : "noteParentAfter"}>
+        //     <div className={(this.state.drawerToggle) ? "noteparent" : "noteParentAfter"}>
 
-                <div className="note-container" >
+        //         <div className="note-container" >
 
-                    {this.state.toggleNote ?
+        //             {this.state.toggleNote ?
 
-                        <Card className="note-title-box"
-                            onClick={event => this.toggleNoteClick(event)}>
-                            Take a note...
-                        </Card> :
+        //                 <Card className="note-title-box"
+        //                     onClick={event => this.toggleNoteClick(event)}>
+        //                     Take a note...
+        //                 </Card> :
 
-                        <Card style={{ backgroundColor: this.state.colorCode }} className="mainInputCard">
+        //                 <Card style={{ backgroundColor: this.state.colorCode }} className="mainInputCard">
 
-                            <div id="title-container">
+        //                     <div id="title-container">
 
-                                <div id="title">
-                                    <InputBase id="searchtextBox" type="text"
-                                        placeholder="Title"
-                                        value={this.state.Title}
-                                        onChange={event => this.Input(event)}
-                                        name="Title" />
-                                </div>
+        //                         <div id="title">
+        //                             <InputBase id="searchtextBox" type="text"
+        //                                 placeholder="Title"
+        //                                 value={this.state.Title}
+        //                                 onChange={event => this.Input(event)}
+        //                                 name="Title" />
+        //                         </div>
 
-                                <div id="pinupImg">
+        //                         <div id="pinupImg">
 
-                                    <IconButton><img src={require('../assets/unpin.svg')} /></IconButton>
+        //                             <IconButton><img src={require('../assets/unpin.svg')} /></IconButton>
 
-                                </div>
-                            </div>
+        //                         </div>
+        //                     </div>
 
-                            <div className="inputNote">
+        //                     <div className="inputNote">
 
-                                <InputBase id="searchtextBox" type="text"
-                                    placeholder="Take a note..."
-                                    value={this.state.Description}
-                                    onChange={event => this.Input(event)}
-                                    name="Description" />
-                            </div>
+        //                         <InputBase id="searchtextBox" type="text"
+        //                             placeholder="Take a note..."
+        //                             value={this.state.Description}
+        //                             onChange={event => this.Input(event)}
+        //                             name="Description" />
+        //                     </div>
 
-                            <div className="utilityIcons">
-                                <div className="icons-in-row">
+        //                     <div className="utilityIcons">
+        //                         <div className="icons-in-row">
 
-                                    <UtilityIcons toggleBool={this.state.toggleNote}
+        //                             <UtilityIcons toggleBool={this.state.toggleNote}
 
-                                        getcolorForDash={this.getColorDash}
-                                    />
+        //                                 getcolorForDash={this.getColorDash}
+        //                             />
 
-                                </div>
+        //                         </div>
 
-                                <div>
-                                    <button id="Closebtn" onClick={event => this.tugglenote(event)}>Close</button>
-                                </div>
+        //                         <div>
+        //                             <button id="Closebtn" onClick={event => this.tugglenote(event)}>Close</button>
+        //                         </div>
 
-                            </div>
-                        </Card>}
-                </div>
+        //                     </div>
+        //                 </Card>}
+        //         </div>
 
-                <Masonry className="note-list">
+        //         <Masonry className="note-list">
 
-                    {/* <div className="note-listForColumn"> */}
-                    {this.state.allNotes.map((item) =>
+        //             {/* <div className="note-listForColumn"> */}
+        //             {this.state.allNotes.map((item) =>
 
-                        <DisplayNotes item={item} colosIcon={this.colorClick}
-                            archiveMethod={this.getNotes} trash={this.trashedNote}
-                            updateNote={this.updateBtnClicked}
-                            toggleChange={this.toggleNoteClick}
-                        />
+        //                 <DisplayNotes item={item} colosIcon={this.colorClick}
+        //                     archiveMethod={this.getNotes} trash={this.trashedNote}
+        //                     updateNote={this.updateBtnClicked}
+        //                     toggleChange={this.toggleNoteClick}
+        //                 />
 
-                    )}
-                </Masonry>
+        //             )}
+        //         </Masonry>
 
-            </div>
+        //     </div>
 
-        )
+        // )
 
         //================================================Archive Page===================================================
 
@@ -334,19 +324,19 @@ class Dashboard extends Component {
             <div >
                 <div>
 
-                    <HeaderAppBar noteClicked={this.DrawerNoteClick}
+                    <HeaderAppBar props = {this.props.history} noteClicked={this.DrawerNoteClick}
                         getvalue={this.getvalue} archiveClickedHere={this.archiveClickedHere}
                         trashClicked={this.trashClicked} />
 
 
-                    <div className="MainContainer">
+                    {/* <div className="MainContainer">
 
 
                         {(this.state.archiveBoolState) || (this.state.trashState) ?
 
-                            <Archive_page item={this.state.drawerClickedArray} /> : mainPage
+                            <Archive_page item={this.state.drawerClickedArray} /> : "mainPage"
                         }
-                    </div>
+                    </div> */}
 
                 </div>
 
