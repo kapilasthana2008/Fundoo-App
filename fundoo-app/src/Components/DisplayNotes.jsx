@@ -13,9 +13,11 @@ import PopperComponent from '../Components/PopperComponent'
 import ColorPopper from '../Components/ColorPopper'
 import Chip from '@material-ui/core/Chip';
 import UtilityIcons from '../Components/UtilityIcons'
+import Dialog from '@material-ui/core/Dialog';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
 const service = require('../Services/DashboardServices')
 var SerObj = new service.NotesServices()
-
 
 class DisplayNotes extends Component {
 
@@ -35,11 +37,17 @@ class DisplayNotes extends Component {
             deleteNotesnackBar: false,
             itemClicked: false,
             colorIconClick: false,
+            clickedOutside:false,
             setColor: this.props.item.color,
         }
-
     }
 
+    componentDidMount(){
+
+   
+
+    }
+   
 
     cardClicked = async () => {
 
@@ -91,46 +99,7 @@ class DisplayNotes extends Component {
 
     }
 
-    // moreBtnClicked = async (event) => {
-
-
-    //     await this.setState({
-
-    //         Popper: !this.state.Popper,
-    //         itemClicked: false,
-    //         colorIconClick: false,
-    //         anchorEl: event.currentTarget
-    //     })
-    //     console.log("more button clicked", this.state);
-    // }
-
-
-    // deletenote = (event) => {
-
-    //     console.log("note deleted...");
-
-    //     let obj = {
-
-    //         noteIdList: [this.props.item.id],
-    //         isDeleted: true
-    //     }
-
-
-    //     SerObj.deleteNote(obj, async (error, result) => {
-
-    //         if (result) {
-
-    //             await this.setState({
-    //                 Popper: !this.state.Popper,
-    //                 snackbarBool: true,
-    //                 snackbarMsg: "trashed note"
-    //             })
-
-    //             this.props.trash(this.props.item.id)
-    //         }
-    //     })
-
-    // }
+   
 
     handleClose = async () => {
         await this.setState({ snackbarBool: !this.state.snackbarBool })
@@ -166,17 +135,7 @@ class DisplayNotes extends Component {
 
     }
 
-    // colorsBtn = async (event) => {
-
-    //     await this.setState({
-    //         itemClicked: false,
-    //         Popper: false,
-    //         colorIconClick: !this.state.colorIconClick,
-    //         anchorEl: event.currentTarget,
-
-    //     })
-    //     this.props.colosIcon(event)
-    // }
+ 
 
 
     setColor = async (colorCode) => {
@@ -189,17 +148,16 @@ class DisplayNotes extends Component {
         this.props.trash()
     }
 
-    // remindIconClicked = async (event) => {
+    handleClickAway = async()=>{
 
+        this.setState ({
+            clickedOutside: !this.state.clickedOutside
+        })
 
-    //     await this.setState({
-    //         colorIconClick: false,
-    //         itemClicked: !this.state.itemClicked,
-    //         anchorEl: event.currentTarget,
-    //         Popper: false
-    //     })
+    }
 
-    // }
+    
+
 
     render() {
 
@@ -209,12 +167,15 @@ class DisplayNotes extends Component {
 
                 <div>
 
+                    <ClickAwayListener onClickAway={this.handleClickAway}>
+                    
                     <Card style={{ backgroundColor: this.state.setColor }}
+                    
                         className={(this.state.editCard) ? "EditmainDipalyCard" : "mainDipalyCard"}
                     >
 
                         {/* title part */}
-                        <div id="titleRow" onClick={() => this.cardClicked()}>
+                        <div id="titleRow" onClick={this.cardClicked}>
 
                             <div id="title-show">
                                 {
@@ -222,7 +183,7 @@ class DisplayNotes extends Component {
 
                                         <InputBase
                                             name="Title"
-                                            value={this.state.Title}
+                                            defaultValue={this.state.Title}
                                             onChange={event => this.Input(event)}
 
                                         />
@@ -333,8 +294,9 @@ class DisplayNotes extends Component {
                         </div> */}
 
                     </Card>
+                    
 
-
+                    </ClickAwayListener>
                     {(this.state.itemClicked) ? <PopperComponent popperBool={this.state.itemClicked}
                         anchor={this.state.anchorEl} />
 

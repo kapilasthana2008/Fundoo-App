@@ -112,8 +112,8 @@ class Dashboard extends Component {
 
         await this.setState({ toggleNote: !this.state.toggleNote })
 
-        console.log("toggleNote",this.state.toggleNote);
-        
+        console.log("toggleNote", this.state.toggleNote);
+
     }
 
     tugglenote = async (event) => {
@@ -144,17 +144,18 @@ class Dashboard extends Component {
             }
 
         })
-        await this.setState({ toggleNote: !this.state.toggleNote ,
+        await this.setState({
+            toggleNote: !this.state.toggleNote,
 
-                colorCode:""
+            colorCode: ""
         })
 
     }
 
-    getColorDash = async(colorCode)=>{
+    getColorDash = async (colorCode) => {
 
-        
-        await this.setState({colorCode:colorCode})
+
+        await this.setState({ colorCode: colorCode })
 
     }
 
@@ -251,7 +252,7 @@ class Dashboard extends Component {
         //=========================================Main page==================================================
         const mainPage = (
 
-            <div className={(this.state.drawerToggle) ? "noteparent" : ""}>
+            <div className={(this.state.drawerToggle) ? "noteparent" : "noteParentAfter"}>
 
                 <div className="note-container" >
 
@@ -262,7 +263,7 @@ class Dashboard extends Component {
                             Take a note...
                         </Card> :
 
-                        <Card style = {{backgroundColor:this.state.colorCode}} className="mainInputCard">
+                        <Card style={{ backgroundColor: this.state.colorCode }} className="mainInputCard">
 
                             <div id="title-container">
 
@@ -309,6 +310,7 @@ class Dashboard extends Component {
                 </div>
 
                 <Masonry className="note-list">
+
                     {/* <div className="note-listForColumn"> */}
                     {this.state.allNotes.map((item) =>
 

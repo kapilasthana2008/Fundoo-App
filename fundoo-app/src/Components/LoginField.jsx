@@ -100,6 +100,7 @@ class LoginField extends Component {
     
     
                     this.props.props.history.push('/Dashboard')
+    // console.log("from login field",this.props.props.history.push);
     
                 }
                 else {

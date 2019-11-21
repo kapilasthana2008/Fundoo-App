@@ -81,8 +81,6 @@ class ColorPopper extends Component {
         }
         else{
 
-        
-
         var obj = {
             noteIdList:[this.props.cardProps.noteItems.id],
             color:colors[index].colorcode
@@ -104,10 +102,12 @@ class ColorPopper extends Component {
 
     render() {
 
+
         const colorPlate = colors.map((item, index) => {
    
 
             return (
+                
                 <div key={index} id="colormargin" >
                     <Tooltip title={item.Colorname}>
 

@@ -78,13 +78,10 @@ class UtilityIcons extends Component {
     colorsBtn = async (event) => {
 
         await this.setState({
-
             MorePopper: false,
             colorIconClick: !this.state.colorIconClick,
             anchorEl: event.currentTarget,
-
         })
-
     }
 
     getcolorCode = (colorCode) => {

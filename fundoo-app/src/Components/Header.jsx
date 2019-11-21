@@ -6,12 +6,12 @@ import AppBar from '@material-ui/core/AppBar';
 import PopUp from '../Components/Popup'
 import Popper from '@material-ui/core/Popper';
 import IconButton from '@material-ui/core/IconButton';
-import { Toolbar } from '@material-ui/core';
+import { Toolbar, InputAdornment } from '@material-ui/core';
 import { makeStyles, useTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
-
+import SearchIcon from '@material-ui/icons/Search';
 // import SearchIcon from '@material-ui/icons/Search';
 
 
@@ -170,24 +170,25 @@ class HeaderAppBar extends Component {
 
                                 <div className="searchbar">
 
-                                    <div id="searchicon">
-                                        <img id="searchimg" src={require('../assets/searchIcn.png')} />
-                                    </div>
+                                    <div id="searchField"></div>
 
-                                    <div id="searchField">
-
-                                        <InputBase id="searchtext" type="text"
+                                        <InputBase startAdornment = {(
+                                          
+                                            <InputAdornment position ='start'>
+                                                <SearchIcon />
+                                            </InputAdornment>
+                                        )}
+                                         id="searchtext" type="text"
                                             placeholder="Search"
                                             name="" />
                                     </div>
 
-                                    <div id="searchCroxBtn">
+                                   
                                         {/* <img id = "crossimg" src = {require('../assets/cross-out.png')}/> */}
-                                    </div>
+                                    
 
                                 </div>
-                            </div>
-
+                            
                             <div className="userDetailsPart">
 
                                 <div className="refreshAndGrid">

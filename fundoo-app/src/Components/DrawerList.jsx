@@ -26,15 +26,15 @@ class DrawerList extends Component {
         this.state = {
             toggleBool: this.props.togglebool,
             bool: true,
-            archiveBool:false,
-            trashBool:false,
-            noteBool:false
+            archiveBool: false,
+            trashBool: false,
+            noteBool: false
         }
     }
 
     style() {
 
-        
+
         const useStyles = createMuiTheme((
             {
                 overrides: {
@@ -52,10 +52,10 @@ class DrawerList extends Component {
         return useStyles
     }
 
-    noteClicked = async()=>{
-    
-     await this.setState({noteBool:true})
-        
+    noteClicked = async () => {
+
+        await this.setState({ noteBool: true })
+
         this.props.noteClick(this.state.noteBool)
     }
 
@@ -63,23 +63,25 @@ class DrawerList extends Component {
 
         console.log("archive fun");
 
-        await this.setState({archiveBool: true})
+        await this.setState({ archiveBool: true })
 
-       this.props.arch(this.state.archiveBool)
+        this.props.arch(this.state.archiveBool)
+
+        // this.props.props.history.push("/Dashboard/Archive")
+    }
+
+    trashClicked = async () => {
+
+        await this.setState({ trashBool: true })
+
+        this.props.props.history.push('/Dashboard/Trash')
+        // console.log("from trash=======>",  this.props.props.history.push('/Dashboard/Trash')); 
+        // this.props.props.history.push("/Dashboard/Trash")
+        // // this.props.trashbox(this.state.trashBool)
 
     }
 
-    trashClicked = async ()=>{
 
-    
-        await this.setState ({trashBool:true})
-
-        // this.props.history.push('/Dashboard/Trash')
-        this.props.trashbox(this.state.trashBool)
-
-    }
-
-    
 
     render() {
 
@@ -103,7 +105,7 @@ class DrawerList extends Component {
                         <Divider />
                         <List >
 
-                            <ListItem button onClick = {this.noteClicked} >
+                            <ListItem button onClick={this.noteClicked} >
                                 <ListItemIcon>
                                     <img src={require('../assets/notes.svg')} alt="Logo" />
                                     {/* <InboxIcon /> */}
@@ -134,9 +136,9 @@ class DrawerList extends Component {
                         </List>
 
                         <Divider />
-                        
-                        <ListItem button onClick = {this.archClicked}>
-                        
+
+                        <ListItem button onClick={this.archClicked}>
+
                             <ListItemIcon >
                                 <img src={require('../assets/archive.svg')} alt="Logo" />
                                 {/* <img src={require('../Assets/remind.svg')} alt="Logo" id="imageFlex1" /> */}
@@ -145,7 +147,7 @@ class DrawerList extends Component {
                             <ListItemText primary="Archive" />
                         </ListItem>
 
-                        <ListItem button onClick = {this.trashClicked}>
+                        <ListItem button onClick={this.trashClicked}>
                             <ListItemIcon>
                                 <img src={require('../assets/trash.svg')} alt="Logo" />
                                 {/* <img src={require('../Assets/remind.svg')} alt="Logo" id="imageFlex1" /> */}
