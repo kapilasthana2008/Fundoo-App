@@ -8,6 +8,7 @@ import Resetpassword from '../src/Components/Resetpassword'
 import Trash from '../src/Components/Trash'
 import ChildNotes from '../src/Components/ChildNotes'
 import Archive_page from './Components/Archive_page';
+import EditLabel from '../src/Components/EditLabel'
 
 const Router = ()=>(
 
@@ -22,6 +23,7 @@ const Router = ()=>(
         <Route path = "/Dashboard/Notes" component = {ChildNotes} exact = {true}/>
         <Route path = "/Dashboard/Trash" component ={Trash} />
         <Route path = "/Dashboard/Archive" component ={Archive_page} />
+        <Route path = "/Dashboard/EditLabel" component ={EditLabel} />
         
         </switch>
     

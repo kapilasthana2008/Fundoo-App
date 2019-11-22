@@ -14,7 +14,8 @@ import Avatar from '@material-ui/core/Avatar';
 import SearchIcon from '@material-ui/icons/Search';
 // import SearchIcon from '@material-ui/icons/Search';
 
-
+const service = require('../Services/EditLabelServices')
+var obj = new service.EditLabelServices()
 
 const useStyles = createMuiTheme((
     {
@@ -39,42 +40,44 @@ class HeaderAppBar extends Component {
         super(props)
 
         this.state = {
+            
             toggleBool: false,
             popupBool: false,
             gridchange: false,
             anchorEl: null,
-            value: 'Fundoo Apps'
+            value: 'Fundoo Apps',
+            labels:[]
         }
 
     }
 
     componentDidMount(){
 
-   
+      
+        this.lebelList() 
     }
 
-    style() {
+    
+    lebelList = () =>{
+    
+       
+       
+        obj.getLabelList(async(error,result)=>{
+    
+            if(result){
+                let arr = []
+                arr = this.state.labels
+    
+                result.map((item,key)=>{
+                   
+                    arr.push(item)
+                })
+                await this.setState({labels:arr})
+            }
 
-
-
-        return useStyles
-    }
-    // style() {
-
-    //     overrides: {
-    //         MuiAppBar: {
-
-    //             top: "60px",
-    //                 width: ''
-    //         },
-    //         MuiButtonBase: {
-    //             top: "60px",
-    //                 width: ''
-
-    //         }
-
-    //     }
-    // }
+        })
+        }
+    
 
     menuClick = async () => {
 
@@ -236,7 +239,8 @@ class HeaderAppBar extends Component {
                     </div>
                 </Popper>
 
-                <DrawerList props={this.props} change={this.changeHeader} noteClick={this.notes} togglebool={this.state.toggleBool} arch={this.arch}
+                <DrawerList props={this.props} change={this.changeHeader} noteClick={this.notes}
+                 togglebool={this.state.toggleBool} arch={this.arch} labelArr = {this.state.labels}
                     trashbox={this.trash} />
 
             </div>

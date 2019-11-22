@@ -41,7 +41,7 @@ class Archive_page extends Component {
                 let arr = []
                 arr = this.state.allarchive
 
-                result.map((item) => {
+                result.map((item,key) => {
                   
 
                     if (item.isArchived) {
@@ -79,7 +79,7 @@ class Archive_page extends Component {
 
                                 <DisplayNotes item={item} getNotes={this.getNotes}
                                 />
-
+                        
                             )}
                         </Masonry>
                     </div>

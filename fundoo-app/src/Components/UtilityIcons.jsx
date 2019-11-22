@@ -107,7 +107,8 @@ class UtilityIcons extends Component {
 
             MorePopper: !this.state.MorePopper,
             anchorEl: event.currentTarget,
-            addlabelBool:false
+            addlabelBool:false,
+            colorIconClick:false
         })
 
 
@@ -241,7 +242,7 @@ class UtilityIcons extends Component {
                        <Paper>
 
 
-                    {/* gdfgdfg */}
+                    gdfgdfg
                     
                        </Paper>
 

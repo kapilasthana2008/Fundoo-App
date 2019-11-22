@@ -38,22 +38,22 @@ class DisplayNotes extends Component {
             deleteNotesnackBar: false,
             itemClicked: false,
             colorIconClick: false,
-            clickedOutside:false,
+            clickedOutside: false,
             setColor: this.props.item.color,
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
 
-   
+
 
     }
-   
+
 
     cardClicked = async () => {
 
-            // console.log("click on card",this.props);
-            
+        // console.log("click on card",this.props);
+
         this.setState({
 
             editCard: true,
@@ -71,7 +71,7 @@ class DisplayNotes extends Component {
 
         })
 
-       
+
 
         let obj = {
             noteId: this.props.item.id,
@@ -91,7 +91,7 @@ class DisplayNotes extends Component {
 
     async Input(event) {
 
-     
+
 
         await this.setState({
 
@@ -100,7 +100,7 @@ class DisplayNotes extends Component {
 
     }
 
-   
+
 
     handleClose = async () => {
         await this.setState({ snackbarBool: !this.state.snackbarBool })
@@ -109,8 +109,8 @@ class DisplayNotes extends Component {
 
     archiveNote = (event) => {
 
-    
-        
+
+
 
         let obj = {
 
@@ -122,7 +122,7 @@ class DisplayNotes extends Component {
 
             if (result) {
 
-             
+
 
                 await this.setState({
                     snackbarMsg: "archeived note.",
@@ -140,39 +140,31 @@ class DisplayNotes extends Component {
     setColor = async (colorCode) => {
 
 
-       await this.setState({setColor:colorCode})
+        await this.setState({ setColor: colorCode })
     }
 
     getAllNotes = () => {
 
-        this.props.getNotes() 
+        this.props.getNotes()
     }
 
-    handleClickAway = async()=>{
+    handleClickAway = async () => {
 
-        this.setState ({
+        this.setState({
             clickedOutside: !this.state.clickedOutside
         })
 
     }
 
-    
+
 
 
     render() {
 
-    
-      
+                const card = (
 
-        return (
-
-            <div>
-
-                <div>
-
-            
                     <Card style={{ backgroundColor: this.state.setColor }}
-                    
+
                         className={(this.state.editCard) ? "EditmainDipalyCard" : "mainDipalyCard"}
                     >
 
@@ -232,30 +224,29 @@ class DisplayNotes extends Component {
                             />
                         </div> */}
 
-
                         {/* utility part  */}
 
                         <div className="utility-part">
-                            
-                            <div id = "utilIcons">
 
-                            <UtilityIcons noteItems={this.props.item} getNotes={this.getAllNotes}
-                            colosIcon={this.setColor}
-                            editCard = {this.state.editCard}
-                           
-                             />    
+                            <div id="utilIcons">
+
+                                <UtilityIcons noteItems={this.props.item} getNotes={this.getAllNotes}
+                                    colosIcon={this.setColor}
+                                    editCard={this.state.editCard}
+
+                                />
                             </div>
-                      
-                            {(this.state.editCard)? 
-                            <div id= "close-btn">
-                            <button id="EditBtn" onClick={this.closeBtnClick}>
-                                            Close
+
+                            {(this.state.editCard) ?
+                                <div id="close-btn">
+                                    <button id="EditBtn" onClick={this.closeBtnClick}>
+                                        Close
                                </button>
-                            </div> : ""}
-                        
-                                                 
+                                </div> : ""}
+
+
                         </div>
-                       
+
                         {/* <div id={(this.state.editCard) ? "EditutililityIcons" : "utililityIcons"}>
                             <IconButton id="remindMe" onClick={event => this.remindIconClicked(event)}>
                                 <img src={require('../assets/remind.svg')} />
@@ -296,7 +287,17 @@ class DisplayNotes extends Component {
                         </div> */}
 
                     </Card>
-                    
+                )
+      
+
+        return (
+
+            <div>
+
+                <div>
+
+                    {card}
+
                     {(this.state.itemClicked) ? <PopperComponent popperBool={this.state.itemClicked}
                         anchor={this.state.anchorEl} />
 
@@ -353,3 +354,28 @@ class DisplayNotes extends Component {
 }
 
 export default DisplayNotes
+
+
+
+
+  // const editCard = (
+
+        //     <div>
+
+        //         <Dialog open={this.state.editCard}>
+
+        //             <Card style={{ backgroundColor: this.state.setColor }} className="EditmainDipalyCard">
+
+        //                 <InputBase
+        //                     name="Title"
+        //                     defaultValue={this.state.Title}
+        //                     onChange={event => this.Input(event)}
+        //                 />
+
+
+        //             </Card>
+
+        //         </Dialog>
+
+        //     </div>
+        // )

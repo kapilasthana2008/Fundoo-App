@@ -15,11 +15,10 @@ import '../cssFiles/Header.css'
 import { yellow } from '@material-ui/core/colors';
 
 
+
 let width = "280px";
 
-
 class DrawerList extends Component {
-
 
     constructor(props) {
         super(props);
@@ -35,20 +34,14 @@ class DrawerList extends Component {
             ReminderItem: false,
             editLabelItem: false,
             archiveItem: false,
-            trashItem: false
+            trashItem: false,
+            labels: this.props.labelArr
         }
 
     }
 
-    componentDidMount(){
-        
-        console.log("current path name---->",window.location.pathname);
-        
-    }
-
     style() {
-
-
+  
         const useStyles = createMuiTheme((
             {
                 overrides: {
@@ -57,15 +50,25 @@ class DrawerList extends Component {
 
                         paperAnchorLeft: {
                             top: "65px",
-                            width: width
+                            width: width,
+                            height:"90vh",
+                            // overflowY:"scroll",
+                            marginBottom:"10px"
 
+                        },
+                        paperAnchorDockedLeft:{
+                         borderRight:"none"
                         }
+
                     }
                 }
             }));
 
         return useStyles
     }
+
+
+
 
     noteClicked = async (event) => {
 
@@ -107,7 +110,8 @@ class DrawerList extends Component {
             trashItem: false
 
         })
-
+        this.props.props.props.push('/Dashboard/EditLabel')
+   
     }
     archClicked = async () => {
 
@@ -136,18 +140,34 @@ class DrawerList extends Component {
             noteItem: false,
             ReminderItem: false,
             editLabelItem: false
-        })
-      
-        
+        })   
         this.props.props.props.push('/Dashboard/Trash')
-        // this.props.history.push('/Dashboard/Trash')
-       
-
     }
 
+    labelClicked = (index) =>{
+
+  
+        
+    }
 
     render() {
 
+           
+        const EditLabels = this.state.labels.map((item,index)=>{
+
+                return (
+
+                
+                    <ListItem button onClick = {event =>this.labelClicked(index)}>
+
+                       <ListItemIcon>
+                           <img src={require('../assets/dialogueFlag.svg')}  />
+                       </ListItemIcon>
+                    <ListItemText primary={item.label} />
+                </ListItem>
+                
+                )
+            }) 
 
 
         return (
@@ -156,7 +176,7 @@ class DrawerList extends Component {
 
                 <MuiThemeProvider theme={this.style()}>
 
-                    <Drawer
+                    <Drawer id = "drawerManage"
 
                         variant="persistent"
                         anchor="left"
@@ -192,19 +212,26 @@ class DrawerList extends Component {
                         </List>
 
                         <Divider />
-                        <List>
-
-                            <ListItem button onClick={this.EditClicked}
-                                id={(this.state.editLabelItem) ? "note" : ""}
-                            >
+                     
+                        <List id = "editItems">
+                              <div>
+                              Labels
+                              </div>  
+                        {/*  */}
+                           {EditLabels}
+                    
+                          
+                            
+                        <ListItem button onClick={this.EditClicked}
+                             id={(this.state.editLabelItem) ? "note" : ""}>
 
                                 <ListItemIcon>
                                     <img src={require('../assets/edit.svg')} alt="Logo" />
-                                    {/* <DraftsIcon /> */}
                                 </ListItemIcon>
-
+                                
                                 <ListItemText primary="Edit Labels" />
-                            </ListItem>
+                         </ListItem>
+                            
                         </List>
 
                         <Divider />
@@ -231,6 +258,9 @@ class DrawerList extends Component {
 
                     </Drawer>
                 </MuiThemeProvider>
+
+
+
             </div>
         )
 

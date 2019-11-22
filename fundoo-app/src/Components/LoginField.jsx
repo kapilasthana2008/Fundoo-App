@@ -86,20 +86,21 @@ class LoginField extends Component {
             password: this.state.Password
         }
 
+        
         if(!flag){
 
             userService.login(obj,async (error, result) => {
 
                 if (result) {
-       
+                    
+                    
+                    await localStorage.setItem('userId',result.data.userId)
                     await localStorage.setItem('firstName', result.data.firstName)
                     await localStorage.setItem('email', result.data.email)
                     await localStorage.setItem('token', result.data.id)
     
-    
                     this.props.props.history.push('/Dashboard/Notes')
-    // console.log("from login field",this.props.props.history.push);
-    
+  
                 }
                 else {
                     this.setState({
@@ -110,13 +111,9 @@ class LoginField extends Component {
         }
        
 
-        // this.navigate(flag)
 
 
     }
-
-
-    // rendering component
     render() {
 
     
@@ -131,12 +128,11 @@ class LoginField extends Component {
                         name="Email"
                         value={this.state.email}
                         helperText={this.state.emailError}
-                        margin="normal"
+                        margin="dense"
                         onChange={event => this.Input(event)}
                         error={this.state.emailError}
                         variant="outlined" />
                 </div>
-
 
 
                 <div className="PasswordField">
@@ -149,7 +145,7 @@ class LoginField extends Component {
                         helperText={this.state.passwordError}
                         onChange={event => this.Input(event)}
                         error={this.state.passwordError}
-                        margin="normal"
+                        margin="dense"
                         variant="outlined" />
                 </div>
                 <div id="forgotPassword">
