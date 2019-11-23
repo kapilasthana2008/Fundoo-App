@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import '../cssFiles/Archive.css'
 import DisplayNotes from '../Components/DisplayNotes'
-
-const service = require('../Services/DashboardServices')
-
-var obj = new service.NotesServices()
 import Masonry from 'react-masonry-component';
 
-class Archive_page extends Component {
+const service = require('../Services/DashboardServices')
+var obj = new service.NotesServices()
+
+
+class Reminder extends Component {
 
 
     constructor(props) {
@@ -15,18 +14,16 @@ class Archive_page extends Component {
 
         this.state = {
 
-            allarchive: [],
-            trashbool: this.props.trashbool
+           
         }
     }
 
-
-
     componentDidMount() {
 
+        console.log("reminder page");
+           
         this.getNotes()
     }
-
 
     getNotes = () => {
 
@@ -34,16 +31,15 @@ class Archive_page extends Component {
         obj.getAllNotes(async (error, result) => {
 
 
-          
-            
             if (result) {
 
+                console.log("reminder page",result);
+                
                 let arr = []
                 arr = this.state.allarchive
 
                 result.map((item,key) => {
                   
-
                     if (item.isArchived) {
                        arr.push(item)
                     }
@@ -51,18 +47,11 @@ class Archive_page extends Component {
                 })
 
                 await this.setState({ allarchive: arr })
-
             }
         })
-
-
     }
 
-
-
     render() {
-
-
 
         return (
 
@@ -73,7 +62,7 @@ class Archive_page extends Component {
 
                     <div classname="all-note-container">
 
-                        <Masonry className="note-list">
+                        {/* <Masonry className="note-list">
 
                             {this.state.allarchive.map((item) =>
 
@@ -81,7 +70,7 @@ class Archive_page extends Component {
                                 />
                         
                             )}
-                        </Masonry>
+                        </Masonry> */}
                     </div>
                 </div>
             </div>
@@ -90,4 +79,4 @@ class Archive_page extends Component {
     }
 }
 
-export default Archive_page
+export default Reminder

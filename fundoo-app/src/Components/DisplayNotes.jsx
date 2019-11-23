@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Popper from '@material-ui/core/Popper';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { Snackbar, TextField } from '@material-ui/core';
+import { Snackbar, TextField, DialogTitle } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
 import PopperComponent from '../Components/PopperComponent'
@@ -15,10 +15,11 @@ import Chip from '@material-ui/core/Chip';
 import UtilityIcons from '../Components/UtilityIcons'
 import Dialog from '@material-ui/core/Dialog';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import { makeStyles, useTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core';
 
 const service = require('../Services/DashboardServices')
 var SerObj = new service.NotesServices()
-
 
 class DisplayNotes extends Component {
 
@@ -40,13 +41,48 @@ class DisplayNotes extends Component {
             colorIconClick: false,
             clickedOutside: false,
             setColor: this.props.item.color,
+            reminderValue: this.props.reminderVal,
+            todayDate: "",
+            time: ""
         }
     }
 
     componentDidMount() {
 
+        this.setReminderValue()
+    }
+
+    setReminderValue = async (value) => {
 
 
+        await this.setState({
+            todayDate: this.state.reminderValue.toString().slice(4, 10),
+            time: this.state.reminderValue.toString().slice(16, 24)
+
+        })
+    }
+
+
+    style() {
+
+        const useStyles = createMuiTheme((
+            {
+
+                overrides: {
+
+                    MuiPaper: {
+
+                        rounded: {
+                            borderRadius: "17px"
+                        },
+                        elevation1: {
+
+                        }
+                    }
+                }
+            }));
+
+        return useStyles
     }
 
 
@@ -60,8 +96,6 @@ class DisplayNotes extends Component {
             Title: this.props.item.title,
             Description: this.props.item.description
         })
-
-
     }
 
     closeBtnClick = async () => {
@@ -71,8 +105,6 @@ class DisplayNotes extends Component {
 
         })
 
-
-
         let obj = {
             noteId: this.props.item.id,
             title: this.state.Title,
@@ -81,17 +113,17 @@ class DisplayNotes extends Component {
 
         SerObj.updateNote(obj, (error, result) => {
 
-            if (result) {
-                this.props.updateNote()
+            console.log("in display notes", this.props);
 
+            if (result) {
+                // this.props.updateNote()
+                this.props.getNotes()
             }
         })
-
     }
 
+
     async Input(event) {
-
-
 
         await this.setState({
 
@@ -100,17 +132,12 @@ class DisplayNotes extends Component {
 
     }
 
-
-
     handleClose = async () => {
         await this.setState({ snackbarBool: !this.state.snackbarBool })
     }
 
 
     archiveNote = (event) => {
-
-
-
 
         let obj = {
 
@@ -121,8 +148,6 @@ class DisplayNotes extends Component {
         SerObj.archiveNote(obj, async (error, result) => {
 
             if (result) {
-
-
 
                 await this.setState({
                     snackbarMsg: "archeived note.",
@@ -138,7 +163,6 @@ class DisplayNotes extends Component {
     }
 
     setColor = async (colorCode) => {
-
 
         await this.setState({ setColor: colorCode })
     }
@@ -156,34 +180,141 @@ class DisplayNotes extends Component {
 
     }
 
+    handleClose = value => {
+
+        this.setState({ editCard: false })
+    };
 
 
+    ChiphandleClick = () => {
+
+
+        let values = {
+            "noteIdList": [this.props.item.id]
+        }
+
+        SerObj.deleteReminder(values, (error, result) => {
+
+            if (result) {
+                this.props.getNotes()
+            }
+        })
+
+    }
+
+    overChipClick = (event) => {
+
+        this.setState({ anchorEl: event.currentTarget })
+    }
 
     render() {
 
-                const card = (
+        const card = (
+
+            <MuiThemeProvider theme={this.style()}>
+                <Card style={{ backgroundColor: this.state.setColor }}
+
+                    className="mainDipalyCard"
+                >
+
+                    {/* title part */}
+                    <div id="titleRow" onClick={this.cardClicked}>
+
+                        <div id="title-show">
+                            {
+                                (this.state.editCard) ?
+
+                                    <InputBase
+                                        name="Title"
+                                        defaultValue={this.state.Title}
+                                        onChange={event => this.Input(event)}
+
+                                    />
+                                    :
+                                    this.props.item.title
+                            }
+
+                        </div>
+                        <IconButton>
+                            <img src={require('../assets/unpin.svg')} />
+                        </IconButton>
+
+                    </div>
+
+                    {/* message display Part in card*/}
+
+
+
+                    <div id="msgDisp-part" onClick={() => this.cardClicked()}>
+
+                        {
+
+                            (this.state.editCard) ?
+                                <InputBase
+                                    name="Description"
+                                    value={this.state.Description}
+                                    onChange={event => this.Input(event)}
+                                />
+                                :
+                                this.props.item.description
+                        }
+                    </div>
+
+                    <div className="chip-edit">
+
+                        {(this.state.todayDate) ? <Chip id="chip-date-time"
+
+                            icon={require('../assets/watch.svg')}
+                            label={this.state.todayDate + `,` + this.state.time}
+                            onClick={event => this.overChipClick(event)}
+                            onDelete={this.ChiphandleClick}
+                        /> : ""}
+
+                    </div>
+
+                    {/* utility part  */}
+
+                    <div className="utility-part">
+
+                        <div id="utilIcons">
+
+                            <UtilityIcons noteItems={this.props.item} getNotes={this.getAllNotes}
+                                colosIcon={this.setColor}
+                                editCard={this.state.editCard}
+                            />
+                        </div>
+
+                    </div>
+
+                    <Popper open={true} anchorEl={this.state.anchorEl}>
+                        <div>kapil asthana</div>
+                    </Popper>
+
+                </Card>
+            </MuiThemeProvider>
+        )
+        const editCard = (
+
+            <MuiThemeProvider theme={this.style()}>
+                <Dialog open={this.state.editCard} onClose={this.handleClose}>
+
 
                     <Card style={{ backgroundColor: this.state.setColor }}
 
-                        className={(this.state.editCard) ? "EditmainDipalyCard" : "mainDipalyCard"}
+                        id="EditmainDipalyCard"
                     >
 
                         {/* title part */}
-                        <div id="titleRow" onClick={this.cardClicked}>
+                        <div id="titleRow">
 
                             <div id="title-show">
-                                {
-                                    (this.state.editCard) ?
 
-                                        <InputBase
-                                            name="Title"
-                                            defaultValue={this.state.Title}
-                                            onChange={event => this.Input(event)}
 
-                                        />
-                                        :
-                                        this.props.item.title
-                                }
+                                <InputBase
+                                    name="Title"
+                                    defaultValue={this.state.Title}
+                                    onChange={event => this.Input(event)}
+                                />
 
                             </div>
                             <IconButton>
@@ -196,33 +327,23 @@ class DisplayNotes extends Component {
 
 
 
-                        <div id="msgDisp-part" onClick={() => this.cardClicked()}>
-
-                            {
-
-                                (this.state.editCard) ?
-                                    <InputBase
-                                        name="Description"
-                                        value={this.state.Description}
-                                        onChange={event => this.Input(event)}
-
-
-                                    />
-                                    :
-                                    this.props.item.description
-
-                            }
+                        <div id="msgDisp-part">
+                            <InputBase
+                                name="Description"
+                                value={this.state.Description}
+                                onChange={event => this.Input(event)}
+                            />
                         </div>
 
 
                         {/* <div className = "">
-                            <Chip
-                                icon={require('../assets/watch.svg')}
-                                label="Nov 25 8:00 PM"
-                                onClick="{handleClick}"
-                                onDelete="{handleDelete}"
-                            />
-                        </div> */}
+            <Chip
+                icon={require('../assets/watch.svg')}
+                label="Nov 25 8:00 PM"
+                onClick="{handleClick}"
+                onDelete="{handleDelete}"
+            />
+        </div> */}
 
                         {/* utility part  */}
 
@@ -230,73 +351,75 @@ class DisplayNotes extends Component {
 
                             <div id="utilIcons">
 
-                                <UtilityIcons noteItems={this.props.item} getNotes={this.getAllNotes}
+                                <UtilityIcons noteItems={this.props.item}
+                                    getNotes={this.getAllNotes}
                                     colosIcon={this.setColor}
                                     editCard={this.state.editCard}
 
                                 />
                             </div>
 
-                            {(this.state.editCard) ?
-                                <div id="close-btn">
-                                    <button id="EditBtn" onClick={this.closeBtnClick}>
-                                        Close
-                               </button>
-                                </div> : ""}
+                            <div id="close-btn">
+                                <button id="EditBtn" onClick={this.closeBtnClick}>
+                                    Close
+               </button>
+                            </div>
 
 
                         </div>
 
                         {/* <div id={(this.state.editCard) ? "EditutililityIcons" : "utililityIcons"}>
-                            <IconButton id="remindMe" onClick={event => this.remindIconClicked(event)}>
-                                <img src={require('../assets/remind.svg')} />
-                            </IconButton>
+            <IconButton id="remindMe" onClick={event => this.remindIconClicked(event)}>
+                <img src={require('../assets/remind.svg')} />
+            </IconButton>
 
-                            <IconButton>
-                                <img src={require('../assets/collabs.svg')} />
-                            </IconButton>
+            <IconButton>
+                <img src={require('../assets/collabs.svg')} />
+            </IconButton>
 
-                            <IconButton onClick={(event) => this.colorsBtn(event)}>
-                                <img src={require('../assets/color.svg')} />
-                            </IconButton>
+            <IconButton onClick={(event) => this.colorsBtn(event)}>
+                <img src={require('../assets/color.svg')} />
+            </IconButton>
 
-                            <IconButton>
-                                <img src={require('../assets/AddImg.svg')} />
-                            </IconButton>
+            <IconButton>
+                <img src={require('../assets/AddImg.svg')} />
+            </IconButton>
 
-                            <IconButton onClick={(event) => this.archiveNote(event)}>
-                                <img src={require('../assets/archive.svg')} />
-                            </IconButton>
+            <IconButton onClick={(event) => this.archiveNote(event)}>
+                <img src={require('../assets/archive.svg')} />
+            </IconButton>
 
-                            <IconButton onClick={(event) => this.moreBtnClicked(event)}>
+            <IconButton onClick={(event) => this.moreBtnClicked(event)}>
 
-                                {(this.state.editCard) ? "" : <img id="moreimg" src={require('../assets/more.svg')} />}
+                {(this.state.editCard) ? "" : <img id="moreimg" src={require('../assets/more.svg')} />}
 
-                            </IconButton>
-                            {
-                                (this.state.editCard) ?
-                                    <div id="closeBtn">
-                                        <button id="EditBtn" onClick={this.closeBtnClick}>
-                                            Close
-                               </button>
-                                    </div>
-                                    : ""
-                            }
+            </IconButton>
+            {
+                (this.state.editCard) ?
+                    <div id="closeBtn">
+                        <button id="EditBtn" onClick={this.closeBtnClick}>
+                            Close
+               </button>
+                    </div>
+                    : ""
+            }
 
 
-                        </div> */}
+        </div> */}
 
                     </Card>
-                )
-      
 
+                </Dialog>
+            </MuiThemeProvider>
+        )
         return (
 
             <div>
 
                 <div>
-
-                    {card}
+                    <MuiThemeProvider theme={this.style()}>
+                        {(this.state.editCard) ? editCard : card}
+                    </MuiThemeProvider>
 
                     {(this.state.itemClicked) ? <PopperComponent popperBool={this.state.itemClicked}
                         anchor={this.state.anchorEl} />
@@ -317,9 +440,6 @@ class DisplayNotes extends Component {
                         <ColorPopper id="colorPopper" popperBool={this.state.colorIconClick}
                             anchor={this.state.anchorEl} cardProps={this.props} changeColor={this.setColor} />
                         : ""}
-
-
-
 
                     <Snackbar
 

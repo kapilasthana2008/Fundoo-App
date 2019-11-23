@@ -32,8 +32,7 @@ class TakeNote extends Component {
 
     async Input(event) {
 
-        console.log("input in textfield",event.target);
-        
+       
         await this.setState({
 
             [event.target.name]: event.target.value
@@ -58,24 +57,27 @@ class TakeNote extends Component {
             isArchived:this.state.isArchived
         }
 
-        
-        obj.addNote(noteObj, async (error, result) => {
+        if(this.state.Title !== "" && this.state.Description !== ""){
+           
+            obj.addNote(noteObj, async (error, result) => {
 
-            if (result) {
-
-                await this.setState({
-                    Title: "",
-                    Description: ""
-
-                })
-
-            this.props.getNotes()
-            } else {
-                console.log("error");
-
-            }
-
-        })
+                if (result) {
+    
+                    await this.setState({
+                        Title: "",
+                        Description: ""
+    
+                    })
+    
+                this.props.getNotes()
+                } else {
+                    console.log("error");
+    
+                }
+    
+            })
+        }
+       
         await this.setState({
             toggleNote: !this.state.toggleNote,
             colorCode: ""
@@ -85,7 +87,7 @@ class TakeNote extends Component {
 
     isArchived = async(data)=>{
 
-        console.log("this.srchived",data);
+      
         await this.setState({
             isArchived:data
         })
@@ -155,10 +157,6 @@ class TakeNote extends Component {
                     </Card>}
 
 
-                {/* <Card className="note-title-box"
-                    onClick={event => this.toggleNoteClick(event)}>
-                    Take a note...
-                </Card> */}
 
             </div>
         )

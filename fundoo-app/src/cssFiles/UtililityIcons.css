@@ -126,3 +126,8 @@
 #addLabelPopper{
     background-color: white;
 }
+
+#reminder-Popper{
+width: 300px;
+height: 46px;
+}

@@ -75,7 +75,10 @@ class Dashboard extends Component {
 
                 let arr = []
                 arr = this.state.allNotes
-
+                
+                // console.log("result...getting in props",result);
+                // reminder
+                
                 result.map((item) => {
                     if (item.isArchived === false) {
                         if (item.isDeleted === false) {
@@ -159,11 +162,6 @@ class Dashboard extends Component {
     
     }
 
-    colorClick = (event) => {
-
-        // console.log("colors Btn Clicked",event);
-
-    }
 
     archiveClickedHere = async (data) => {
 
@@ -191,10 +189,7 @@ class Dashboard extends Component {
             }
         })
 
-        console.log("drawer state aarray", this.state.drawerClickedArray.length);
-
-        // console.log("state set for archive", this.state.archiveBoolState);
-
+      
     }
 
     trashClicked = async (data) => {
@@ -229,11 +224,11 @@ class Dashboard extends Component {
 
     updateBtnClicked = async () => {
 
-
         await this.setState({ updatenote: true })
         this.getNotes()
 
     }
+
 
     render() {
 

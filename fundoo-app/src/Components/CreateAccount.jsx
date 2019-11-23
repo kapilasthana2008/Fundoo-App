@@ -332,6 +332,7 @@ class CreateAccount extends Component {
 
                         </div>
                         <div id="basic-advnc">
+                            
                             <div id={(this.state.basicUserToggle) ? "basic-toggle" : "basic"}
                                 onClick={event => this.basicUser(event)}>Basic</div>
                             <div id={(this.state.advnceUserToggle) ? "basic-toggle" : "basic"}

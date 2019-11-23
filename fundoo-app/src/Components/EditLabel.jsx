@@ -46,7 +46,6 @@ class EditLabel extends Component {
         this.setState({ openDialog: false })
     };
 
-
     creteLabel = () => {
        
         const values = {
@@ -63,9 +62,6 @@ class EditLabel extends Component {
         }
 
     }
-
-
-
 
     render() {
 

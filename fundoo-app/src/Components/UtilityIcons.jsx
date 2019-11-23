@@ -7,6 +7,7 @@ import { Snackbar } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
 import ColorPopper from '../Components/ColorPopper'
+import PopperComponent from './PopperComponent';
 
 const service = require('../Services/DashboardServices')
 var SerObj = new service.NotesServices()
@@ -27,7 +28,7 @@ class UtilityIcons extends Component {
             setColor: '',
             DashboardBool: this.props.toggleBool,
             addlabelBool:false,
-
+            reminderPopper:false
         }
 
 
@@ -45,13 +46,16 @@ class UtilityIcons extends Component {
 
     remindIconClicked = async (event) => {
 
-
+        console.log("reminder clicked....");
+        
         await this.setState({
             colorIconClick: false,
             anchorEl: event.currentTarget,
             Popper: false,
-            snackbarBool: false
-        })
+            snackbarBool: false,
+            MorePopper:false,
+            reminderPopper: !this.state.reminderPopper,
+        })        
 
     }
 
@@ -83,22 +87,20 @@ class UtilityIcons extends Component {
     }
     }
 
-
     colorsBtn = async (event) => {
 
         await this.setState({
             MorePopper: false,
             colorIconClick: !this.state.colorIconClick,
             anchorEl: event.currentTarget,
+            MorePopper:false,
+            reminderPopper:false
         })
     }
 
     getcolorCode = (colorCode) => {
 
-     
-        this.props.colosIcon(colorCode)
-        
-        
+        this.props.colosIcon(colorCode) 
     }
 
     moreBtnClicked = async (event) => {
@@ -108,15 +110,15 @@ class UtilityIcons extends Component {
             MorePopper: !this.state.MorePopper,
             anchorEl: event.currentTarget,
             addlabelBool:false,
-            colorIconClick:false
+            colorIconClick:false,
+            reminderPopper:false
         })
-
-
     }
+
+
 
     deletenote = (event) => {
 
-       
         let obj = {
 
             noteIdList: [this.props.noteItems.id],
@@ -140,16 +142,21 @@ class UtilityIcons extends Component {
 
     }
 
-   
+
     addLabel = (event) =>{
 
         this.setState({MorePopper:false,
             addlabelBool:true,
            
         })
+    }
 
 
+    refreshReminder = ()=>{
 
+        console.log("from reminder");
+        
+        this.props.getNotes()
     }
 
     render() {
@@ -200,9 +207,7 @@ class UtilityIcons extends Component {
 
 
                 <Popper id="popper" open={this.state.MorePopper}
-
                     anchorEl={this.state.anchorEl} transition placement="bottom-start">
-
                     <Paper>
 
                     {
@@ -231,24 +236,19 @@ class UtilityIcons extends Component {
 
               
                 </Popper>
-
-                    
                     
                     <Popper id = "addLabelPopper" open ={this.state.addlabelBool}
-                    anchorEl={this.state.anchorEl} transition placement="bottom-start">
-                       
-                      
-                      
+                    anchorEl={this.state.anchorEl} transition placement="bottom-start">   
                        <Paper>
-
-
                     gdfgdfg
-                    
                        </Paper>
-
-
                     </Popper>
-
+            
+                    {(this.state.reminderPopper) ? 
+                    <PopperComponent popperBool = {this.state.reminderPopper}
+                        anchor ={this.state.anchorEl} noteId = {this.props.noteItems.id}
+                        refreshReminder = {this.refreshReminder}
+                    />: ""}
 
 
 

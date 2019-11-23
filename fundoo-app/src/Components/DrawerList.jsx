@@ -96,9 +96,7 @@ class DrawerList extends Component {
 
         }) 
 
-        console.log("event",event);
-        this.props.change('reminder')
-        
+        this.props.props.props.push('/Dashboard/Reminder')
     }
 
     EditClicked = async () => {

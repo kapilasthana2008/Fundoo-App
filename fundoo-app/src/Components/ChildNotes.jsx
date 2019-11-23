@@ -40,6 +40,8 @@ class ChildNotes extends Component {
                 arr = this.state.allNotes
 
                 result.map((item) => {
+
+                    
                     if (item.isArchived === false) {
                         if (item.isDeleted === false) {
                             arr.push(item)
@@ -73,8 +75,8 @@ class ChildNotes extends Component {
                         <Masonry className="note-list">
 
                             {this.state.allNotes.map((item) =>
-
-                                <DisplayNotes item={item} getNotes={this.getNotes}
+                                
+                                <DisplayNotes item={item} getNotes={this.getNotes} reminderVal = {item.reminder}
                                 />
 
                             )}

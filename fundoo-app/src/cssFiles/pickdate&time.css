@@ -112,10 +112,12 @@
 
 .pickDate:hover {
     background-color: rgb(247, 243, 243);
+    cursor: pointer;
 }
 
 .later-today:hover {
     background-color: rgb(247, 243, 243);
+    cursor: pointer;
 }
 
 .pick-place {

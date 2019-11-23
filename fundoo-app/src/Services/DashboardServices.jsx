@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const BaseUrl = "http://fundoonotes.incubation.bridgelabz.com/api/notes"
+const ReminderBaseUrl = "http://fundoonotes.incubation.bridgelabz.com/api"
 
 let headers = {
     Authorization: localStorage.getItem('token')
@@ -140,6 +141,17 @@ export class NotesServices {
 
             return callback(error)
 
+        })
+    }
+
+    deleteReminder(values,callback){
+
+        axios.post(ReminderBaseUrl+"/notes/removeReminderNotes",values,{ headers: headers }).then((response)=>{
+
+            return callback(null,response)
+        }).catch((error)=>{
+
+            return callback(error)
         })
     }
 }
