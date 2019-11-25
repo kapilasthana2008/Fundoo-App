@@ -12,14 +12,13 @@
 #EditmainDipalyCard {
 
     position: relative;
-
+    overflow-wrap : break-word;
     width    : 500px;
     padding  : 12px 16px 0px;
     font-size: 12px;
 
 
 }
-
 
 
 #titleRow {
@@ -41,7 +40,8 @@
     width         : 100%;
     display       : flex;
     flex-direction: column;
-    overflow-wrap : break-word;
+ 
+    
 
 }
 
@@ -115,4 +115,179 @@ height: auto;
 font-size: 10px;
 margin-top: 15px;
 cursor: pointer;
+}
+
+
+#Chip-reminder{
+    background-color: white;
+    width           : 260px;
+    padding: 15px 15px 15px 15px;
+    height          : 239px;
+    border          : 1px solid rgb(201, 198, 198);
+    border-radius   : 8px;
+    box-shadow      : 0 3px 3px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.25);
+ 
+}
+
+#chip-pickDate{
+    display :flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+#backBtn{
+
+    width: 20px;
+    cursor: pointer;
+}
+
+#backBtn:hover{
+    opacity: 0.7;
+}
+
+#pickdate-font{
+    font-size: 14px;
+    margin-right: 140px;
+}
+
+#Chip-line{
+    height: 1px;
+    width: 100%;
+    margin-top: 10px;
+    background-color: rgb(163, 159, 159);
+}
+
+#chipCalender{
+    margin-top: 20px;
+   
+}
+
+#date{
+    width: 260px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+#Chip-line2{
+    height: 1px;
+    width: 100%;
+    margin-top: 5px;
+    background-color: rgb(163, 159, 159);
+}
+#chip-time{
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+#chip-reminder-priority{
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+#chip-time-popper{
+
+    background-color: white;
+    width: 246px;
+   
+    padding: 6px 6px;
+    border          : 1px solid rgb(201, 198, 198);
+    border-radius   : 8px;
+    box-shadow      : 0 3px 3px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+#morning{
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+#morning:hover{
+    background-color: rgb(238, 235, 235)
+}
+
+#mornig-title{
+    font-size: 14px;
+    color: rgb(71, 71, 71)
+}
+
+#afternoon{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+}
+#afternoon:hover{
+    background-color: rgb(238, 235, 235)
+}
+
+#evening{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+}
+#evening:hover{
+    background-color: rgb(238, 235, 235)
+}
+#night{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+#night:hover{
+    background-color: rgb(238, 235, 235)
+}
+
+#saveBtnDiv{
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end
+}
+
+
+#saveBtn{
+   
+    border          : none;
+    font-size       : 14px;
+    font-weight     : bold;
+    color           : rgb(61, 60, 60);
+    height          : 30px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.OnGridChange{
+    
+        width         : 550px;
+        margin-top    : 20px;
+        padding       : 12px 16px 0px;
+        font-size     : 12px;
+        display       : flex;
+        flex-direction: column;
+        margin-left   : 170px;
+}
+
+@media (max-width: 580px) {
+
+.mainDipalyCard {
+    width         : 480px;
+    margin-top    : 20px;
+    padding       : 12px 16px 0px;
+    font-size     : 12px;
+    display       : flex;
+    flex-direction: column;
+
+}
+
+
 }

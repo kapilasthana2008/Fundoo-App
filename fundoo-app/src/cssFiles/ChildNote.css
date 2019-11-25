@@ -25,3 +25,14 @@
     flex-wrap     : wrap;
     margin        : 5px auto
 }
+
+
+@media (max-width: 580px) {
+
+    .childContainer {
+        /* background-color: aquamarine; */
+        width : auto;
+        margin: auto 0px
+    }
+}
+

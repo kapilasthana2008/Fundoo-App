@@ -70,3 +70,23 @@ background-color: rgb(163, 159, 159)
     margin-left: 10px;
     cursor: pointer;
 }
+
+#editLabel-set{
+    height: 300px;
+    overflow-y: scroll;
+}
+
+#DoneBtnDiv{
+   
+    display: flex;
+    
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 50px;
+    border-top: 1px solid rgb(214, 210, 210);
+}
+
+#DoneBtn{
+    margin-top: 20px;
+    margin-right: 20px;
+}

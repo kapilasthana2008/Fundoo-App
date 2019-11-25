@@ -12,6 +12,7 @@ import {
 } from '@material-ui/pickers';
 import { typography } from '@material-ui/system';
 import { object } from 'prop-types';
+import PickDate_time from '../Components/PickDate_time'
 
 const service = require('../Services/ReminderServices')
 var SerObj = new service.ReminderServices()
@@ -33,7 +34,8 @@ class PopperComponent extends Component {
         this.state = {
             reminderBool: this.props.popperBool,
             remiderPoper: false,
-            anchorEl: this.props.anchor
+            anchorEl: this.props.anchor,
+            pickDate:false
         }
 
 
@@ -54,7 +56,6 @@ class PopperComponent extends Component {
             "noteIdList": [this.props.noteId]
         }
 
-        console.log("props in component", this.props);
 
         SerObj.updateReminder(values, (error, result) => {
 
@@ -100,8 +101,6 @@ class PopperComponent extends Component {
             reminderBool: false
         })
 
-
-
     }
 
     nextWeekClicked = async() => {
@@ -127,30 +126,41 @@ class PopperComponent extends Component {
                 this.props.refreshReminder()
             }
         })
-
         await this.setState({
             reminderBool: false
         })
-
-
     }
 
+    pickDate_time = ()=>{
+
+        this.setState({
+            pickDate: !this.state.pickDate,
+            reminderBool:false
+        })
+    }
+
+    changeAnchor = ()=>{
+
+        this.setState({
+            pickDate: false,
+            reminderBool:true
+        })
+    }
 
     render() {
 
         console.log("this.popper state", this.state);
         return (
             <div>
+
                 <Popper id="ReminderPopper" open={this.state.reminderBool}
                     anchorEl={this.state.anchorEl} transition placement="bottom-start">
-
 
                     <Typography className="reminder-title">
                         <div id="reminder-tital">
                             Reminder:
                             </div>
                     </Typography>
-
 
                     <Typography className="later-today" onClick={this.todayClicked}>
                         <div id="laterToday">
@@ -193,8 +203,7 @@ class PopperComponent extends Component {
 
                     <Typography>
 
-
-                        <ButtonBase className="pickDate">
+                        <ButtonBase className="pickDate" onClick={this.pickDate_time}>
                             <div id="watch">
                                 <img id="watchImg" src={require('../assets/watch.svg')} />
                             </div>
@@ -222,8 +231,12 @@ class PopperComponent extends Component {
 
                     </Typography>
 
-
                 </Popper>
+           
+                <PickDate_time bool = {this.state.pickDate}
+                    changeAnchor ={this.changeAnchor}
+                    item = {this.props}
+                anchor = {this.state.anchorEl}/>
             </div>
         )
     }

@@ -12,7 +12,8 @@ class AddedLabel extends Component {
 
         this.state = {
             changeLabel: false,
-            editLabel: ""
+            editLabel: "",
+            value:this.props.itemValue.label
         }
 
     }
@@ -37,6 +38,11 @@ class AddedLabel extends Component {
 
     render() {
 
+        console.log("this is rendering again",this.props.itemValue.label);
+        
+
+        // let value = this.props.item.label
+
         return (
             <div  >
                 <ListItem >
@@ -56,10 +62,9 @@ class AddedLabel extends Component {
                                         defaultValue={this.state.editLabel}
                                         onChange={event => this.Input(event)}
                                     />
-
-                                    : "dfghdf"
+                                    : this.state.value
                             }
-
+                            
                         </div>
 
                         <div id="editIcon" onClick={this.labelChange}>

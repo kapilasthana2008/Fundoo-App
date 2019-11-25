@@ -26,7 +26,7 @@ const Router = () => (
                 <Route path="/Dashboard/Notes" component={ChildNotes} exact={true} />
                 <Route path="/Dashboard/Trash" component={Trash} />
                 <Route path="/Dashboard/Archive" component={Archive_page} />
-                <Route path="/Dashboard/EditLabel" component={EditLabel} />
+                {/* <Route path="/Dashboard/EditLabel" component={EditLabel} /> */}
                 <Route path="/Dashboard/Reminder" component={Reminder} />
             </switch>
 

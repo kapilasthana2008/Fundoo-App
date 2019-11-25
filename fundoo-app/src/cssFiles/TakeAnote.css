@@ -1,6 +1,7 @@
-
-
-
+/* .note-title-box
+{
+    margin-right: 0px
+} */
 #title-container{
 
     display: flex;
@@ -29,7 +30,15 @@
    
 
 }
-
 .card-Holder{
     margin-left: 170px;
+}
+
+
+@media (max-width: 580px) {
+    .card-Holder{
+        
+        margin-left: 10px;
+    }
+    
 }

@@ -73,6 +73,8 @@ class Dashboard extends Component {
 
             if (result) {
 
+                console.log("noteessssssssss",result);
+                
                 let arr = []
                 arr = this.state.allNotes
                 

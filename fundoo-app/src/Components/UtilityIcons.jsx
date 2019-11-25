@@ -8,6 +8,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
 import ColorPopper from '../Components/ColorPopper'
 import PopperComponent from './PopperComponent';
+import LabelList from '../Components/LabelList'
+import CardLabel from '../Components/CardLabel' 
 
 const service = require('../Services/DashboardServices')
 var SerObj = new service.NotesServices()
@@ -27,64 +29,64 @@ class UtilityIcons extends Component {
             snackbarMsg: '',
             setColor: '',
             DashboardBool: this.props.toggleBool,
-            addlabelBool:false,
-            reminderPopper:false
+            addlabelBool: false,
+            reminderPopper: false
         }
 
 
     }
 
 
-    colorForDashboard = (colorCode)=>{
+    colorForDashboard = (colorCode) => {
 
-       
-        
+
+
         this.props.getcolorForDash(colorCode)
         // console.log("getting color in utility",);
-        
+
     }
 
     remindIconClicked = async (event) => {
 
         console.log("reminder clicked....");
-        
+
         await this.setState({
             colorIconClick: false,
             anchorEl: event.currentTarget,
             Popper: false,
             snackbarBool: false,
-            MorePopper:false,
+            MorePopper: false,
             reminderPopper: !this.state.reminderPopper,
-        })        
+        })
 
     }
 
     archiveNote = (event) => {
 
-      if(this.state.DashboardBool === false){
+        if (this.state.DashboardBool === false) {
 
-        this.props.isArchive(true)   
-        
-      }else{
-        
-        let obj = {
+            this.props.isArchive(true)
 
-            noteIdList: [this.props.noteItems.id],
-            isArchived: true
-        }
+        } else {
 
-        SerObj.archiveNote(obj, async (error, result) => {
+            let obj = {
 
-            if (result) {
-
-                await this.setState({
-                    snackbarMsg: "archeived note.",
-                    snackbarBool: true
-                })
-                this.props.getNotes()
+                noteIdList: [this.props.noteItems.id],
+                isArchived: true
             }
-        })
-    }
+
+            SerObj.archiveNote(obj, async (error, result) => {
+
+                if (result) {
+
+                    await this.setState({
+                        snackbarMsg: "archeived note.",
+                        snackbarBool: true
+                    })
+                    this.props.getNotes()
+                }
+            })
+        }
     }
 
     colorsBtn = async (event) => {
@@ -93,14 +95,14 @@ class UtilityIcons extends Component {
             MorePopper: false,
             colorIconClick: !this.state.colorIconClick,
             anchorEl: event.currentTarget,
-            MorePopper:false,
-            reminderPopper:false
+            MorePopper: false,
+            reminderPopper: false
         })
     }
 
     getcolorCode = (colorCode) => {
 
-        this.props.colosIcon(colorCode) 
+        this.props.colosIcon(colorCode)
     }
 
     moreBtnClicked = async (event) => {
@@ -109,9 +111,9 @@ class UtilityIcons extends Component {
 
             MorePopper: !this.state.MorePopper,
             anchorEl: event.currentTarget,
-            addlabelBool:false,
-            colorIconClick:false,
-            reminderPopper:false
+            addlabelBool: false,
+            colorIconClick: false,
+            reminderPopper: false
         })
     }
 
@@ -143,31 +145,32 @@ class UtilityIcons extends Component {
     }
 
 
-    addLabel = (event) =>{
+    addLabel = (event) => {
 
-        this.setState({MorePopper:false,
-            addlabelBool:true,
-           
+        this.setState({
+            MorePopper: false,
+            addlabelBool: true,
+
         })
     }
 
 
-    refreshReminder = ()=>{
+    refreshReminder = () => {
 
         console.log("from reminder");
-        
+
         this.props.getNotes()
     }
 
     render() {
 
-       console.log("this.from take note",this.props);
-       
-        
+        console.log("this.from take note", this.props);
+
+
         return (
 
             <div>
-                <div className= "utility-icons" >
+                <div className="utility-icons" >
 
                     <div className="reminder" onClick={event => this.remindIconClicked(event)}>
 
@@ -175,32 +178,32 @@ class UtilityIcons extends Component {
                     </div>
 
 
-                    <div className={(this.state.DashboardBool === false)? "For-Dashboard-Collabs" :"collabs"}>
+                    <div className={(this.state.DashboardBool === false) ? "For-Dashboard-Collabs" : "collabs"}>
 
                         <img src={require('../assets/collabs.svg')} id="remindIcon" />
                     </div>
 
 
-                    <div className={(this.state.DashboardBool === false)? "For-Dashboard-color":"color"}>
+                    <div className={(this.state.DashboardBool === false) ? "For-Dashboard-color" : "color"}>
 
                         <img src={require('../assets/color.svg')} id="remindIcon"
                             onClick={(event) => this.colorsBtn(event)} />
                     </div>
 
 
-                    <div className={(this.state.DashboardBool=== false)? "For-Dashboard-addImg":"addImg"}>
+                    <div className={(this.state.DashboardBool === false) ? "For-Dashboard-addImg" : "addImg"}>
 
                         <img src={require('../assets/AddImg.svg')} id="remindIcon" />
                     </div>
 
-                    <div className= {(this.state.DashboardBool === false) ? "For-Dashboard-archive" : "archive"}>
+                    <div className={(this.state.DashboardBool === false) ? "For-Dashboard-archive" : "archive"}>
 
                         <img src={require('../assets/archive.svg')} id="remindIcon"
                             onClick={(event) => this.archiveNote(event)} />
                     </div>
 
-                    <div className={(this.state.DashboardBool === false) ? "For-Dashboard-more": "more"} 
-                    onClick={(event) => this.moreBtnClicked(event)}>
+                    <div className={(this.state.DashboardBool === false) ? "For-Dashboard-more" : "more"}
+                        onClick={(event) => this.moreBtnClicked(event)}>
                         <img id="moreimg" src={require('../assets/more.svg')} id="remindIcon" />
                     </div>
                 </div>
@@ -210,54 +213,55 @@ class UtilityIcons extends Component {
                     anchorEl={this.state.anchorEl} transition placement="bottom-start">
                     <Paper>
 
-                    {
-                        (this.state.DashboardBool === false) ? "" :
-                        
-                        <Typography id="typographyEdit" onClick={event => this.deletenote(event)} >
-                        <div id="delete-note">Delete Note</div>
-                        </Typography>       
-                    }
+                        {
+                            (this.state.DashboardBool === false) ? "" :
 
-                    {
-                        (this.state.DashboardBool === false) ? "" :
-                       
-                        <Typography id="typographyEdit">
-                        <div id="delete-note">Make a copy</div>
-                        </Typography>   
-                    }
+                                <Typography id="typographyEdit" onClick={event => this.deletenote(event)} >
+                                    <div id="delete-note">Delete Note</div>
+                                </Typography>
+                        }
+
+                        {
+                            (this.state.DashboardBool === false) ? "" :
+
+                                <Typography id="typographyEdit">
+                                    <div id="delete-note">Make a copy</div>
+                                </Typography>
+                        }
                         <Typography id="typographyEdit" onClick={event => this.addLabel(event)}>
-                        <div id="delete-note">Add label</div>
-                        </Typography> 
+                            <div id="delete-note">Add label</div>
+                        </Typography>
 
                         <Typography id="typographyEdit"><div id="delete-note">Add drawing</div></Typography>
                         <Typography id="typographyEdit"><div id="delete-note">Show checkbox</div></Typography>
-        
+
                     </Paper>
 
-              
+
                 </Popper>
-                    
-                    <Popper id = "addLabelPopper" open ={this.state.addlabelBool}
-                    anchorEl={this.state.anchorEl} transition placement="bottom-start">   
-                       <Paper>
-                    gdfgdfg
-                       </Paper>
-                    </Popper>
-            
-                    {(this.state.reminderPopper) ? 
-                    <PopperComponent popperBool = {this.state.reminderPopper}
-                        anchor ={this.state.anchorEl} noteId = {this.props.noteItems.id}
-                        refreshReminder = {this.refreshReminder}
-                    />: ""}
+
+
+                <Popper id="addLabelPopper" open={this.state.addlabelBool}
+                    anchorEl={this.state.anchorEl} transition placement="bottom-start">
+
+                  <CardLabel/>
+
+                </Popper>
+
+                {(this.state.reminderPopper) ?
+                    <PopperComponent popperBool={this.state.reminderPopper}
+                        anchor={this.state.anchorEl} noteId={this.props.noteItems.id}
+                        refreshReminder={this.refreshReminder}
+                    /> : ""}
 
 
 
                 {(this.state.colorIconClick) ?
                     <ColorPopper id="colorPopper" popperBool={this.state.colorIconClick}
                         anchor={this.state.anchorEl} cardProps={this.props} changeColor={this.getcolorCode}
-                        dashboardBool = {this.state.DashboardBool}
-                        dashboardNote = {this.colorForDashboard}
-                         />
+                        dashboardBool={this.state.DashboardBool}
+                        dashboardNote={this.colorForDashboard}
+                    />
                     : ""}
 
 

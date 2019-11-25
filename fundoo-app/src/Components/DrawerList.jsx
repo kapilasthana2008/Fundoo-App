@@ -13,7 +13,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import List from '@material-ui/core/List';
 import '../cssFiles/Header.css'
 import { yellow } from '@material-ui/core/colors';
-
+import EditLabel from '../Components/EditLabel'
 
 
 let width = "280px";
@@ -52,7 +52,6 @@ class DrawerList extends Component {
                             top: "65px",
                             width: width,
                             height:"90vh",
-                            // overflowY:"scroll",
                             marginBottom:"10px"
 
                         },
@@ -108,13 +107,12 @@ class DrawerList extends Component {
             trashItem: false
 
         })
-        this.props.props.props.push('/Dashboard/EditLabel')
+        // this.props.props.props.push('/Dashboard/EditLabel')
    
     }
     archClicked = async () => {
 
       
-
         await this.setState({
             archiveBool: true,
             archiveItem: true,
@@ -144,8 +142,7 @@ class DrawerList extends Component {
 
     labelClicked = (index) =>{
 
-  
-        
+
     }
 
     render() {
@@ -159,7 +156,11 @@ class DrawerList extends Component {
                     <ListItem button onClick = {event =>this.labelClicked(index)}>
 
                        <ListItemIcon>
-                           <img src={require('../assets/dialogueFlag.svg')}  />
+                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z">
+                    
+                                </path></svg>
+                                
                        </ListItemIcon>
                     <ListItemText primary={item.label} />
                 </ListItem>
@@ -212,9 +213,10 @@ class DrawerList extends Component {
                         <Divider />
                      
                         <List id = "editItems">
-                              <div>
+                              <div id ="LabelName">
                               Labels
                               </div>  
+
                         {/*  */}
                            {EditLabels}
                     
@@ -257,7 +259,7 @@ class DrawerList extends Component {
                     </Drawer>
                 </MuiThemeProvider>
 
-
+            {(this.state.editLabelItem) ? <EditLabel/>: ""}
 
             </div>
         )

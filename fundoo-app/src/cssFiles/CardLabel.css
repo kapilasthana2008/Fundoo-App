@@ -1,0 +1,38 @@
+#labelSearch{
+    width: 100%;
+    margin-top: 10px;
+}
+
+#card-label-title{
+
+    margin-top: 10px;
+    margin-left: 10px;
+    color: rgb(68, 66, 66);
+    font-size: 16px;
+}
+
+#card-Label{
+    margin-top: 10px;
+    height: 210px;
+    overflow-y: scroll;
+}
+
+.select_label_div{
+
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+#Label_value{
+    margin-left: 30px;
+    margin-top: 4px;
+    font-size: 14px
+}
+
+#label_checkbox{
+    height: 10px;
+    width: 10px;
+    margin-top: -10px
+}
+

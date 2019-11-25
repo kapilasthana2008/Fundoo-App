@@ -14,13 +14,11 @@ class Reminder extends Component {
 
         this.state = {
 
-           
+           reminderCard:[]
         }
     }
 
     componentDidMount() {
-
-        console.log("reminder page");
            
         this.getNotes()
     }
@@ -32,22 +30,23 @@ class Reminder extends Component {
 
 
             if (result) {
-
-                console.log("reminder page",result);
                 
                 let arr = []
-                arr = this.state.allarchive
+                arr = this.state.reminderCard
 
                 result.map((item,key) => {
-                  
-                    if (item.isArchived) {
-                       arr.push(item)
+        
+                    if (item.reminder.length>0) {
+                        arr.push(item)
                     }
 
                 })
 
-                await this.setState({ allarchive: arr })
+                await this.setState({reminderCard: arr })
             }
+
+           
+            
         })
     }
 
@@ -62,15 +61,17 @@ class Reminder extends Component {
 
                     <div classname="all-note-container">
 
-                        {/* <Masonry className="note-list">
+                        <Masonry className="note-list">
 
-                            {this.state.allarchive.map((item) =>
+                            {this.state.reminderCard.map((item) =>
 
                                 <DisplayNotes item={item} getNotes={this.getNotes}
+                                    reminderVal = {item.reminder}
                                 />
                         
                             )}
-                        </Masonry> */}
+                            
+                        </Masonry>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Popper from '@material-ui/core/Popper';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { Snackbar, TextField, DialogTitle } from '@material-ui/core';
+import { Snackbar, TextField, DialogTitle, Tooltip } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
 import PopperComponent from '../Components/PopperComponent'
@@ -17,6 +17,10 @@ import Dialog from '@material-ui/core/Dialog';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { makeStyles, useTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core';
+import PickDate_time from '../Components/PickDate_time'
+
+
+
 
 const service = require('../Services/DashboardServices')
 var SerObj = new service.NotesServices()
@@ -26,10 +30,11 @@ class DisplayNotes extends Component {
     constructor(props) {
         super(props)
 
-
         this.state = {
             Popper: false,
             anchorEl: null,
+            anchorEl2: null,
+            anchorEl3: null,
             snackbar: false,
             "snackbarMsg": "",
             "snackbarBool": false,
@@ -43,7 +48,10 @@ class DisplayNotes extends Component {
             setColor: this.props.item.color,
             reminderValue: this.props.reminderVal,
             todayDate: "",
-            time: ""
+            time: "",
+            chipReminderBool: false,
+            chipTimePopperBool:false,
+            ChipTimePriorityPopper:false,
         }
     }
 
@@ -204,16 +212,30 @@ class DisplayNotes extends Component {
 
     overChipClick = (event) => {
 
-        this.setState({ anchorEl: event.currentTarget })
+        this.setState({
+            anchorEl: event.currentTarget,
+            chipReminderBool: !this.state.chipReminderBool
+        })
     }
+
+    changeAnchor = ()=>{
+
+        this.setState({
+            pickDate: false,
+            reminderBool:true
+        })
+    }
+
 
     render() {
 
+        
         const card = (
 
             <MuiThemeProvider theme={this.style()}>
                 <Card style={{ backgroundColor: this.state.setColor }}
 
+                    // className={(localStorage.getItem('grid') === "true") ? "OnGridChange":"mainDipalyCard"}
                     className="mainDipalyCard"
                 >
 
@@ -286,10 +308,13 @@ class DisplayNotes extends Component {
 
                     </div>
 
-                    <Popper open={true} anchorEl={this.state.anchorEl}>
-                        <div>kapil asthana</div>
-                    </Popper>
-
+                    
+                        {/* Chip Time popper */}
+                        
+                        <PickDate_time bool = {this.state.chipReminderBool}
+                            
+                         anchor = {this.state.anchorEl}/>
+                 
                 </Card>
             </MuiThemeProvider>
         )
@@ -314,6 +339,7 @@ class DisplayNotes extends Component {
                                     name="Title"
                                     defaultValue={this.state.Title}
                                     onChange={event => this.Input(event)}
+                                    multiline = {true}
                                 />
 
                             </div>
@@ -332,6 +358,7 @@ class DisplayNotes extends Component {
                                 name="Description"
                                 value={this.state.Description}
                                 onChange={event => this.Input(event)}
+                                multiline = {true}
                             />
                         </div>
 

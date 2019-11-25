@@ -116,11 +116,15 @@ class HeaderAppBar extends Component {
 
             await this.setState({
                 gridchange: false
+
             })
+            localStorage.setItem('grid',"false")
+            
         } else {
             await this.setState({
                 gridchange: true
             })
+            localStorage.setItem('grid',"true")
         }
 
     }
