@@ -40,44 +40,44 @@ class HeaderAppBar extends Component {
         super(props)
 
         this.state = {
-            
+
             toggleBool: false,
             popupBool: false,
             gridchange: false,
             anchorEl: null,
             value: 'Fundoo Apps',
-            labels:[]
+            labels: []
         }
 
     }
 
-    componentDidMount(){
+    componentDidMount() {
 
-      
-        this.lebelList() 
+
+        this.lebelList()
     }
 
-    
-    lebelList = () =>{
-    
-       
-       
-        obj.getLabelList(async(error,result)=>{
-    
-            if(result){
+
+    lebelList = () => {
+
+
+
+        obj.getLabelList(async (error, result) => {
+
+            if (result) {
                 let arr = []
                 arr = this.state.labels
-    
-                result.map((item,key)=>{
-                   
+
+                result.map((item, key) => {
+
                     arr.push(item)
                 })
-                await this.setState({labels:arr})
+                await this.setState({ labels: arr })
             }
 
         })
-        }
-    
+    }
+
 
     menuClick = async () => {
 
@@ -97,14 +97,14 @@ class HeaderAppBar extends Component {
 
             await this.setState({
                 popupBool: false,
-                anchorEl: event.currentTarget
+                
             })
         } else {
             await this.setState({
-                popupBool: true
+                popupBool: true,
+                anchorEl: event.currentTarget
             })
         }
-
 
     }
 
@@ -118,13 +118,13 @@ class HeaderAppBar extends Component {
                 gridchange: false
 
             })
-            localStorage.setItem('grid',"false")
-            
+            localStorage.setItem('grid', "false")
+
         } else {
             await this.setState({
                 gridchange: true
             })
-            localStorage.setItem('grid',"true")
+            localStorage.setItem('grid', "true")
         }
 
     }
@@ -147,9 +147,9 @@ class HeaderAppBar extends Component {
 
         this.props.trashClicked(data)
     }
-    changeHeader = (value) =>{
+    changeHeader = (value) => {
 
-     this.setState({ value: value })
+        this.setState({ value: value })
 
     }
 
@@ -225,7 +225,7 @@ class HeaderAppBar extends Component {
                                 </div>
                                 <div id="profileIcon">
                                     <IconButton id="profile-icon" onClick={event => this.popUpClick(event)}>
-                                        <Avatar alt="Remy Sharp" src={require('../assets/fundoo.png')} id="avtar" />
+                                        <Avatar alt="Remy Sharp" src={require('../assets/pic3.jpeg')} id="avtar" />
                                     </IconButton>
                                 </div>
                             </div>
@@ -235,16 +235,21 @@ class HeaderAppBar extends Component {
                     </AppBar>
                 </div>
 
-                <Popper open={this.state.popupBool} >
-                    <div className="popupContainer">
-                        <div id="popup">
-                            <PopUp props={this.props} />
-                        </div>
+                <Popper className="profilePicPopper" open={this.state.popupBool}
+                    anchorEl={this.state.anchorEl} transition placement="bottom-start">
+
+                    <div>
+                    <PopUp props={this.props} />
                     </div>
+                    {/* <div id="popup">
+                        
+                    </div> */}
+
+
                 </Popper>
 
                 <DrawerList props={this.props} change={this.changeHeader} noteClick={this.notes}
-                 togglebool={this.state.toggleBool} arch={this.arch} labelArr = {this.state.labels}
+                    togglebool={this.state.toggleBool} arch={this.arch} labelArr={this.state.labels}
                     trashbox={this.trash} />
 
             </div>

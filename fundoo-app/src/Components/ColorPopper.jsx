@@ -115,18 +115,14 @@ class ColorPopper extends Component {
                         <IconButton style={{ backgroundColor: item.colorcode }}
                          onClick={event => this.colorClicked(index)}>
                         </IconButton>
-
                     </Tooltip>
-
                 </div>
-
             )
         })
+        
         return (
 
-
-
-            <div >
+            <div>
 
                 <div>
                     <Popper id="colorPopper" open={this.state.popperBool}

@@ -35,7 +35,6 @@ class PickDate_time extends Component {
 
     }
 
-
     backBtn = () => {
 
         this.setState({
@@ -46,12 +45,9 @@ class PickDate_time extends Component {
         this.props.changeAnchor()
     }
 
-    // Mon Nov 25 2019 08:00:00 GMT+0530 (India Standard Time)
-
     selectDate = (event) => {
-
+        
         console.log("date", event.currentTarget.defaultValue);
-
     }
 
     TimeSelect = (event) => {
@@ -144,15 +140,15 @@ class PickDate_time extends Component {
             "noteIdList": [this.props.item.noteId]
         }
 
-        console.log("value in pick&Date",value);
-        
-        if(this.state.reminderValue !== ""){
-           
+        console.log("value in pick&Date", value);
+
+        if (this.state.reminderValue !== "") {
+
             SerObj.updateReminder(value, (error, result) => {
 
                 if (result) {
-                    console.log("result from pick",result);
-                    
+                    console.log("result from pick", result);
+
                     this.props.item.refreshReminder()
                 }
             })
@@ -243,19 +239,16 @@ class PickDate_time extends Component {
                     </div>
 
                 </Popper>
-
-
+                
                 <Popper open={this.state.ChipTimePriorityPopper} id="chip-time-popper"
                     anchorEl={this.state.anchorEl3}>
 
                     <div id="morning">
                         <div id="mornig-title">Does not repeat</div>
-
                     </div>
 
                     <div id="afternoon">
                         <div id="mornig-title">Daily</div>
-
                     </div>
 
                     <div id="evening">
@@ -269,6 +262,7 @@ class PickDate_time extends Component {
                     <div id="night">
                         <div id="mornig-title">Monthly</div>
                     </div>
+                    
                     <div id="night">
                         <div id="mornig-title">Yearly</div>
                     </div>

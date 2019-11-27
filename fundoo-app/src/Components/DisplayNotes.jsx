@@ -50,8 +50,8 @@ class DisplayNotes extends Component {
             todayDate: "",
             time: "",
             chipReminderBool: false,
-            chipTimePopperBool:false,
-            ChipTimePriorityPopper:false,
+            chipTimePopperBool: false,
+            ChipTimePriorityPopper: false,
         }
     }
 
@@ -218,18 +218,18 @@ class DisplayNotes extends Component {
         })
     }
 
-    changeAnchor = ()=>{
+    changeAnchor = () => {
 
         this.setState({
             pickDate: false,
-            reminderBool:true
+            reminderBool: true
         })
     }
 
 
     render() {
 
-        
+
         const card = (
 
             <MuiThemeProvider theme={this.style()}>
@@ -308,13 +308,13 @@ class DisplayNotes extends Component {
 
                     </div>
 
-                    
-                        {/* Chip Time popper */}
-                        
-                        <PickDate_time bool = {this.state.chipReminderBool}
-                            
-                         anchor = {this.state.anchorEl}/>
-                 
+
+                    {/* Chip Time popper */}
+
+                    <PickDate_time bool={this.state.chipReminderBool}
+
+                        anchor={this.state.anchorEl} />
+
                 </Card>
             </MuiThemeProvider>
         )
@@ -339,7 +339,7 @@ class DisplayNotes extends Component {
                                     name="Title"
                                     defaultValue={this.state.Title}
                                     onChange={event => this.Input(event)}
-                                    multiline = {true}
+                                    multiline={true}
                                 />
 
                             </div>
@@ -358,19 +358,17 @@ class DisplayNotes extends Component {
                                 name="Description"
                                 value={this.state.Description}
                                 onChange={event => this.Input(event)}
-                                multiline = {true}
+                                multiline={true}
                             />
                         </div>
 
+                        {(this.state.todayDate) ? <Chip id="chip-date-time"
 
-                        {/* <div className = "">
-            <Chip
-                icon={require('../assets/watch.svg')}
-                label="Nov 25 8:00 PM"
-                onClick="{handleClick}"
-                onDelete="{handleDelete}"
-            />
-        </div> */}
+                            icon={require('../assets/watch.svg')}
+                            label={this.state.todayDate + `,` + this.state.time}
+                            onClick={event => this.overChipClick(event)}
+                            onDelete={this.ChiphandleClick}
+                        /> : ""}
 
                         {/* utility part  */}
 

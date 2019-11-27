@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import IconButton from '@material-ui/core/IconButton';
 import '../cssFiles/UtililityIcons.css'
-import { Paper, Popper } from '@material-ui/core';
+import { Paper, Popper, Popover } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { Snackbar } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import ColorPopper from '../Components/ColorPopper'
 import PopperComponent from './PopperComponent';
 import LabelList from '../Components/LabelList'
-import CardLabel from '../Components/CardLabel' 
+import CardLabel from '../Components/CardLabel'
 
 const service = require('../Services/DashboardServices')
 var SerObj = new service.NotesServices()
@@ -32,10 +32,7 @@ class UtilityIcons extends Component {
             addlabelBool: false,
             reminderPopper: false
         }
-
-
     }
-
 
     colorForDashboard = (colorCode) => {
 
@@ -48,7 +45,6 @@ class UtilityIcons extends Component {
 
     remindIconClicked = async (event) => {
 
-        console.log("reminder clicked....");
 
         await this.setState({
             colorIconClick: false,
@@ -117,8 +113,6 @@ class UtilityIcons extends Component {
         })
     }
 
-
-
     deletenote = (event) => {
 
         let obj = {
@@ -177,7 +171,6 @@ class UtilityIcons extends Component {
                         <img src={require('../assets/remind.svg')} id="remindIcon" />
                     </div>
 
-
                     <div className={(this.state.DashboardBool === false) ? "For-Dashboard-Collabs" : "collabs"}>
 
                         <img src={require('../assets/collabs.svg')} id="remindIcon" />
@@ -190,14 +183,12 @@ class UtilityIcons extends Component {
                             onClick={(event) => this.colorsBtn(event)} />
                     </div>
 
-
                     <div className={(this.state.DashboardBool === false) ? "For-Dashboard-addImg" : "addImg"}>
 
                         <img src={require('../assets/AddImg.svg')} id="remindIcon" />
                     </div>
 
                     <div className={(this.state.DashboardBool === false) ? "For-Dashboard-archive" : "archive"}>
-
                         <img src={require('../assets/archive.svg')} id="remindIcon"
                             onClick={(event) => this.archiveNote(event)} />
                     </div>
@@ -208,11 +199,10 @@ class UtilityIcons extends Component {
                     </div>
                 </div>
 
-
                 <Popper id="popper" open={this.state.MorePopper}
                     anchorEl={this.state.anchorEl} transition placement="bottom-start">
-                    <Paper>
 
+                    <Paper>
                         {
                             (this.state.DashboardBool === false) ? "" :
 
@@ -236,15 +226,11 @@ class UtilityIcons extends Component {
                         <Typography id="typographyEdit"><div id="delete-note">Show checkbox</div></Typography>
 
                     </Paper>
-
-
                 </Popper>
-
 
                 <Popper id="addLabelPopper" open={this.state.addlabelBool}
                     anchorEl={this.state.anchorEl} transition placement="bottom-start">
-
-                  <CardLabel/>
+                    <CardLabel />
 
                 </Popper>
 
@@ -254,8 +240,6 @@ class UtilityIcons extends Component {
                         refreshReminder={this.refreshReminder}
                     /> : ""}
 
-
-
                 {(this.state.colorIconClick) ?
                     <ColorPopper id="colorPopper" popperBool={this.state.colorIconClick}
                         anchor={this.state.anchorEl} cardProps={this.props} changeColor={this.getcolorCode}
@@ -264,13 +248,13 @@ class UtilityIcons extends Component {
                     />
                     : ""}
 
-
                 <Snackbar
 
                     anchorOrigin={{
                         vertical: 'bottom',
                         horizontal: 'left',
                     }}
+                    
                     open={this.state.snackbarBool}
                     message={this.state.snackbarMsg}
                     autoHideDuration={6000}
@@ -278,7 +262,7 @@ class UtilityIcons extends Component {
                     action={[
                         <Button key="undo" color="primary" size="small" onClick={this.handleClose}>
                             UNDO
-</Button>,
+                    </Button>,
                         <IconButton
                             key="close"
                             aria-label="close"

@@ -13,6 +13,7 @@
     background-color: rgb(181, 185, 187);
     border-radius: 100%;
     margin: 0px auto;
+    border: 1px solid gray;
  
 }
 
@@ -66,4 +67,29 @@
 
 #signOut:hover{
     background-color: rgb(243, 253, 253);
+}
+
+#profileIMg{
+    height: 80px;
+    width: 80px;
+
+border-radius: 100%;
+}
+
+#cameraIcon{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: rgb(236, 232, 232);
+    display: flex;
+    justify-content: center;
+    top: 60px;
+    margin-left: 47px;
+    cursor: pointer;
+}
+
+
+#cameraIconImg{
+    opacity: 0.6;
 }

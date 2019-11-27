@@ -70,3 +70,21 @@ export function register(values,callback) {
       return callback(error)
     })
   }
+
+  export function UploadProfile(values,callback){
+
+    var headers = {
+      Authorization: localStorage.getItem('token')
+    }
+  
+    axios.post("http://fundoonotes.incubation.bridgelabz.com/api/user/uploadProfileImage",values,{headers:headers}).then((response)=>{
+
+     if(response){
+       return callback(null,response)
+     }
+      
+    }).catch((error)=>{
+
+      return callback(error)
+    })
+  }
