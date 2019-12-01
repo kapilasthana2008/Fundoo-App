@@ -19,20 +19,15 @@ class PickDate_time extends Component {
             ChipTimePriorityPopper: false,
             priority: "Does not repeat",
             setTime: "8:00 PM",
-            reminderValue: ""
+            reminderValue: "",
+            date:""
         }
     }
 
 
     componentDidMount() {
 
-        // let todayTime = new Date()
-
-        // this.setState({
-        //     setTime: todayTime,
-        //     reminderValue: todayTime
-        // })
-
+       
     }
 
     backBtn = () => {
@@ -47,11 +42,14 @@ class PickDate_time extends Component {
 
     selectDate = (event) => {
         
-        console.log("date", event.currentTarget.defaultValue);
+        this.setState({date:event.target.value})
+   
     }
 
     TimeSelect = (event) => {
 
+        console.log("date",this.state.date);
+        
         this.setState({
             anchorEl2: event.currentTarget,
             chipTimePopperBool: !this.state.chipTimePopperBool,
@@ -77,7 +75,7 @@ class PickDate_time extends Component {
         morning.setMinutes(0)
         morning.setSeconds(0)
 
-        let time = morning.toLocaleTimeString() + "AM"
+        let time = morning.toLocaleTimeString()
 
         this.setState({
             setTime: time,
@@ -92,7 +90,7 @@ class PickDate_time extends Component {
         afternoon.setMinutes(0)
         afternoon.setSeconds(0)
 
-        let time = afternoon.toLocaleTimeString() + "PM"
+        let time = afternoon.toLocaleTimeString()
 
         this.setState({
             setTime: time,
@@ -107,7 +105,7 @@ class PickDate_time extends Component {
         eve.setMinutes(0)
         eve.setSeconds(0)
 
-        let time = eve.toLocaleTimeString() + "PM"
+        let time = eve.toLocaleTimeString()
 
         this.setState({
             setTime: time,
@@ -122,7 +120,7 @@ class PickDate_time extends Component {
         night.setMinutes(0)
         night.setSeconds(0)
 
-        let time = night.toLocaleTimeString() + "PM"
+        let time = night.toLocaleTimeString()
 
         this.setState({
             setTime: time,
@@ -134,28 +132,28 @@ class PickDate_time extends Component {
 
     save = () => {
 
+       const appendTime_date = this.state.date+" "+this.state.setTime
+        const newDate = new Date(appendTime_date)
+        const final_reminder = newDate.toString()
 
+       
         let value = {
-            "reminder": [this.state.reminderValue],
+
+            "reminder": [final_reminder],
             "noteIdList": [this.props.item.noteId]
         }
-
-        console.log("value in pick&Date", value);
-
+    
         if (this.state.reminderValue !== "") {
 
-            SerObj.updateReminder(value, (error, result) => {
+                SerObj.updateReminder(value, (error, result) => {
 
-                if (result) {
-                    console.log("result from pick", result);
+                    if (result) {
+                        console.log("result from pick", result);
 
-                    this.props.item.refreshReminder()
-                }
-            })
-
+                        this.props.item.refreshReminder()
+                    }
+                })
         }
-
-
 
     }
 
@@ -189,7 +187,7 @@ class PickDate_time extends Component {
                         <TextField
                             id="date"
                             type="date"
-                            defaultValue="2017-05-24"
+                            defaultValue={this.state.date}
                             onChange={this.selectDate}
                         />
                     </div>

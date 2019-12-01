@@ -13,11 +13,12 @@ import Reminder from '../src/Components/Reminder'
 
 
 const Router = () => (
-
+    
     <BrowserRouter>
         <div>
-
-            <switch>
+        
+            <switch>  
+            
                 <Route path="/" component={SignInContainer} exact={true} />
                 <Route path="/Dashboard" component={Dashboard} />
                 <Route path="/ForgotPassword" component={ForgotPassword} exact={true} />
@@ -28,11 +29,14 @@ const Router = () => (
                 <Route path="/Dashboard/Archive" component={Archive_page} />
                 {/* <Route path="/Dashboard/EditLabel" component={EditLabel} /> */}
                 <Route path="/Dashboard/Reminder" component={Reminder} />
+              
             </switch>
-
+           
         </div>
 
     </BrowserRouter>
+  
+  
 )
 
 

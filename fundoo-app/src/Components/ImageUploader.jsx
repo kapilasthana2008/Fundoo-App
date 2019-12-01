@@ -69,7 +69,6 @@ class ImageUploader extends Component {
 
     render() {
 
-
         return (
             <div>
                 <Dialog open={this.state.uploader} onClose={this.handleClose}>

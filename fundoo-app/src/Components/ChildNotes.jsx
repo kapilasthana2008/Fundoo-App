@@ -62,6 +62,9 @@ class ChildNotes extends Component {
 
     render() {
 
+        
+      
+        
         return (
 
             <div className="NoteMainContainer">
@@ -76,9 +79,10 @@ class ChildNotes extends Component {
 
                             {this.state.allNotes.map((item) =>
                                 
-                                <DisplayNotes item={item} getNotes={this.getNotes} reminderVal = {item.reminder}
-                                />
 
+                                <DisplayNotes item={item} getNotes={this.getNotes} reminderVal = {item.reminder}
+                            
+                                />
                             )}
                         </Masonry>
                     </div>

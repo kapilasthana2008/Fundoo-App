@@ -12,6 +12,7 @@ import { createMuiTheme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import SearchIcon from '@material-ui/icons/Search';
+import { connect } from 'react-redux';
 // import SearchIcon from '@material-ui/icons/Search';
 
 const service = require('../Services/EditLabelServices')
@@ -48,11 +49,9 @@ class HeaderAppBar extends Component {
             value: 'Fundoo Apps',
             labels: []
         }
-
     }
 
     componentDidMount() {
-
 
         this.lebelList()
     }
@@ -83,21 +82,27 @@ class HeaderAppBar extends Component {
 
         await this.setState({ toggleBool: !this.state.toggleBool })
 
+        const menuToggle = {
+            toggleBool: !this.state.toggleBool
+        }
+
+        this.props.dispatch({
+
+            type:'ADD_POST',
+            menuToggle
+        });
 
         this.props.getvalue(this.state.toggleBool)
-
 
     }
 
     popUpClick = async (event) => {
 
-
-
         if (this.state.popupBool) {
 
             await this.setState({
                 popupBool: false,
-                
+
             })
         } else {
             await this.setState({
@@ -154,8 +159,7 @@ class HeaderAppBar extends Component {
     }
 
     render() {
-
-
+                
 
         return (
 
@@ -239,7 +243,7 @@ class HeaderAppBar extends Component {
                     anchorEl={this.state.anchorEl} transition placement="bottom-start">
 
                     <div>
-                    <PopUp props={this.props} />
+                        <PopUp props={this.props} />
                     </div>
                     {/* <div id="popup">
                         
@@ -258,4 +262,4 @@ class HeaderAppBar extends Component {
 
 }
 
-export default HeaderAppBar
+export default connect()(HeaderAppBar)

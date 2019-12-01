@@ -14,11 +14,12 @@ import ColorPopper from '../Components/ColorPopper'
 import Chip from '@material-ui/core/Chip';
 import UtilityIcons from '../Components/UtilityIcons'
 import Dialog from '@material-ui/core/Dialog';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+// import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Header from './Header'
 import { makeStyles, useTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core';
 import PickDate_time from '../Components/PickDate_time'
-
+import { connect } from 'react-redux';
 
 
 
@@ -52,12 +53,16 @@ class DisplayNotes extends Component {
             chipReminderBool: false,
             chipTimePopperBool: false,
             ChipTimePriorityPopper: false,
+            addedLabel: this.props.item.noteLabels,
+            label: "",
+            isHovering: false
         }
     }
 
     componentDidMount() {
 
         this.setReminderValue()
+        this.setAddedLabel()
     }
 
     setReminderValue = async (value) => {
@@ -68,6 +73,17 @@ class DisplayNotes extends Component {
             time: this.state.reminderValue.toString().slice(16, 24)
 
         })
+    }
+
+    setAddedLabel = () => {
+
+        console.log("setting label", this.state.addedLabel);
+
+        // await this.setState({
+        //     todayDate: this.state.reminderValue.toString().slice(4, 10),
+        //     time: this.state.reminderValue.toString().slice(16, 24)
+
+        // })
     }
 
 
@@ -210,6 +226,27 @@ class DisplayNotes extends Component {
 
     }
 
+    deleteLabel = (index)=>{
+
+        
+        let values = {
+            noteId:this.props.item.id,
+            lableId:this.props.item.noteLabels[index]["id"]
+        }
+
+        console.log("values",values);
+        
+
+        SerObj.deleteLabelToNote(values,(error,result)=>{
+
+            if(result){
+                this.props.getNotes()
+            }
+
+        })
+    }
+
+    
     overChipClick = (event) => {
 
         this.setState({
@@ -226,15 +263,27 @@ class DisplayNotes extends Component {
         })
     }
 
+    handleMouseHover =()=> {
+        console.log("on hover");
+        this.setState(this.toggleHoverState);
+      }
+
+      toggleHoverState = (state)=>{
+  
+        return {
+          isHovering: !state.isHovering,
+        };
+      }
 
     render() {
-
-
+        // noteLabels
+        console.log("added label", this.props.item.noteLabels);
+        
         const card = (
 
             <MuiThemeProvider theme={this.style()}>
                 <Card style={{ backgroundColor: this.state.setColor }}
-
+               
                     // className={(localStorage.getItem('grid') === "true") ? "OnGridChange":"mainDipalyCard"}
                     className="mainDipalyCard"
                 >
@@ -291,6 +340,22 @@ class DisplayNotes extends Component {
                             onClick={event => this.overChipClick(event)}
                             onDelete={this.ChiphandleClick}
                         /> : ""}
+
+                    </div>
+                    <div className="labelsAdded">
+                       
+                        {this.state.addedLabel.map((item,index) =>
+                            <Chip id="chiplabelAdded"
+
+                                icon=""
+                                label={item.label}
+                                onClick=""
+                            onDelete={event=>this.deleteLabel(index)}
+                            />
+                        )}
+
+
+                        {/* {(this.state.addedLabel.length>0) ?  : ""} */}
 
                     </div>
 
@@ -489,7 +554,6 @@ class DisplayNotes extends Component {
                                 <CloseIcon />
                             </IconButton>,
                         ]}
-
                     />
                 </div>
 
@@ -498,7 +562,9 @@ class DisplayNotes extends Component {
     }
 }
 
-export default DisplayNotes
+
+
+export default connect()(DisplayNotes)
 
 
 

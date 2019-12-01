@@ -43,7 +43,7 @@ export class NotesServices {
 
             
             
-            return callback(null, response.data.data.data)
+            return callback(null, response.data.data.data.reverse())
 
         }).catch((error) => {
 
@@ -153,5 +153,20 @@ export class NotesServices {
 
             return callback(error)
         })
+    }
+
+
+    deleteLabelToNote = (values,callback)=>{
+        // noteLabels/h7b1b1g6g6b1f5d3c2e4/deleteNoteLabel
+
+        const urll = ReminderBaseUrl+"/notes/"+`${values.noteId}`+"/addLabelToNotes/"+`${values.lableId}/remove`
+
+        axios.post(urll,values,{ headers: headers }).then((response)=>{
+            
+           return callback(null,response)
+            
+        }).then((error)=>{
+            return callback(error)
+     })
     }
 }

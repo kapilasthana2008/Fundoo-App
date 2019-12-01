@@ -10,7 +10,7 @@ import ColorPopper from '../Components/ColorPopper'
 import PopperComponent from './PopperComponent';
 import LabelList from '../Components/LabelList'
 import CardLabel from '../Components/CardLabel'
-
+import Collaboration from '../Components/Collaboration'
 const service = require('../Services/DashboardServices')
 var SerObj = new service.NotesServices()
 
@@ -30,7 +30,8 @@ class UtilityIcons extends Component {
             setColor: '',
             DashboardBool: this.props.toggleBool,
             addlabelBool: false,
-            reminderPopper: false
+            reminderPopper: false,
+            collabsBool:false
         }
     }
 
@@ -42,6 +43,18 @@ class UtilityIcons extends Component {
         // console.log("getting color in utility",);
 
     }
+
+    collabsClick = async() =>{
+        
+        console.log("this.collabs");
+        
+        
+       await this.setState({
+           collabsBool:true
+        })
+
+    }
+
 
     remindIconClicked = async (event) => {
 
@@ -138,9 +151,10 @@ class UtilityIcons extends Component {
 
     }
 
-
     addLabel = (event) => {
 
+     
+        
         this.setState({
             MorePopper: false,
             addlabelBool: true,
@@ -151,14 +165,12 @@ class UtilityIcons extends Component {
 
     refreshReminder = () => {
 
-        console.log("from reminder");
 
         this.props.getNotes()
     }
 
     render() {
 
-        console.log("this.from take note", this.props);
 
 
         return (
@@ -171,7 +183,7 @@ class UtilityIcons extends Component {
                         <img src={require('../assets/remind.svg')} id="remindIcon" />
                     </div>
 
-                    <div className={(this.state.DashboardBool === false) ? "For-Dashboard-Collabs" : "collabs"}>
+                    <div onClick ={this.collabsClick} className={(this.state.DashboardBool === false) ? "For-Dashboard-Collabs" : "collabs"}>
 
                         <img src={require('../assets/collabs.svg')} id="remindIcon" />
                     </div>
@@ -230,7 +242,7 @@ class UtilityIcons extends Component {
 
                 <Popper id="addLabelPopper" open={this.state.addlabelBool}
                     anchorEl={this.state.anchorEl} transition placement="bottom-start">
-                    <CardLabel />
+                    <CardLabel cardDetail = {this.props.noteItems} forRefreshOnly ={this.refreshReminder}/>
 
                 </Popper>
 
@@ -272,8 +284,10 @@ class UtilityIcons extends Component {
                             <CloseIcon />
                         </IconButton>,
                     ]}
-
                 />
+                {
+                (this.state.collabsBool) ?<Collaboration collabsBool = {this.state.collabsBool}/> :""
+                }
             </div>
         )
     }

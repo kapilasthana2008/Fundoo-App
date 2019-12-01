@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import DisplayNotes from '../Components/DisplayNotes'
 import Masonry from 'react-masonry-component';
-
+import TakeNote from '../Components/TakeNote'
 const service = require('../Services/DashboardServices')
 var obj = new service.NotesServices()
 
@@ -58,6 +58,7 @@ class Reminder extends Component {
 
 
                 <div className="childContainer">
+                <TakeNote getNotes={this.getNotes} />
 
                     <div classname="all-note-container">
 

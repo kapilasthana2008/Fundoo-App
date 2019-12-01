@@ -22,8 +22,7 @@ class CardLabel extends Component {
         this.getList()
     }
 
-
-
+    
     getList() {
 
         obj.getLabelList(async (error, result) => {
@@ -47,10 +46,7 @@ class CardLabel extends Component {
 
     render() {
 
-            // this.state.labels.map((item,key)=>{
-            //     console.log("item",item);
-                
-            // })
+           
             
         return (
             <div>
@@ -67,8 +63,8 @@ class CardLabel extends Component {
 
                 {/* <CardLabelEdit item = {this.state.labels} /> */}
 
-                {this.state.labels.map((item,key)=>(
-                    <CardLabelEdit item = {item}/>
+                {this.state.labels.map((item,index)=>(
+                    <CardLabelEdit item = {item} key = {index} cardDetails={this.props.cardDetail} props={this.props}/>
                 ))}
                     
                 </div>

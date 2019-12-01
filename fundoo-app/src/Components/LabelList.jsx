@@ -27,11 +27,10 @@ class LabelList extends Component {
         this.getList()
     }
 
-   
-
     getList() {
 
 
+        
         obj.getLabelList(async (error, result) => {
 
             if (result) {
@@ -48,6 +47,7 @@ class LabelList extends Component {
 
         })
 
+       
 
     }
 
@@ -61,6 +61,7 @@ class LabelList extends Component {
         })
     }
 
+
     creteLabel = () => {
 
         const values = {
@@ -72,9 +73,13 @@ class LabelList extends Component {
         if (this.state.Label !== "") {
 
             obj.createNewLabel(values, (error, result) => {
-
+                
             })
         }
+
+        this.setState({
+            Label: ""
+        })
     
     }
 
@@ -103,7 +108,6 @@ class LabelList extends Component {
                                     value={this.state.Label}
                                     onChange={event => this.Input(event)}
                                 />
-
                             </div>
 
                             <Tooltip title="create label">
@@ -119,7 +123,7 @@ class LabelList extends Component {
                     <div id="editLabel-set">
 
                     {this.state.labels.map((item,key)=>(
-                        <AddedLabel itemValue = {item}/>
+                        <AddedLabel getList = {this.getList} itemValue = {item}/>
                 ))}
                    
                     </div>

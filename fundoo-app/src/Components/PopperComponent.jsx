@@ -17,12 +17,6 @@ import PickDate_time from '../Components/PickDate_time'
 const service = require('../Services/ReminderServices')
 var SerObj = new service.ReminderServices()
 
-// let newDate = new Date()
-// let monthNumber = (new Date().getMonth());
-// let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-// let monthName = monthNames[monthNumber];
-// let arr = monthName.split("")
-// let shortMonth = arr.splice(0,3).join("")
 
 
 

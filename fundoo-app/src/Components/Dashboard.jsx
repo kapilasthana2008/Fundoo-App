@@ -70,10 +70,10 @@ class Dashboard extends Component {
 
             await this.setState({ allNotes: [] })
 
-
             if (result) {
 
-                console.log("noteessssssssss",result);
+                console.log("all notes",result);
+                
                 
                 let arr = []
                 arr = this.state.allNotes

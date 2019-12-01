@@ -1,0 +1,88 @@
+
+.collaboratorPage{
+
+    max-height: 400px;
+    min-width: 600px;
+    padding: 20px 0px 0px 0px;
+}
+
+#Collbs-title{
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold
+}
+
+#collabs-line{
+    height: 1px;
+    background-color: gray;
+    margin: 5px 15px 0px 15px;
+}
+.collabsDisplay{
+    max-height: 300px;
+    padding: 20px
+}
+
+.collabs-Detail{
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: red;
+}
+
+#imgPart{
+    width: 10%;
+    background-color: white
+}
+
+#img{
+    /* height: 35px;
+    width: 35px;
+    border-radius: 100%;
+    border: 1px solid gray; */
+}
+
+#avtarImg{
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+}
+
+
+.btnArea{
+
+height: 60px;
+background-color: rgb(238, 235, 235);
+display: flex;
+flex-direction: row;
+justify-content: flex-end
+}
+
+#Cancel_saveBtns{
+    margin-right: 20px;
+    width: 170px;
+    display: flex;
+   
+    flex-direction: row;
+    justify-content: space-between
+}
+#cancelBtn{
+    height: 30px;
+    margin: auto auto;
+}
+
+#save_Btn{
+    height: 30px;
+    margin: auto auto;
+}
+#sBtn{
+    height: 30px;
+    background-color: rgb(238, 235, 235);
+    border: none;
+    font-size: 15px
+}
+
+#sBtn:hover{
+    background-color: rgb(221, 216, 216);
+    cursor: pointer;
+}

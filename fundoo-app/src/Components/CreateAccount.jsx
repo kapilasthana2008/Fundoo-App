@@ -331,6 +331,7 @@ class CreateAccount extends Component {
                             {this.state.defaultMsg}
 
                         </div>
+                        
                         <div id="basic-advnc">
                             
                             <div id={(this.state.basicUserToggle) ? "basic-toggle" : "basic"}

@@ -9,6 +9,17 @@
 
 }
 
+/* .mainDipalyCard:hover{
+    width         : 250px;
+    margin-top    : 20px;
+    padding       : 12px 16px 0px;
+    font-size     : 12px;
+    display       : flex;
+    flex-direction: column;
+    margin-left   : 10px;
+
+} */
+
 #EditmainDipalyCard {
 
     position: relative;
@@ -117,6 +128,14 @@ margin-top: 15px;
 cursor: pointer;
 }
 
+#chiplabelAdded{
+    font-size: 10px;
+    margin-top: 10px;
+    margin-left: 5px;
+    height: 20px;
+    cursor: pointer;   
+}
+
 
 #Chip-reminder{
     background-color: white;
@@ -168,6 +187,13 @@ cursor: pointer;
     font-size: 14px;
 }
 
+.labelsAdded{
+    
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 
 #Chip-line2{
     height: 1px;

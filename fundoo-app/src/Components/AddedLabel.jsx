@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import ListItem from '@material-ui/core/ListItem';
 import LabelIcon from '@material-ui/icons/Label';
 import InputBase from '@material-ui/core/InputBase';
+import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
+import Tooltip from '@material-ui/core/Tooltip';
+import TextField from '@material-ui/core/TextField';
 import '../cssFiles/EditLabel.css'
+
+const service = require('../Services/EditLabelServices')
+var obj = new service.EditLabelServices()
 
 
 class AddedLabel extends Component {
@@ -13,21 +19,27 @@ class AddedLabel extends Component {
         this.state = {
             changeLabel: false,
             editLabel: "",
-            value:this.props.itemValue.label
+            value: this.props.itemValue.label,
+            item: this.props.itemValue,
+            labelId: ""
         }
-
     }
 
     labelChange = () => {
 
-        this.setState({
-            changeLabel: true
-        })
     }
+
+    changeField = async (id) => {
+    
+        await this.setState({
+            labelId: id
+        })
+        
+    }
+
 
     async Input(event) {
 
-        console.log("event", event.target.value);
 
         await this.setState({
 
@@ -36,40 +48,91 @@ class AddedLabel extends Component {
     }
 
 
+    update = () => {
+
+        console.log("item value",this.state.item);
+        
+        let value = {
+            "label": this.state.editLabel,
+            "isDeleted": false,
+            "id": this.props.itemValue.id,
+            "userId": localStorage.getItem("userId"),
+            "updated":""
+        }
+    
+        obj.updateLabel(value ,async(error,result)=>{
+
+            if(result){
+                this.props.getList()
+                await this.setState({updated:"updated"})
+            }
+        })
+    }
+
+    delete = () =>{
+        
+        let value = {
+            id:  this.props.itemValue.id
+        }
+
+        obj.deleteLabel(value,(error,result)=>{
+
+            if(result){
+                this.props.getList()
+            }
+        })
+    }
+
+
+
     render() {
 
-        console.log("this is rendering again",this.props.itemValue.label);
+        console.log(this.state.updated);
         
-
-        // let value = this.props.item.label
-
         return (
             <div  >
                 <ListItem >
                     <div className="addedlabel">
                         <div>
-                            <LabelIcon style={{ fontsize: '1rem' }} />
-                            {/* <img src = {require('../assets/')}/> */}
+
+                            {(this.state.labelId === this.props.itemValue.id) ?
+
+                                <Tooltip title="delete label">
+                                    <DeleteTwoToneIcon
+                                        onClick={this.delete} /></Tooltip>
+                                : <LabelIcon style={{ fontsize: '1rem' }} />}
+
                         </div>
 
                         <div id="simpleText" onClick={this.labelChange} >
 
-                            {
-                                (this.state.changeLabel) ?
 
-                                    <InputBase
-                                        name="editLabel"
-                                        defaultValue={this.state.editLabel}
-                                        onChange={event => this.Input(event)}
-                                    />
-                                    : this.state.value
-                            }
-                            
+                            <TextField
+
+                                name="editLabel"
+
+                                InputProps={{
+                                    disableUnderline: true
+                                }}
+                                defaultValue={this.state.value}
+                                onChange={event => this.Input(event)}
+                                onClick={() => this.changeField(this.props.itemValue.id)}
+
+                            />
+
                         </div>
 
                         <div id="editIcon" onClick={this.labelChange}>
+                            {
+                                (this.state.labelId === this.props.itemValue.id) ?
+                                    <Tooltip title="update Label">
+                                        <img src={require('../assets/checkBtn.svg')} onClick={this.update} /></Tooltip> :
+                                    <Tooltip title="edit label">
+                                        <img src={require('../assets/labelPencil.svg')} />
+                                    </Tooltip>
+                            }
 
-                            <img src={require('../assets/labelPencil.svg')} />
+
                         </div>
 
                     </div>
